@@ -12,3 +12,19 @@ logs
 results
 
 npm-debug.log
+
+# SublimeText project files
+*.sublime-workspace
+
+*~
+\#*\#
+/.emacs.desktop
+/.emacs.desktop.lock
+.elc
+auto-save-list
+tramp
+.\#*
+
+# Org-mode
+.org-id-locations
+*_archive
