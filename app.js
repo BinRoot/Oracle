@@ -5,6 +5,8 @@ var db = require('./db.js');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
 
+app.use(express.static(__dirname + '/public'));
+
 var hurl = 'http://oracle1.herokuapp.com';
 var lurl = 'http://localhost:5000'
 
