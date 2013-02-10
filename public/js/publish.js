@@ -24,6 +24,16 @@ $('#gist').click(function() {
     $('#gistLI').addClass('active');
 });
 
+$('#type').click(function() {
+    var children = $('#options').children();
+    clearAllActiveChildren(children);
+    $('#typeLI').addClass('active');
+});
+
+$('#languages li').click(function() {
+    console.log('in lang');
+    $('#selectedLanguage').html( $(this).text() + ' <span class="caret"></span>');
+});
 
 function clearAllActiveChildren (children) {
     for(var i=0; i<children.length; i++) {

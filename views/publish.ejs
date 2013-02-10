@@ -31,20 +31,25 @@
 
 	    <div class="span5">
 		<div class="btn-group">
-		    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+		    <a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
 			Java
 			<span class="caret"></span>
 		    </a>
-		    <ul class="dropdown-menu">
-			<!-- dropdown menu links -->
+		    <ul id="languages" class="dropdown-menu">
+			<li><a>Haskell</a></li>
+			<li><a>Java</a></li>
+			<li><a>Python</a></li>
 		    </ul>
 		</div>
 	    </div>
 	</div>
 
 	<ul id="options" class="nav nav-tabs">
-	    <li class="active">
-		<a href="#">Type code</a>
+	    <li id="typeLI" class="active">
+		<a id="type" href="#">Type code</a>
+	    </li>
+	    <li id="gistLI">
+		<a id="gist" href="#gistModal" data-toggle="modal">Get from Gist</a>
 	    </li>
 	    <li id="gistLI"><a id="gist" href="#gistModal" data-toggle="modal">Get from Gist</a></li>
 	    <li id="uploadLI"><a href="#" id="upload">Upload code</a></li>
