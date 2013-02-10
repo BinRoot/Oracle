@@ -23,6 +23,12 @@ $('#gist').click(function() {
     $('#gistLI').addClass('active');
 });
 
+$('#type').click(function() {
+    var children = $('#options').children();
+    clearAllActiveChildren(children);
+    $('#typeLI').addClass('active');
+});
+
 
 function clearAllActiveChildren (children) {
     for(var i=0; i<children.length; i++) {
