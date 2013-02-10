@@ -14,15 +14,6 @@ var codeItem =
 	description: "This algorithm ..."
     }
 
-// @commentObject
-var commentObject =
-    {
-	name: "BinRoot",
-	id: "abcd123",
-	text: "",
-	points: 4
-    }
-
 // Schema for 'User' Collection
 var userItem = 
     {

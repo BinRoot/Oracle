@@ -12,8 +12,8 @@ $('#upload').click(function() {
 		},
 		function(fpfile){
 			filepicker.read(fpfile, function(data){
-			editor.setValue(data);
-			editor.setReadOnly(true);
+			editor.setValue(data); // TODO: call updateCode() instead!
+			// editor.setReadOnly(true);
 		});
     });
 });
@@ -31,13 +31,40 @@ $('#type').click(function() {
 });
 
 $('#languages li').click(function() {
-    console.log('in lang');
     $('#selectedLanguage').html( $(this).text() + ' <span class="caret"></span>');
 });
 
-function clearAllActiveChildren (children) {
+$('#gistOK').click(function() {
+    var urlQuery = document.getElementById('gistURL').value;
+    $.ajax({
+	url: "https://api.github.com/gists/4711213",
+	success: function(data, textStatus, jqXHR) {
+	    var files = data.files;
+	    for(var fileName in files) {
+		var code = files[fileName].content;
+		var lang = files[fileName].language;
+
+		updateCode(lang, code);
+		
+		break;
+	    }
+	}
+    });
+});
+
+function updateCode(lang, code) {
+    editor.setValue(code);
+
+    editor.getSession().setMode(null);
+
+    $('#selectedLanguage').html( lang + ' <span class="caret"></span>');
+}
+
+function clearAllActiveChildren(children) {
     for(var i=0; i<children.length; i++) {
-		var v = children[i];
-		$(v).removeClass('active');
+	var v = children[i];
+	$(v).removeClass('active');
     }
 }
+
+var aceLanguages = ["java", "python"];
