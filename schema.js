@@ -3,12 +3,25 @@
 var codeItem =
     { 
 	type: "bubble sort", // category of code
-	author: "binroot", // original author
+	name: "binroot", // original author
+	uid: "abcdef12345", // original author
 	language: "java", // programming language
 	code: "code", // implementation of code
-	timestamp: "Jan 31, 2013" // time created
+	timestamp: "Jan 31, 2013", // time created
+	points: 2, // ranking
+	comments: [ ],
+	tags: ["sort", "naive"],
+	description: "This algorithm ..."
     }
 
+// @commentObject
+var commentObject =
+    {
+	name: "BinRoot",
+	id: "abcd123",
+	text: "",
+	points: 4
+    }
 
 // Schema for 'User' Collection
 var userItem = 
