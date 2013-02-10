@@ -29,6 +29,12 @@ $('#type').click(function() {
     $('#typeLI').addClass('active');
 });
 
+$('#languages li').click(function() {
+    console.log('in lang');
+    $('#selectedLanguage').html( $(this).text() + ' <span class="caret"></span>');
+});
+
+
 
 function clearAllActiveChildren (children) {
     for(var i=0; i<children.length; i++) {
