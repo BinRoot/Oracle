@@ -45,6 +45,14 @@
 
     <div class="row">
       <div class="span12">
+        <h2>Upload your own code:</h2>
+        <i class="icon-arrow-right"></i>
+        <input type="filepicker" data-fp-apikey="ALQcedGXCTs-BiXSzHaVlz" data-fp-mimetypes="text/*" data-fp-container="modal" data-fp-services="COMPUTER,DROPBOX,GITHUB,GOOGLE_DRIVE" onchange="upload(event.fpfile)"></input>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="span12">
 
 
 
@@ -79,6 +87,10 @@
     </footer>
 
   </div> <!-- /container -->
+  <!-- Nonblocking scripts at the bottom of the body -->
+  <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+  <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
+  <script type="text/javascript" src="js/publish.js"></script>
 
 </body>
 </html>
