@@ -9,8 +9,6 @@
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/custom.css">
-
-
 </head>
 
 <body>
@@ -44,14 +42,28 @@
 	    </div>
 	</div>
 
-	<ul class="nav nav-tabs">
+	<ul id="options" class="nav nav-tabs">
 	    <li class="active">
 		<a href="#">Type code</a>
 	    </li>
-	    <li><a href="#">Get from Gist</a></li>
+	    <li id="gistLI"><a id="gist" href="#gistModal" data-toggle="modal">Get from Gist</a></li>
 	    <li><a href="#">Upload code</a></li>
-
 	</ul>
+
+	<!-- Gist Modal -->
+	<div id="gistModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	    <div class="modal-header">
+		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+		<h3 id="myModalLabel">Modal header</h3>
+	    </div>
+	    <div class="modal-body">
+		<p>One fine body…</p>
+	    </div>
+	    <div class="modal-footer">
+		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+		<button class="btn btn-primary">Save changes</button>
+	    </div>
+	</div>
 
 <!-- 
 		<i class="icon-arrow-right"></i>
@@ -94,7 +106,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/publish.js"></script>
-    <script type="text/javascript" src="js/bootstrap-dropdown.js"></script>
-
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
 </body>
 </html>
