@@ -9,9 +9,9 @@ var codeItem =
 	code: "code", // implementation of code
 	timestamp: "Jan 31, 2013", // time created
 	points: 2, // ranking
-	comments: [ ],
-	tags: ["sort", "naive"],
-	description: "This algorithm ..."
+	comments: [ ], 
+	tags: ["sort", "naive"], // used for searching
+	description: "This algorithm ..." // also used for searching
     }
 
 // Schema for 'User' Collection

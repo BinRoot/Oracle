@@ -36,6 +36,12 @@ $('#languages li').click(function() {
 
 $('#gistOK').click(function() {
     var urlQuery = document.getElementById('gistURL').value;
+
+    if(urlQuery.indexOf("gist.github.com") == -1) {
+	// if user entered the id without the URL prefix
+	urlQuery = "https://api.github.com/gists/" + urlQuery;
+    }
+
     $.ajax({
 	url: "https://api.github.com/gists/4711213",
 	success: function(data, textStatus, jqXHR) {
