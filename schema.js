@@ -6,7 +6,7 @@ var codeItem =
 	name: "binroot", // original author
 	uid: "abcdef12345", // original author
 	language: "java", // programming language
-	code: "code", // implementation of code
+	code: "[code]", // implementation of code
 	timestamp: "Jan 31, 2013", // time created
 	points: 2, // ranking
 	comments: [ ], 
@@ -18,7 +18,13 @@ var codeItem =
 var userItem = 
     {
 	name: "phiV",
-	id: "lk3jd3ljflq",
+	uid: "lk3jd3ljflq",
 	timestamp: "Jan 30, 2013",
-	history: [{action: "edit", name:"Bubble sort", lang:"Java", cid:"3x42sw"}]
+	rep: 30,
+	history: [ 
+	    {action: "edit", name:"Bubble sort", lang:"Java", cid:"3x42sw", timestamp:"Jan 31, 2013"},
+	    {action: "publish", name:"Djikstra's Sortest Path", lang:"Python", cid:"la9a3a", timestamp:"Jan 30, 2013"},
+	    {action: "star", name:"Binary Tree", lang:"Haskell", cid:"f2lf2", timestamp:"Jan 30, 2013"},
+	    {action: "comment", cid:"11" name:"Binary Tree", lang:"Haskell", cid:"f2lf2", timestamp:"Jan 30, 2013"}
+	]
     }
