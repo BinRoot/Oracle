@@ -60,13 +60,17 @@ $('#languages li').click(function() {
 $('#gistOK').click(function() {
     var urlQuery = document.getElementById('gistURL').value;
 
-    var id = parseInt(urlQuery.split('/').pop(), 10);
-    console.log(id);
+    var intRegex = /^\d+$/;
 
-    if(isNaN(id)){
+    // var id = parseInt(urlQuery.split('/').pop(), 10);
+
+    if(!intRegex.test(urlQuery.split('/').pop())){
+        console.log("No Number found");
         $('.hiddenAlert').show();
     }
     else{
+        var id = urlQuery.split('/').pop();
+        console.log("Number found");
         //Add logic here to handle bad URLs so they can't mess up the script
         $.ajax({
         url: "https://api.github.com/gists/" + id,
@@ -75,6 +79,8 @@ $('#gistOK').click(function() {
             for(var fileName in files) {
                 var code = files[fileName].content;
                 var lang = files[fileName].language;
+
+                console.log(lang);
 
                 updateCode(lang, code);
                 var children = $('#options').children();
@@ -85,6 +91,9 @@ $('#gistOK').click(function() {
             }
 
             $('#gistModal').modal('toggle');
+        },
+        error: function(){
+            $('.hiddenAlert').show();
         }
         });
     }
@@ -133,4 +142,5 @@ function postPublish () {
 //Add mimetype and ace language mappings here
 //Language listing here https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
+var gistLanguages = {"JavaScript":"javascript", };
 
