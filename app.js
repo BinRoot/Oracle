@@ -121,7 +121,35 @@ app.post('/publish', function(req, res, next) {
     });
 });
 
+app.get('/search', function(req, res) {
+    var q = req.query["q"];
 
+    if(!q) {
+	// res.send('[]'); // if empty, return nothing
+	var searchObject = {type: {$regex:".*"}};
+        db.findTypes(searchObject, function(out) {
+	    res.send('0: '+JSON.stringify(out) );
+	});
+    }
+    else if (q) {
+        // if search is surround by quotes, return exact results                
+        if(q[0]=="\"" && q[q.length-1]=="\"") {
+            q = q.substring(1,q.length-1)
+            var searchObject = {type: q};
+            db.findTypes(searchObject, function(out) {
+		res.send('1: '+JSON.stringify(out) );
+	    });
+        }
+        else { // otherwise return similar results                              
+            q = ".*" + q.replace(" ",".*") + ".*";
+
+            var searchObject = {type: {$regex: q}};
+            db.findTypes(searchObject, function(out) {
+		res.send('2: '+JSON.stringify(out) );
+	    });
+        }
+    }
+});
 
 
 // Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.                                                          

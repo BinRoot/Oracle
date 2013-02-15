@@ -80,8 +80,8 @@ function clearAllActiveChildren(children) {
 
 function postPublish () {
 
-    var data_type = $('#type').val();
-    var data_lang = $('#selectedLanguage').text().trim()
+    var data_type = $('#type').val().toLowerCase();
+    var data_lang = $('#selectedLanguage').text().trim().toLowerCase();
     var data_code = editor.getValue();
 
     var postData = {
