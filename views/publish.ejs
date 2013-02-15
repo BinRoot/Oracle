@@ -26,13 +26,18 @@
 	    </div>
 
 	    <div class="span5">
-		<input style="width:100%;" type="text" placeholder="Name of algorithm or code">
+		<% if (!extra.type) { %>
+		<input id="type" style="width:100%;" type="text" placeholder="Name of algorithm or code">
+		<% } %>
+		<% if (extra.type) { %>
+		<input id="type" style="width:100%;" type="text" value="<%= extra.type %>" >
+		<% } %>
 	    </div>
 
 	    <div class="span5">
 		<div class="btn-group">
 		    <a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-			Java
+			Java 
 			<span class="caret"></span>
 		    </a>
 		    <ul id="languages" class="dropdown-menu">
@@ -94,7 +99,7 @@
 	<div class="row">
 	    <div class="span12">
 		<center>
-		    <button class="btn btn-large btn-success" type="button"><i class="icon-ok icon-white"></i> Publish</button>
+		    <button onclick="postPublish();" class="btn btn-large btn-success" type="button"><i class="icon-ok icon-white"></i> Publish</button>
 		</center>
 	    </div>
 	</div>

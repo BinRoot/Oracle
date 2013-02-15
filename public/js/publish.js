@@ -74,3 +74,21 @@ function clearAllActiveChildren(children) {
 }
 
 var aceLanguages = ["java", "python"];
+
+function postPublish () {
+
+    var data_type = $('#type').val();
+    var data_lang = $('#selectedLanguage').text().trim()
+    var data_code = editor.getValue();
+
+    var postData = {
+	type: data_type,
+	lang: data_lang,
+	code: data_code
+    };
+
+    $.post("/publish", postData, function(data){
+        console.log(data);
+    });
+
+}

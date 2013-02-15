@@ -88,10 +88,48 @@ app.get('/fail', function(req, res) {
 app.get('/publish', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
-    res.render('publish', {user: req.user});
+    var extraData = {type: req.query.type};
+    console.log('type: '+ extraData.type );
+    res.render('publish', {user: req.user, extra:extraData});
 });
 
-// Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.                                                                                                                                                               
+app.post('/publish', function(req, res, next) {
+    ensureAuthenticated(req, res, next, '/publish');
+}, function(req, res) {
+
+    var post_type = req.body.type;
+    var post_lang = req.body.lang;
+    var post_code = req.body.code;
+
+    console.log("user stuff: "+JSON.stringify(req.user));
+
+
+    var data = {
+	type: post_type,
+	uname: req.user.displayName,
+	uid: getIdFromURI(req.user.identifier),
+	lang: post_lang,
+	code: post_code,
+	time: new Date(),
+	votes: 1,
+	comments: [],
+	tags: [],
+	description: ""
+    };
+    db.insertCode(data, function() {
+	res.send('works');
+    });
+});
+
+
+
+
+// Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.                                                          
+
+function getIdFromURI(uri) {
+    var gid = uri.split("?")[1];
+    return gid.substring(3, gid.length);
+}                                                                                                     
 function ensureAuthenticated(req, res, next, ret) {
     if (req.isAuthenticated()) { return next(); }
 

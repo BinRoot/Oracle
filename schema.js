@@ -3,12 +3,12 @@
 var codeItem =
     { 
 	type: "bubble sort", // category of code
-	name: "binroot", // original author
+	uname: "binroot", // original author
 	uid: "abcdef12345", // original author
-	language: "java", // programming language
+	lang: "java", // programming language
 	code: "[code]", // implementation of code
-	timestamp: "Jan 31, 2013", // time created
-	points: 2, // ranking
+	time: "Jan 31, 2013", // time created
+	votes: 2, // ranking
 	comments: [ ], 
 	tags: ["sort", "naive"], // used for searching
 	description: "This algorithm ..." // also used for searching
@@ -27,4 +27,20 @@ var userItem =
 	    {action: "star", name:"Binary Tree", lang:"Haskell", cid:"f2lf2", timestamp:"Jan 30, 2013"},
 	    {action: "comment", cid:"11" name:"Binary Tree", lang:"Haskell", cid:"f2lf2", timestamp:"Jan 30, 2013"}
 	]
+    }
+
+
+var googleAuth = 
+    {
+	displayName: "Nishant Shukla",
+	emails: 
+	[
+	    {value: "nick722@gmail.com"}
+	],
+	name: 
+	{
+	    familyName: "Shukla",
+	    givenName: "Nishant"
+	},
+	identifier:"https://www.google.com/accounts/o8/id?id=AItOawko8c_hlIiC0x8h3XYlZewRHPr8FnXidac"
     }
