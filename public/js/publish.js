@@ -1,4 +1,30 @@
+$('.typeahead').typeahead({source: ["aaa", "bbb"]})
+
+$("#type").typeahead({
+        source: function(query, process) {
+	    $.get('/search', { q: query }, function(data) {
+		var d = JSON.parse(data);
+		var types = [];		
+		for(var i=0; i<d.length; i++) {
+		    types.push(d[i].type + " ("+d[i].sum+")");
+		}
+		process(types);
+	    });
+	},
+        updater: function (item) {
+	    var splits = item.split(' ');
+	    item = "";
+	    for(var i=0; i<splits.length-1; i++) {
+		item = item + " " + splits[i];
+	    }
+            return item;
+        },
+        minLength: 1
+    });
+
+
 filepicker.setKey('AoO2NYenFQq2z9yVBtOEKz');
+$('.hiddenAlert').hide();
 
 $('#upload').click(function() {
     var children = $('#options').children();
@@ -34,26 +60,34 @@ $('#languages li').click(function() {
 $('#gistOK').click(function() {
     var urlQuery = document.getElementById('gistURL').value;
 
-    if(urlQuery.indexOf("gist.github.com") == -1) {
-	// if user entered the id without the URL prefix
-	urlQuery = "https://api.github.com/gists/" + urlQuery;
+    var id = parseInt(urlQuery.split('/').pop(), 10);
+    console.log(id);
+
+    if(isNaN(id)){
+        $('.hiddenAlert').show();
     }
+    else{
+        //Add logic here to handle bad URLs so they can't mess up the script
+        $.ajax({
+        url: "https://api.github.com/gists/" + id,
+        success: function(data, textStatus, jqXHR) {
+            var files = data.files;
+            for(var fileName in files) {
+                var code = files[fileName].content;
+                var lang = files[fileName].language;
 
-    $.ajax({
-	url: "https://api.github.com/gists/4711213",
-	success: function(data, textStatus, jqXHR) {
-	    var files = data.files;
-	    for(var fileName in files) {
-		var code = files[fileName].content;
-		var lang = files[fileName].language;
+                updateCode(lang, code);
+                var children = $('#options').children();
+                clearAllActiveChildren(children);
+                $('#gistLI').addClass('active');
 
-		updateCode(lang, code);
-		clearAllActiveChildren(children);
-		$('#gistLI').addClass('active');
-		break;
-	    }
-	}
-    });
+                break;
+            }
+
+            $('#gistModal').modal('toggle');
+        }
+        });
+    }
 });
 
 function updateCode(lang, code) {
@@ -97,5 +131,6 @@ function postPublish () {
 }
 
 //Add mimetype and ace language mappings here
+//Language listing here https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
 

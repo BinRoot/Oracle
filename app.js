@@ -128,7 +128,7 @@ app.get('/search', function(req, res) {
 	// res.send('[]'); // if empty, return nothing
 	var searchObject = {type: {$regex:".*"}};
         db.findTypes(searchObject, function(out) {
-	    res.send('0: '+JSON.stringify(out) );
+	    res.send(JSON.stringify(out) );
 	});
     }
     else if (q) {
@@ -137,7 +137,7 @@ app.get('/search', function(req, res) {
             q = q.substring(1,q.length-1)
             var searchObject = {type: q};
             db.findTypes(searchObject, function(out) {
-		res.send('1: '+JSON.stringify(out) );
+		res.send(JSON.stringify(out) );
 	    });
         }
         else { // otherwise return similar results                              
@@ -145,7 +145,7 @@ app.get('/search', function(req, res) {
 
             var searchObject = {type: {$regex: q}};
             db.findTypes(searchObject, function(out) {
-		res.send('2: '+JSON.stringify(out) );
+		res.send( JSON.stringify(out) );
 	    });
         }
     }

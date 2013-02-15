@@ -27,10 +27,10 @@
 
 	    <div class="span5">
 		<% if (!extra.type) { %>
-		<input id="type" style="width:100%;" type="text" placeholder="Name of algorithm or code">
+		<input id="type" style="width:100%;" type="text" placeholder="Name of algorithm or code" data-provide="typeahead" autocomplete="off">
 		<% } %>
 		<% if (extra.type) { %>
-		<input id="type" style="width:100%;" type="text" value="<%= extra.type %>" >
+		<input id="type" style="width:100%;" type="text" value="<%= extra.type %>" data-provide="typeahead" autocomplete="off">
 		<% } %>
 	    </div>
 
@@ -66,11 +66,15 @@
 		<h3 id="myModalLabel">Grab code from <a href="https://gist.github.com/discover" target="_blank">Gist</a></h3>
 	    </div>
 	    <div class="modal-body">
-		<input id="gistURL" type="text" style="width:95%;" placeholder="Enter Gist URL">
+	    <div class="alert alert-error hiddenAlert">
+	    	<button type="button" class="close" data-dismiss="alert">&times;</button>
+	    	Bad URL?  We had trouble fetching this gist, make sure it's the right URL and public! 
+	    </div>
+		<input id="gistURL" type="text" style="width:95%;" placeholder="Enter Gist URL" required pattern="[/^https://gist.github.com/$].*[/0-9]">
 	    </div>
 	    <div class="modal-footer">
 		<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-		<button id="gistOK" class="btn btn-primary" data-dismiss="modal">Ok</button>
+		<button id="gistOK" class="btn btn-primary">Ok</button>
 	    </div>
 	</div>
 
@@ -114,7 +118,7 @@
     <!-- Nonblocking scripts at the bottom of the body -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
-    <script type="text/javascript" src="js/publish.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/publish.js"></script>
 </body>
 </html>
