@@ -7,21 +7,18 @@ $('#upload').click(function() {
 
     filepicker.pick(
 		{
-			services: ['GITHUB', 'COMPUTER', 'GOOGLE_DRIVE', 'URL'],
+			services: ['GITHUB', 'DROPBOX', 'GOOGLE_DRIVE', 'COMPUTER', 'URL'],
 			maxSize: 100*1024
 		},
 		function(fpfile){
 			filepicker.read(fpfile, function(data){
-			editor.setValue(data); // TODO: call updateCode() instead!
-			// editor.setReadOnly(true);
+            updateCode(aceLanguages[fpfile.mimetype], data);
 		});
     });
 });
 
 $('#gist').click(function() {
     var children = $('#options').children();
-    clearAllActiveChildren(children);
-    $('#gistLI').addClass('active');
 });
 
 $('#type').click(function() {
@@ -45,7 +42,8 @@ $('#gistOK').click(function() {
 		var lang = files[fileName].language;
 
 		updateCode(lang, code);
-		
+		clearAllActiveChildren(children);
+		$('#gistLI').addClass('active');
 		break;
 	    }
 	}
@@ -55,9 +53,16 @@ $('#gistOK').click(function() {
 function updateCode(lang, code) {
     editor.setValue(code);
 
-    editor.getSession().setMode(null);
+    if(typeof lang === 'undefined'){
+        editor.getSession().setMode(null);
+        $('#selectedLanguage').html( "other" + ' <span class="caret"></span>');
+    }
+    else{
+        editor.getSession().setMode("ace/mode/" + lang);
+        $('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
+    }
 
-    $('#selectedLanguage').html( lang + ' <span class="caret"></span>');
+    
 }
 
 function clearAllActiveChildren(children) {
@@ -67,4 +72,5 @@ function clearAllActiveChildren(children) {
     }
 }
 
-var aceLanguages = ["java", "python"];
+//Add mimetype and ace language mappings here
+var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
