@@ -65,7 +65,7 @@ app.get('/', function(req, res) {
 	res.clearCookie('returnto');
 	res.redirect(retto);
     }
-    res.send('Hello World!');
+    res.render('index', {user: req.user});
 });
 
 app.get('/auth/google', passport.authenticate('google'));
