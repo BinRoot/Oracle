@@ -1,22 +1,23 @@
-$('.typeahead').typeahead({source: ["aaa", "bbb"]})
+$('.typeahead').typeahead({source: ["aaa", "bbb"]});
 
 $("#type").typeahead({
         source: function(query, process) {
-	    $.get('/search', { q: query }, function(data) {
-		var d = JSON.parse(data);
-		var types = [];		
+        $.get('/search', { q: query }, function(data) {
+        var d = JSON.parse(data);
+		var types = [];
 		for(var i=0; i<d.length; i++) {
-		    types.push(d[i].type + " ("+d[i].sum+")");
+            types.push(d[i].type + " ("+d[i].sum+")");
 		}
 		process(types);
-	    });
+        });
 	},
         updater: function (item) {
-	    var splits = item.split(' ');
-	    item = "";
-	    for(var i=0; i<splits.length-1; i++) {
-		item = item + " " + splits[i];
-	    }
+            var splits = item.split(' ');
+            item = "";
+            for(var i=0; i<splits.length-1; i++) {
+                item = item + " " + splits[i];
+            }
+
             return item;
         },
         minLength: 1
@@ -82,7 +83,7 @@ $('#gistOK').click(function() {
 
                 console.log(lang);
 
-                updateCode(lang, code);
+                updateCode(gistLanguages[lang], code);
                 var children = $('#options').children();
                 clearAllActiveChildren(children);
                 $('#gistLI').addClass('active');
@@ -142,5 +143,5 @@ function postPublish () {
 //Add mimetype and ace language mappings here
 //Language listing here https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
-var gistLanguages = {"JavaScript":"javascript", };
+var gistLanguages = {"JavaScript":"javascript", "Python" : "python"};
 
