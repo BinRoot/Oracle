@@ -3,6 +3,8 @@
     height: 42px;
     background-color:#e4e4e4;
     border-radius: 5px;
+    margin-top:20px;
+    margin-bottom:20px;
 }
 
 #searchText {
@@ -40,4 +42,18 @@
 
 .right {
     float:left;    
+}
+
+#results {
+    width:670px;
+    background-color:#e4e4e4;
+}
+
+#languages {
+    width:160px;
+}
+
+#codes {
+    background-color:#ffffff;
+    width:510px;
 }

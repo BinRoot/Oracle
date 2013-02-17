@@ -22,11 +22,36 @@
 			<p>Search:</p>
 		    </div>
 		    <div class="left" id="searchInputDiv">
-			<input id="searchInput" type="text" placeholder="Name of algorithm or code">
+			<input id="searchInput" type="text" placeholder="Name of algorithm or code" data-provide="typeahead" autocomplete="off">
 		    </div>
 		    <div class="right" id="searchButtonDiv">
 			<button id="searchButton" class="btn btn-info">Find Code</button>
 		    </div>
+		</div>
+		</center>
+	    </div>
+	</div>
+	
+	<div class="row">
+	    <div class="offset2 span8">
+		<center>
+		<div id="results">
+		    <div class="left" id="languages">
+			<ul>
+			    <li>C</li>
+			    <li>Java</li>
+			    <li>Javascript</li>
+			    <li>Haskell</li>
+			</ul>
+		    </div>
+		    <div class="right" id="codes">
+			<ul>
+			    <li>code item 1</li>
+			    <li>code item 2</li>
+			    <li>code item 3</li>
+			</ul>
+		    </div>
+
 		</div>
 		</center>
 	    </div>
@@ -40,6 +65,6 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/publish.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
