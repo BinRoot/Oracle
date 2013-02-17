@@ -101,8 +101,6 @@ app.post('/publish', function(req, res, next) {
     var post_lang = req.body.lang;
     var post_code = req.body.code;
 
-    console.log("user stuff: "+JSON.stringify(req.user));
-
 
     var data = {
 	type: post_type,
@@ -113,7 +111,7 @@ app.post('/publish', function(req, res, next) {
 	time: new Date(),
 	votes: 1,
 	comments: [],
-	tags: [],
+	tags: [post_type],
 	description: ""
     };
     db.insertCode(data, function() {
