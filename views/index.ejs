@@ -6,34 +6,40 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
     <div class="container">
 
-	<div class="row">
-	    <div class="offset2 span8">
-		<center>
-		<div id="searchBar">
-		    <div class="left" id="searchText">
-			<p>Search:</p>
-		    </div>
-		    <div class="left" id="searchInputDiv">
-			<input id="searchInput" type="text" placeholder="Name of algorithm or code">
-		    </div>
-		    <div class="right" id="searchButtonDiv">
-			<button id="searchButton" class="btn btn-info">Find Code</button>
-		    </div>
-		</div>
-		</center>
-	    </div>
-	</div>
+    	<header>
+			<div id="search">
+				<label>Search:</label>
+			    <div class="search-bar">
+					<input id="search-input" type="text" placeholder="Name of algorithm or code">
+			    </div>
+				<button class="button blue">Find Code</button>
+			</div>
 
-	<footer>
-	</footer>
+			<div id="search-results">
+				<div class="result">
+					<div class="avatars">
+
+					</div>
+					<span class="votes"><span>271</span> votes</span>
+					<div class="meta">
+						<span class="byline">By jasdev and 2 others</span>
+						<span class="revisions">13 revisions</span>
+						<div class="snippet">
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</header>
+
+		<footer>
+		</footer>
 
     </div> <!-- /container -->
     <!-- Nonblocking scripts at the bottom of the body -->
@@ -41,5 +47,6 @@
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/publish.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
 </body>
 </html>
