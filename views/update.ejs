@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title></title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="css/custom.css">
+</head>
+
+<body>
+    <div class="container">
+
+        <form class="form-horizontal">
+          <fieldset>
+            <legend>Update your submission!</legend>
+
+            <div class="control-group">
+              <label class="control-label" for="description">Description:</label>
+              <div class="controls">
+                <textarea id="description" class="input-xxlarge" rows="3"></textarea>
+              </div>
+            </div>
+
+            <div class="control-group">
+              <label class="control-label" for="prependedInput">Attribution:</label>
+              <div class="controls">
+                <div class="input-prepend">
+                  <span class="add-on">Name:</span>
+                  <input class="span2" id="prependedNameInput" type="text" placeholder="Type a name...">
+                </div>
+                <div class="input-prepend">
+                  <span class="add-on">E-mail:</span>
+                  <input class="span2" id="prependedEmailInput" type="text" placeholder="Type an e-mail...">
+                </div>
+              </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for=""><i class="icon-arrow-right"></i> or is this code from</label>
+                <div class="controls">
+                    <label class="radio">
+                      Stack Overflow
+                    </label>
+
+                    <label class="radio">
+                      <input type="radio" name="options" id="gistOption" value="gist">
+                      Gist
+                    </label>
+
+                    <label class="radio">
+                      <input type="radio" name="options" id="wikiOption" value="wiki">
+                      Wikipedia
+                    </label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="">Tags:</label>
+                <div class="controls">
+                    <input type="text" placeholder="Separate tags by commas...">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <div class="controls">
+                    <button type="submit" class="btn btn-success">Submit</button>
+                </div>
+            </div>
+          </fieldset>
+        </form>
+
+    </div> <!-- /container -->
+    <!-- Nonblocking scripts at the bottom of the body -->
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="js/publish.js"></script>
+</body>
+</html>

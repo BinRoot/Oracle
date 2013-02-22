@@ -80,7 +80,7 @@ $('#gistOK').click(function() {
 
                 console.log(lang);
 
-                updateCode(lang, code);
+                updateCode(gistLanguages[lang], code);
                 var children = $('#options').children();
                 clearAllActiveChildren(children);
                 $('#gistLI').addClass('active');
@@ -140,5 +140,5 @@ function postPublish () {
 //Add mimetype and ace language mappings here
 //Language listing here https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
 var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
-var gistLanguages = {"JavaScript":"javascript", };
+var gistLanguages = {"JavaScript":"javascript", "Python" : "python"};
 

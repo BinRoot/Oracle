@@ -6,59 +6,40 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
     <div class="container">
+    	<header>
+	    <div id="search">
+		<label>Search:</label>
+		<div class="search-bar">
+		    <input id="search-input" type="text" placeholder="Name of algorithm or code">
+		</div>
+		<button class="button blue">Find Code</button>
+	    </div>
 
-	<div class="row">
-	    <div class="offset2 span8">
-		<center>
-		<div id="searchBar">
-		    <div class="left" id="searchText">
-			<p>Search:</p>
+	    <div id="search-results">
+		<div class="result">
+		    <div class="avatars">
+
 		    </div>
-		    <div class="left" id="searchInputDiv">
-			<input id="searchInput" type="text" placeholder="Name of algorithm or code" data-provide="typeahead" autocomplete="off">
-		    </div>
-		    <div class="right" id="searchButtonDiv">
-			<button id="searchButton" class="btn btn-info">Find Code</button>
+		    <span class="votes"><span>271</span> votes</span>
+		    <div class="meta">
+			<span class="byline">By jasdev and 2 others</span>
+			<span class="revisions">13 revisions</span>
+			<div class="snippet">
+
+			</div>
 		    </div>
 		</div>
-		</center>
 	    </div>
-	</div>
-	
-	<div class="row">
-	    <div class="offset2 span8">
-		<center>
-		<div id="results">
-		    <div class="left" id="languages">
-			<ul>
-			    <li>C</li>
-			    <li>Java</li>
-			    <li>Javascript</li>
-			    <li>Haskell</li>
-			</ul>
-		    </div>
-		    <div class="right" id="codes">
-			<ul>
-			    <li>code item 1</li>
-			    <li>code item 2</li>
-			    <li>code item 3</li>
-			</ul>
-		    </div>
-
-		</div>
-		</center>
-	    </div>
-	</div>
+	</header>
 
 	<footer>
 	</footer>
+	>>>>>>> 201ee7271d1e95587255bb90777038028ef224ce
 
     </div> <!-- /container -->
     <!-- Nonblocking scripts at the bottom of the body -->

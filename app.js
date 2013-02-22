@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 var db = require('./db.js');
-
+var crypto = require('crypto');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
 
@@ -68,6 +68,18 @@ app.get('/', function(req, res) {
     res.render('index', {user: req.user});
 });
 
+app.get('/profile', function(req, res, next){
+  ensureAuthenticated(req, res, next, '/profile');
+}, function(req, res) {
+    var user = req.user;
+
+    //Assume atleast one email for gravatar purposes, since it is gmail login afterall
+    var email = user.emails[0]['value'].toLowerCase();
+
+    var hash = crypto.createHash('md5').update(email).digest("hex");
+    res.render('profile', {userHash: hash});
+});
+
 app.get('/auth/google', passport.authenticate('google'));
 
 app.get('/auth/google/return', 
@@ -91,6 +103,14 @@ app.get('/publish', function(req, res, next) {
     var extraData = {type: req.query.type};
     console.log('type: '+ extraData.type );
     res.render('publish', {user: req.user, extra:extraData});
+});
+
+app.get('/update', function(req, res, next) {
+    ensureAuthenticated(req, res, next, '/update');
+}, function(req, res) {
+    var extraData = {type: req.query.type};
+    console.log('type: '+ extraData.type );
+    res.render('update', {user: req.user, extra:extraData});
 });
 
 app.post('/publish', function(req, res, next) {
