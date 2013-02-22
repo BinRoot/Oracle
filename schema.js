@@ -3,8 +3,8 @@
 var codeItem =
     { 
 	type: "bubble sort", // category of code
-	uname: "binroot", // original author
-	uid: "abcdef12345", // original author
+	uname: "Nishant Shukla", // original submitter
+	uid: "abcdef12345", // original submitter
 	lang: "java", // programming language
 	code: "[code]", // implementation of code
 	time: "Jan 31, 2013", // time created
