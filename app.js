@@ -2,7 +2,6 @@ var express = require('express');
 var app = express();
 var db = require('./db.js');
 var crypto = require('crypto');
-
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
 
@@ -104,6 +103,14 @@ app.get('/publish', function(req, res, next) {
     var extraData = {type: req.query.type};
     console.log('type: '+ extraData.type );
     res.render('publish', {user: req.user, extra:extraData});
+});
+
+app.get('/update', function(req, res, next) {
+    ensureAuthenticated(req, res, next, '/update');
+}, function(req, res) {
+    var extraData = {type: req.query.type};
+    console.log('type: '+ extraData.type );
+    res.render('update', {user: req.user, extra:extraData});
 });
 
 app.post('/publish', function(req, res, next) {
