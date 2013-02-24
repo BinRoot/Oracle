@@ -43,6 +43,7 @@
                 <label class="control-label" for=""><i class="icon-arrow-right"></i> or is this code from</label>
                 <div class="controls">
                     <label class="radio">
+                      <input type="radio" name="options" id="stackoverflowOption" value="stackoverflow">
                       Stack Overflow
                     </label>
 
@@ -61,13 +62,13 @@
             <div class="control-group">
                 <label class="control-label" for="">Tags:</label>
                 <div class="controls">
-                    <input type="text" placeholder="Separate tags by commas...">
+                    <input type="text" id="tags" placeholder="Separate tags by commas...">
                 </div>
             </div>
 
             <div class="control-group">
                 <div class="controls">
-                    <button type="submit" class="btn btn-success">Submit</button>
+                    <button id="submit" class="btn btn-success">Submit</button>
                 </div>
             </div>
           </fieldset>
@@ -77,6 +78,6 @@
     <!-- Nonblocking scripts at the bottom of the body -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/publish.js"></script>
+    <script type="text/javascript" src="js/update.js"></script>
 </body>
 </html>
