@@ -11,6 +11,7 @@ var hurl = 'http://oracle1.herokuapp.com';
 var lurl = 'http://localhost:5000'
 
 var env = process.env.NODE_ENV || 'development';
+var aws = "http://ec2-50-19-140-101.compute-1.amazonaws.com:8983/solr/";
 
 switch(env){
   case 'development':
@@ -123,20 +124,32 @@ app.post('/publish', function(req, res, next) {
 
 
     var data = {
+	id: getIdFromURI(req.user.identifier) + new Date(),
 	type: post_type,
 	uname: req.user.displayName,
 	uid: getIdFromURI(req.user.identifier),
 	lang: post_lang,
 	code: post_code,
-	time: new Date(),
 	votes: 1,
-	comments: [],
-	tags: [post_type],
 	description: ""
     };
-    db.insertCode(data, function() {
-	res.send('works');
+    
+    var postData = {add:{doc:data}};
+    
+    var request = require('request');
+
+    var options = {
+	uri: aws + 'update/json?commit=true',
+	method: 'POST',
+	json: postData
+    };
+
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    res.send(body);
+	}
     });
+    
 });
 
 app.get('/search', function(req, res) {

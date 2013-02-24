@@ -6,7 +6,8 @@
 	"mongodb": "1.2.11",
 	"ejs": "0.8.3",
 	"passport": "0.1.15",
-	"passport-google": "0.2.0"	
+	"passport-google": "0.2.0",
+	"request": "2.14.0"
     },
     "engines": {
 	"node": "0.8.x",
