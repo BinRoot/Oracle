@@ -72,8 +72,9 @@ $('#gistOK').click(function() {
         //Add logic here to handle bad URLs so they can't mess up the script
         $.ajax({
         url: "https://api.github.com/gists/" + id,
+        dataType: 'jsonp',
         success: function(data, textStatus, jqXHR) {
-            var files = data.files;
+            var files = data.data.files;
             for(var fileName in files) {
                 var code = files[fileName].content;
                 var lang = files[fileName].language;
