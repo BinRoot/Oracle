@@ -118,8 +118,8 @@ app.post('/publish', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
 
-    var post_type = req.body.type;
-    var post_lang = req.body.lang;
+    var post_type = req.body.type.toLowerCase();
+    var post_lang = req.body.lang.toLowerCase();
     var post_code = req.body.code;
 
 

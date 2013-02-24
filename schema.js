@@ -14,6 +14,9 @@ var codeItem =
 	description: "This algorithm ..." // also used for searching
     }
 
+// GET lang peek
+// http://ec2-50-19-140-101.compute-1.amazonaws.com:8983/solr/collection1/select/?wt=json&q=*:*&fl=name&facet=true&facet.field=lang
+
 // Schema for 'User' Collection
 var userItem = 
     {
