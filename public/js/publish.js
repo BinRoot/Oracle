@@ -2,7 +2,7 @@ $("#type").typeahead({
     source: function(query, process) {
 	$.get('/peek', { q: query }, function(data) {
 	    var d = JSON.parse(data);
-	    var types = [];		
+	    var types = [];
 	    for(var i=0; i<d.length; i++) {
 		types.push(d[i].type + " ("+d[i].sum+")");
 	    }
@@ -36,7 +36,8 @@ $('#upload').click(function() {
 		},
 		function(fpfile){
 			filepicker.read(fpfile, function(data){
-            updateCode(aceLanguages[fpfile.mimetype], data);
+                var extension = fpfile.filename.split('.').pop();
+                updateCode(aceLanguages[extension], data);
 		});
     });
 });
@@ -106,11 +107,12 @@ function updateCode(lang, code) {
         $('#selectedLanguage').html( "other" + ' <span class="caret"></span>');
     }
     else{
+        console.log("Setting code to language " + lang);
         editor.getSession().setMode("ace/mode/" + lang);
         $('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
     }
 
-    
+
 }
 
 function clearAllActiveChildren(children) {
@@ -140,6 +142,38 @@ function postPublish () {
 
 //Add mimetype and ace language mappings here
 //Language listing here https://github.com/ajaxorg/ace/tree/master/lib/ace/mode
-var aceLanguages = {"text/x-java":"java", "text/x-python":"python", "application/javascript":"javascript"};
-var gistLanguages = {"JavaScript":"javascript", "Python" : "python"};
+var aceLanguages = {
+                    ".java":"java",
+                    ".py":"python",
+                    ".js":"javascript",
+                    ".rb":"ruby",
+                    ".hs":"haskell",
+                    ".cpp":"c_cpp",
+                    ".sh":"shell",
+                    ".php": "php",
+                    ".pl":"perl",
+                    ".m": "objectivec",
+                    ".cs":"csharp",
+                    ".coffee": "coffee",
+                    ".go":"golang",
+                    ".scm":"scheme",
+                    ".ss":"scheme"
+                };
 
+var gistLanguages = {
+                    "Java": "java",
+                    "JavaScript":"javascript",
+                    "Python" : "python",
+                    "Haskell":"haskell",
+                    "Ruby":"ruby",
+                    "C++":"c_cpp",
+                    "C":"c_cpp",
+                    "Shell":"shell",
+                    "PHP":"php",
+                    "Perl":"perl",
+                    "Objective-C": "objectivec",
+                    "C#":"csharp",
+                    "CoffeeScript":"coffee",
+                    "Go":"golang",
+                    "Scheme":"scheme"
+                };
