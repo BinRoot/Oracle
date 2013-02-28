@@ -4,6 +4,7 @@ var db = require('./db.js');
 var crypto = require('crypto');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
+var request = require('request');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -135,8 +136,6 @@ app.post('/publish', function(req, res, next) {
     };
     
     var postData = {add:{doc:data}};
-    
-    var request = require('request');
 
     var options = {
 	uri: aws + 'update/json?commit=true',
@@ -155,61 +154,27 @@ app.post('/publish', function(req, res, next) {
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    if(!q) {
-	// res.send('[]'); // if empty, return nothing
-	var searchObject = {type: {$regex:".*"}};
-        db.findTypes(searchObject, function(out) {
-	    res.send(JSON.stringify(out) );
-	});
-    }
-    else if (q) {
-        // if search is surround by quotes, return exact results                
-        if(q[0]=="\"" && q[q.length-1]=="\"") {
-            q = q.substring(1,q.length-1)
-            var searchObject = {type: q};
-            db.findTypes(searchObject, function(out) {
-		res.send(JSON.stringify(out) );
-	    });
-        }
-        else { // otherwise return similar results                              
-            q = ".*" + q.replace(" ",".*") + ".*";
-
-            var searchObject = {type: {$regex: q}};
-            db.findTypes(searchObject, function(out) {
-		res.send( JSON.stringify(out) );
-	    });
-        }
-    }
+    res.send('search: '+q);
+    
 });
 
 app.get('/peek', function(req, res) {
     var q = req.query["q"];
 
-    if(!q) {
-	// res.send('[]'); // if empty, return nothing
-	var searchObject = {type: {$regex:".*"}};
-        db.findTypes(searchObject, function(out) {
-	    res.send(JSON.stringify(out) );
-	});
-    }
-    else if (q) {
-        // if search is surround by quotes, return exact results                
-        if(q[0]=="\"" && q[q.length-1]=="\"") {
-            q = q.substring(1,q.length-1)
-            var searchObject = {type: q};
-            db.findTypes(searchObject, function(out) {
-		res.send(JSON.stringify(out) );
-	    });
-        }
-        else { // otherwise return similar results                              
-            q = ".*" + q.replace(" ",".*") + ".*";
+    var options = {
+	uri: aws + 'collection1/select/?wt=json&q=*:*&fl=name&facet=true&facet.field=type',
+	method: 'GET',
+    };
 
-            var searchObject = {type: {$regex: q}};
-            db.findTypes(searchObject, function(out) {
-		res.send( JSON.stringify(out) );
-	    });
-        }
-    }
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    res.send(body);
+	}
+	else {
+	    console.log(error + ' *** ' + response.statusCode);
+	}
+    });
+    
 });
 
 
