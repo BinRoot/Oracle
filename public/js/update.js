@@ -12,5 +12,5 @@ $('#submit').click(function(){
     var tags = $('#tags').val().split(',');
 
     //Make post request to backend after ensuring enough data is entered
-    alert("Description: " + description + "\nAttribution: " + attribution + "\nTags: " + tags);
+    //alert("Description: " + description + "\nAttribution: " + attribution + "\nTags: " + tags);
 });
