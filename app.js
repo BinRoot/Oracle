@@ -115,6 +115,32 @@ app.get('/update', function(req, res, next) {
     res.render('update', {user: req.user, extra:extraData});
 });
 
+// TODO: /delete should not be available to all users
+// Huge-ass security issue.
+app.post('/delete', function(req, res, next) {
+    var post_id = req.body.id; // :codeid | :userid
+    var post_mode = req.body.mode; // "code" | "user"
+
+    var data = {
+	id: post_id,
+    };
+    
+    var postData = {delete:data};
+
+    var options = {
+	uri: aws + 'update/json?commit=true',
+	method: 'POST',
+	json: postData
+    };
+
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    res.send(body);
+	}
+    });
+    
+});
+
 app.post('/publish', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
@@ -125,7 +151,7 @@ app.post('/publish', function(req, res, next) {
 
 
     var data = {
-	id: getIdFromURI(req.user.identifier) + new Date(),
+	id: getIdFromURI(req.user.identifier) + (new Date()).getTime(),
 	type: post_type,
 	uname: req.user.displayName,
 	uid: getIdFromURI(req.user.identifier),
@@ -174,7 +200,6 @@ app.get('/peek', function(req, res) {
 	    console.log(error + ' *** ' + response.statusCode);
 	}
     });
-    
 });
 
 
