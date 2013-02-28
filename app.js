@@ -4,6 +4,7 @@ var db = require('./db.js');
 var crypto = require('crypto');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
+var request = require('request');
 
 app.use(express.static(__dirname + '/public'));
 
@@ -114,17 +115,43 @@ app.get('/update', function(req, res, next) {
     res.render('update', {user: req.user, extra:extraData});
 });
 
+// TODO: /delete should not be available to all users
+// Huge-ass security issue.
+app.post('/delete', function(req, res, next) {
+    var post_id = req.body.id; // :codeid | :userid
+    var post_mode = req.body.mode; // "code" | "user"
+
+    var data = {
+	id: post_id,
+    };
+    
+    var postData = {delete:data};
+
+    var options = {
+	uri: aws + 'update/json?commit=true',
+	method: 'POST',
+	json: postData
+    };
+
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    res.send(body);
+	}
+    });
+    
+});
+
 app.post('/publish', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
 
-    var post_type = req.body.type;
-    var post_lang = req.body.lang;
+    var post_type = req.body.type.toLowerCase();
+    var post_lang = req.body.lang.toLowerCase();
     var post_code = req.body.code;
 
 
     var data = {
-	id: getIdFromURI(req.user.identifier) + new Date(),
+	id: getIdFromURI(req.user.identifier) + (new Date()).getTime(),
 	type: post_type,
 	uname: req.user.displayName,
 	uid: getIdFromURI(req.user.identifier),
@@ -135,8 +162,6 @@ app.post('/publish', function(req, res, next) {
     };
     
     var postData = {add:{doc:data}};
-    
-    var request = require('request');
 
     var options = {
 	uri: aws + 'update/json?commit=true',
@@ -155,61 +180,26 @@ app.post('/publish', function(req, res, next) {
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    if(!q) {
-	// res.send('[]'); // if empty, return nothing
-	var searchObject = {type: {$regex:".*"}};
-        db.findTypes(searchObject, function(out) {
-	    res.send(JSON.stringify(out) );
-	});
-    }
-    else if (q) {
-        // if search is surround by quotes, return exact results                
-        if(q[0]=="\"" && q[q.length-1]=="\"") {
-            q = q.substring(1,q.length-1)
-            var searchObject = {type: q};
-            db.findTypes(searchObject, function(out) {
-		res.send(JSON.stringify(out) );
-	    });
-        }
-        else { // otherwise return similar results                              
-            q = ".*" + q.replace(" ",".*") + ".*";
-
-            var searchObject = {type: {$regex: q}};
-            db.findTypes(searchObject, function(out) {
-		res.send( JSON.stringify(out) );
-	    });
-        }
-    }
+    res.send('search: '+q);
+    
 });
 
 app.get('/peek', function(req, res) {
     var q = req.query["q"];
 
-    if(!q) {
-	// res.send('[]'); // if empty, return nothing
-	var searchObject = {type: {$regex:".*"}};
-        db.findTypes(searchObject, function(out) {
-	    res.send(JSON.stringify(out) );
-	});
-    }
-    else if (q) {
-        // if search is surround by quotes, return exact results                
-        if(q[0]=="\"" && q[q.length-1]=="\"") {
-            q = q.substring(1,q.length-1)
-            var searchObject = {type: q};
-            db.findTypes(searchObject, function(out) {
-		res.send(JSON.stringify(out) );
-	    });
-        }
-        else { // otherwise return similar results                              
-            q = ".*" + q.replace(" ",".*") + ".*";
+    var options = {
+	uri: aws + 'collection1/select/?wt=json&q=*:*&fl=name&facet=true&facet.field=type',
+	method: 'GET',
+    };
 
-            var searchObject = {type: {$regex: q}};
-            db.findTypes(searchObject, function(out) {
-		res.send( JSON.stringify(out) );
-	    });
-        }
-    }
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    res.send(body);
+	}
+	else {
+	    console.log(error + ' *** ' + response.statusCode);
+	}
+    });
 });
 
 

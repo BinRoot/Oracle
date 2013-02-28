@@ -1,0 +1,1 @@
+curl 'http://ec2-50-19-140-101.compute-1.amazonaws.com:8983/solr/update/json?commit=true' --data-binary @json.json -H 'Content-type:application/json'
