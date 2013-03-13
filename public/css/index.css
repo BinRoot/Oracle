@@ -6,7 +6,11 @@ blue: #67b5f6;
 html, body {
     font-family: "Open Sans";
     padding: 0;
-    margin:0;
+/*    margin:0; */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0;
+    width: 720px;
 }
 header {
     height: 500px;
