@@ -177,11 +177,33 @@ app.post('/publish', function(req, res, next) {
     
 });
 
+/* Currently the Solr search is pretty dumb:
+ * if type matches OR code matches then
+ * it sorts per votes and returns result
+*/
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    res.send('search: '+q);
-    
+    var regexQuery = "*" + q.replace(" ", "*") + "*";
+
+    var searchURL = aws + "collection1/select?q=type%3A" 
+	+ regexQuery + "+OR+code%3A*" 
+	+ regexQuery + "&sort=votes+desc&wt=json";
+
+    var options = {
+	uri: searchURL,
+	method: 'GET',
+    };
+
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    console.log(JSON.stringify((JSON.parse(body)).response) );
+	    res.send(JSON.stringify((JSON.parse(body)).response));
+	}
+	else {
+	    console.log(error + ' *** ' + response.statusCode);
+	}
+    });
 });
 
 app.get('/peek', function(req, res) {
