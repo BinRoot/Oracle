@@ -167,3 +167,7 @@ header {
     border: 1px solid #ababab;
     border-radius: 4px;
 }
+
+.result {
+    display: inline-block;
+}
