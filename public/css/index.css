@@ -27,6 +27,7 @@ header {
     box-shadow: inset 0 0 10px rgba(0,0,0,.1);
     padding: 6px 10px;
     box-sizing: border-box;
+    margin-top:20px;
 }
 
 .search-bar {
@@ -149,13 +150,12 @@ header {
 
 
 #search-results {
-    width: 680px;
+    width: 485px;
     border-radius: 4px;
     background: white;
     border: 5px solid #dadada;
     position: relative;
     padding: 5px;
-    margin-top: 10px;
 }
 #search-results:before {
     content: '';
@@ -168,6 +168,98 @@ header {
     border-radius: 4px;
 }
 
-.result {
-    display: inline-block;
+#language-results {
+    width:150px;
+    border-radius: 4px;
+    background: white;
+    border: 5px solid #dadada;
+    position: relative;
+    padding: 5px;
+    margin-right:20px;
 }
+#language-results:before {
+    content: '';
+    width: 100%;
+    height: 100%;
+    left: -1px;
+    top: -1px;
+    position: absolute;
+    border: 1px solid #ababab;
+    border-radius: 4px;
+}
+
+.lang-item {
+    height:30px;
+    line-height: 30px;
+    padding-left:10px;
+
+    border-style:solid;
+    border-left:8px solid #0000ff;
+    border-right:none;
+    border-top:none;
+    border-bottom:none;
+
+}
+
+.lang-number {
+    float:right;
+
+    -webkit-border-radius: 999px;
+    -moz-border-radius: 999px;
+    border-radius: 999px;
+    behavior: url(PIE.htc);
+
+    width: 16px;
+    height: 16px;
+    padding: 5px;
+    
+    background: #aaa;
+    color: #fff;
+    text-align: center;
+
+    margin-top:3px;
+    margin-right:5px;
+    
+    font: 12px Arial, sans-serif
+}
+
+
+#lang-and-code-results {
+    margin-top:20px;
+}
+
+.result {
+    margin:5px;
+}
+
+
+/* Snippet from http://goo.gl/BYaqf */
+ul.inline-block,
+ul.inline-block li {
+    /* Setting a common base */
+    margin: 0;
+    padding: 0;
+}
+ 
+ul.inline-block li {
+    display: inline-block;
+    vertical-align: top;
+}
+
+.avatars {
+    width:100px;
+    height:100px;
+}
+
+.meta {
+    width:400px;
+}
+
+.byline {
+    float:left;
+}
+
+.comments {
+    float: right;
+}
+

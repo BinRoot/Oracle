@@ -13,5 +13,10 @@ $('#find-button').click(function() {
 
     $.get(searchURL, function(data) {
 	console.log(data);
+	$('#search-results').append(
+	    $('<div>').attr('class', 'result').append(
+		"hi"
+	    )
+	);
     });
 });
