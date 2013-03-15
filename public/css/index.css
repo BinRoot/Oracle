@@ -150,7 +150,7 @@ header {
 
 
 #search-results {
-    width: 485px;
+    width: 487px;
     border-radius: 4px;
     background: white;
     border: 5px solid #dadada;
@@ -175,7 +175,7 @@ header {
     border: 5px solid #dadada;
     position: relative;
     padding: 5px;
-    margin-right:20px;
+    margin-right:18px;
 }
 #language-results:before {
     content: '';
@@ -191,14 +191,18 @@ header {
 .lang-item {
     height:30px;
     line-height: 30px;
-    padding-left:10px;
+    padding-left:14px;
+
+}
+
+.lang-item.lang-active {
+    padding-left:8px;
 
     border-style:solid;
-    border-left:8px solid #0000ff;
+    border-left:6px solid #66b5f7;
     border-right:none;
     border-top:none;
     border-bottom:none;
-
 }
 
 .lang-number {
@@ -223,6 +227,10 @@ header {
     font: 12px Arial, sans-serif
 }
 
+.lang-active .lang-number {
+    background: #66b5f7;
+}
+
 
 #lang-and-code-results {
     margin-top:20px;
@@ -235,13 +243,13 @@ header {
 
 /* Snippet from http://goo.gl/BYaqf */
 ul.inline-block,
-ul.inline-block li {
+ul.inline-block > li {
     /* Setting a common base */
     margin: 0;
     padding: 0;
 }
  
-ul.inline-block li {
+ul.inline-block > li {
     display: inline-block;
     vertical-align: top;
 }
@@ -252,14 +260,14 @@ ul.inline-block li {
 }
 
 .meta {
-    width:400px;
-}
-
-.byline {
-    float:left;
+    width:372px;
 }
 
 .comments {
     float: right;
+}
+
+.snippet {
+    
 }
 
