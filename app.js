@@ -77,16 +77,19 @@ app.get('/', function(req, res) {
     res.render('index', {user: req.user});
 });
 
-app.get('/profile', function(req, res, next){
-  ensureAuthenticated(req, res, next, '/profile');
-}, function(req, res) {
-    var user = req.user;
 
-    //Assume atleast one email for gravatar purposes, since it is gmail login afterall
-    var email = user.emails[0]['value'].toLowerCase();
+app.get('/gravatar', function(req, res, next) {
+    var uid = req.query["id"];
 
-    var hash = crypto.createHash('md5').update(email).digest("hex");
-    res.render('profile', {userHash: hash});
+    db.findUser({id: uid}, function(user) {
+
+	console.log('in callback: '+JSON.stringify(user));
+
+	var email = user.email;
+	var hash = crypto.createHash('md5').update(email).digest("hex");
+	res.send(hash);
+    });
+
 });
 
 app.get('/auth/google', passport.authenticate('google'));

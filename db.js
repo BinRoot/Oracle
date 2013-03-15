@@ -43,6 +43,25 @@ var findTypes = function findTypes(val, callback) {
     });
 }
 
+
+var findUser = function findUser(val, callback) {
+    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+        if(!err) {
+            console.log("We are connected! finding user "+JSON.stringify(val));
+
+	    db.collection('users').findOne(val, function(err, result) {
+		if (err) return console.dir(err);
+
+                callback(result);
+	    });
+	    
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+}
+
 var addOrUpdateUser = function addOrUpdateUser(userData) {
     Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
         if(!err) {
@@ -64,3 +83,4 @@ var addOrUpdateUser = function addOrUpdateUser(userData) {
 exports.insertCode = insertCode;
 exports.findTypes = findTypes;
 exports.addOrUpdateUser = addOrUpdateUser;
+exports.findUser = findUser;
