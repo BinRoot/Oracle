@@ -43,5 +43,24 @@ var findTypes = function findTypes(val, callback) {
     });
 }
 
+var addOrUpdateUser = function addOrUpdateUser(userData) {
+    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+        if(!err) {
+            console.log("We are connected! upserting "+JSON.stringify(userData));
+	    
+	    db.collection('users').update({email:userData.email}, userData, {safe:true, upsert:true}, function(err) {
+                if (err) return console.dir(err);
+
+            });
+	    
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+    
+}
+
 exports.insertCode = insertCode;
 exports.findTypes = findTypes;
+exports.addOrUpdateUser = addOrUpdateUser;

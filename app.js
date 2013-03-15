@@ -41,6 +41,13 @@ passport.use(new GoogleStrategy({
     process.nextTick(function () {
         console.log("done! "+identifier);
 	profile.identifier = identifier;
+
+	console.log("profile: " + JSON.stringify(profile))
+/*
+{"displayName":"Nishant Shukla","emails":[{"value":"nick722@gmail.com"}],"name":{"familyName":"Shukla","givenName":"Nishant"},"identifier":"https://www.google.com/accounts/o8/id?id=AItOawko8c_hlIiC0x8h3XYlZewRHPr8FnXidac"}
+*/
+	addOrUpdateUser(profile);
+
 	return done(null, profile);
     });
   }
@@ -230,7 +237,28 @@ app.get('/peek', function(req, res) {
 function getIdFromURI(uri) {
     var gid = uri.split("?")[1];
     return gid.substring(3, gid.length);
-}                                                                                                     
+}
+
+
+/*
+profile = {"displayName":"Nishant Shukla",
+           "emails":[{"value":"nick722@gmail.com"}],
+           "name":{"familyName":"Shukla","givenName":"Nishant"},
+           "identifier":"https://www.google.com/accounts/o8/id?id=AItOawko8c_hlIiC0x8h3XYlZewRHPr8FnXidac"}
+*/
+function addOrUpdateUser(profile) {
+    var userData = {
+	displayName: profile.displayName,
+	email: profile.emails[0].value,
+	id: getIdFromURI(profile.identifier)
+    }
+
+    console.log("\ncalling db.addOrUpdateUser on " + JSON.stringify(userData)+"\n");
+    
+    db.addOrUpdateUser(userData);
+}
+
+
 function ensureAuthenticated(req, res, next, ret) {
     if (req.isAuthenticated()) { return next(); }
 
