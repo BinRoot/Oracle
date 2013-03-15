@@ -238,6 +238,7 @@ header {
 
 .result {
     margin:5px;
+    min-height: 150px;
 }
 
 
@@ -270,16 +271,6 @@ ul.inline-block > li {
 .snippet {
     
 }
-/*
-.circular {
-    width: 100px;
-    height: 100px;
-    border-radius: 50px;
-    -webkit-border-radius: 50px;
-    -moz-border-radius: 50px;
-    background: url(http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100) no-repeat;
-}
-*/
 
 .circular {
     width: 90px;
@@ -288,14 +279,8 @@ ul.inline-block > li {
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
     background: url(http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100) no-repeat;
-
 }
 
-.circular:hover {
-    box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    -webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-    -moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-}
 
 .votes {
     margin-top:10px;
@@ -316,3 +301,10 @@ ul.inline-block > li {
 }
 
 
+pre {
+    white-space: pre-wrap;       /* css-3 */
+    white-space: -moz-pre-wrap;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
