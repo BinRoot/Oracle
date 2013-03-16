@@ -78,7 +78,7 @@ app.get('/', function(req, res) {
 });
 
 
-app.get('/gravatar', function(req, res, next) {
+app.get('/gravatar', function(req, res) {
     var uid = req.query["id"];
 
     db.findUser({id: uid}, function(user) {

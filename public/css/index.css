@@ -13,7 +13,7 @@ html, body {
     width: 720px;
 }
 header {
-    height: 500px;
+    height: 100%;
     border-bottom: 1px solid #ababab;
     background: #eaeaea;
     padding: 10px;
@@ -272,13 +272,12 @@ ul.inline-block > li {
     
 }
 
-.circular {
+.img-circle {
     width: 90px;
     height: 90px;
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
-    background: url(http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100) no-repeat;
 }
 
 
