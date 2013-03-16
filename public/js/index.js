@@ -13,45 +13,10 @@ $('#find-button').click(function() {
 
     $.get(searchURL, function(data) {
 	console.log(data);
-
 	data = JSON.parse(data);
 
-	var langFreq = [];
-
-	$('#search-results').empty();
-
-	_.each(data.docs, function(docItem, i, list) {
-
-	    var found = false;
-	    for(var j=0; j<langFreq.length; j++) {
-		if(langFreq[j].lang == docItem.lang) {
-		    langFreq[j].value++;
-		    found = true;
-		    break;
-		}
-	    }
-	    if(!found) {
-		langFreq.push({lang: docItem.lang, value: 1});
-	    }
-	});
-
-
-	langFreq = langFreq.sort(function(a,b) {return b.value-a.value});
-	console.log('sorted lang freq: '+JSON.stringify(langFreq));
-
-
-// generate html now, select later	
-	$('#language-results').empty();
-
-	for(var i=0; i<langFreq.length; i++) {
-
-	    buildLangResults(langFreq[i].lang, langFreq[i].value);
-	    
-	    if(i < langFreq.length-1) {
-		$('#language-results').append("<hr>");
-	    }
-	}
-
+	var langFreq = sortLanguages(data.docs);
+	showLanguages(langFreq);
 
 	var langToShow = langFreq[0].lang;
 	selectLanguage(langToShow);
@@ -60,11 +25,54 @@ $('#find-button').click(function() {
     });
 });
 
+
+
+function sortLanguages(docs) {
+    var langFreq = [];
+    _.each(docs, function(docItem, i, list) {
+
+	var found = false;
+	for(var j=0; j<langFreq.length; j++) {
+	    if(langFreq[j].lang == docItem.lang) {
+		langFreq[j].value++;
+		found = true;
+		break;
+	    }
+	}
+	if(!found) {
+	    langFreq.push({lang: docItem.lang, value: 1});
+	}
+    });
+    
+    // sort list of languages
+    langFreq = langFreq.sort(function(a,b) {return b.value-a.value});
+    console.log('sorted lang freq: '+JSON.stringify(langFreq));
+    
+    return langFreq;
+
+}
+
 function titleCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function showLanguages(langFreq) {
+    $('#language-results').empty();
+    
+    for(var i=0; i<langFreq.length; i++) {
+	
+	buildLangResults(langFreq[i].lang, langFreq[i].value);
+	
+	if(i < langFreq.length-1) {
+	    $('#language-results').append("<hr>");
+	}
+    }
+
+}
+
 function showResults(docs, lang) {
+    $('#search-results').empty();
+
     _.each(docs, function(docItem, i, list) {
 
 	if(lang == docItem.lang) {
@@ -87,6 +95,7 @@ function selectLanguage(lang) {
 	    $(langItem).addClass('lang-item');
 	}
     });
+
 }
 
 function buildLangResults(lang, value) {
