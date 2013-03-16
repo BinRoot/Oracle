@@ -158,7 +158,7 @@ app.post('/publish', function(req, res, next) {
     var post_type = req.body.type.toLowerCase();
     var post_lang = req.body.lang.toLowerCase();
     var post_code = req.body.code;
-
+    var post_email = req.user.emails[0].value;
 
     var data = {
 	id: getIdFromURI(req.user.identifier) + (new Date()).getTime(),
@@ -168,7 +168,8 @@ app.post('/publish', function(req, res, next) {
 	lang: post_lang,
 	code: post_code,
 	votes: 1,
-	description: ""
+	description: "",
+	email: post_email
     };
     
     var postData = {add:{doc:data}};
@@ -178,6 +179,8 @@ app.post('/publish', function(req, res, next) {
 	method: 'POST',
 	json: postData
     };
+
+    console.log('POSTing: '+JSON.stringify(postData));
 
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {

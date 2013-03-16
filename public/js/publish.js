@@ -134,6 +134,8 @@ function postPublish () {
 	code: data_code
     };
 
+    console.log('post data is ', JSON.stringify(postData));
+
     $.post("/publish", postData, function(data){
         console.log(data);
     });

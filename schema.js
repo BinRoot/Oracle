@@ -11,7 +11,8 @@ var codeItem =
 	votes: 2, // ranking
 	comments: [ ], 
 	tags: ["sort", "naive"], // used for searching
-	description: "This algorithm ..." // also used for searching
+	description: "This algorithm ...", // also used for searching
+	email: "blah@email.com"
     }
 
 // GET lang peek

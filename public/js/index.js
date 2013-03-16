@@ -15,17 +15,26 @@ $('#find-button').click(function() {
 	console.log(data);
 	data = JSON.parse(data);
 
-	var langFreq = sortLanguages(data.docs);
-	showLanguages(langFreq);
+	if(data.docs.length > 0) {
+	    var langFreq = sortLanguages(data.docs);
+	    showLanguages(langFreq);
 
-	var langToShow = langFreq[0].lang;
-	selectLanguage(langToShow);
-	showResults(data.docs, langToShow);
+	    var langToShow = langFreq[0].lang;
+	    selectLanguage(langToShow);
+	    showResults(data.docs, langToShow);
+	}
+	else {
+	    noResults();
+	}
+
 
     });
 });
 
-
+function noResults() {
+    $('#language-results').empty();
+    $('#search-results').empty();
+}
 
 function sortLanguages(docs) {
     var langFreq = [];
@@ -56,6 +65,12 @@ function titleCase(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+function gravatarHash(email) {
+    if(email)
+	return md5(email.trim().toLowerCase());
+    else return 0;
+}
+
 function showLanguages(langFreq) {
     $('#language-results').empty();
     
@@ -77,7 +92,10 @@ function showResults(docs, lang) {
 
 	if(lang == docItem.lang) {
 	    var voteStr = docItem.votes>1 ? "votes" : "vote";
-	    buildSearchResults('http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100', docItem.votes, voteStr, docItem.uname, docItem.code, docItem.lang);
+	    
+	    var imgURL = 'http://gravatar.com/avatar/'+gravatarHash(docItem.email)+'?s=100';
+	    // http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100
+	    buildSearchResults(imgURL, docItem.votes, voteStr, docItem.uname, docItem.code, docItem.lang);
 	}
     });
 }
