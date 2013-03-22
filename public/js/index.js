@@ -31,6 +31,10 @@ $('#find-button').click(function() {
     });
 });
 
+$('#publish-bar').click(function() {
+    window.location = "/publish"
+});
+
 function noResults() {
     $('#language-results').empty();
     $('#search-results').empty();

@@ -151,11 +151,19 @@ header {
 
 #search-results {
     width: 487px;
-    border-radius: 4px;
+/*    border-radius: 4px; */
     background: white;
     border: 5px solid #dadada;
     position: relative;
     padding: 5px;
+
+    -webkit-border-bottom-right-radius: 5px;
+    -webkit-border-bottom-left-radius: 5px;
+    -moz-border-radius-bottomright: 5px;
+    -moz-border-radius-bottomleft: 5px;
+    border-bottom-right-radius: 5px;
+    border-bottom-left-radius: 5px;
+
 }
 #search-results:before {
     content: '';
@@ -306,4 +314,32 @@ pre {
     white-space: -pre-wrap;      /* Opera 4-6 */
     white-space: -o-pre-wrap;    /* Opera 7 */
     word-wrap: break-word;       /* Internet Explorer 5.5+ */
+}
+
+#publish-bar {
+
+/*    border-radius: 4px; */
+    background: #ddffdd;
+
+    border: 5px solid #dadada;
+    position: relative;
+    padding: 5px;
+
+    -webkit-border-top-left-radius: 3px;
+    -webkit-border-top-right-radius: 3px;
+    -moz-border-radius-topleft: 3px;
+    -moz-border-radius-topright: 3px;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+
+/*    box-shadow: inset 5px 5px 5px rgba(0,0,0,.1); */
+    box-sizing: border-box;
+    color: #555;
+    
+    text-align:center;
+}
+
+#publish-bar:hover {
+    background: #ccffcc;
+    cursor: hand; cursor: pointer;
 }
