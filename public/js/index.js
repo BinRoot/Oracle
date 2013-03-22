@@ -1,3 +1,19 @@
+window.onload = function() {
+    var prmstr = window.location.search.substr(1);
+    var prmarr = prmstr.split ("&");
+    var params = {};
+
+    for ( var i = 0; i < prmarr.length; i++) {
+	var tmparr = prmarr[i].split("=");
+	params[tmparr[0]] = tmparr[1];
+    }
+
+    var searchQuery = params.q;
+    if(searchQuery) {
+	search(searchQuery);
+    }
+};
+
 
 $('.search-bar input').focus(function() {
     $(this).parent().addClass('focus');
@@ -46,7 +62,7 @@ function search(searchStr) {
 }
 
 $('#publish-bar').click(function() {
-    window.location = "/publish"
+    window.location = "/publish";
 });
 
 

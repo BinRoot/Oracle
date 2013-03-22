@@ -8,56 +8,59 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="css/custom.css">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/publish.css">
 </head>
 
 <body>
-    <div class="container">
+    <div>
 
-	<br>
-	<div class="row">
-	    <div class="span2">
-		<center>
-		    <ul class="breadcrumb" style="height:14px">
-			<li><a href="/"><b>O</b></a> <span class="divider">/</span></li>
-			<li class="active"><b>Publish</b></li>
-		    </ul>
-		</center>
+	<header>
+	    <div id="search">
+		<label>Name:&nbsp;&nbsp;</label>
+		<div class="search-bar">
+
+		    <% if (!extra.type) { %>
+		    <input id="type" type="text" placeholder="Binary Tree Traversal" autofocus="autofocus">
+		    <% } %>
+		    <% if (extra.type) { %>
+		    <input id="type" type="text" value="<%= extra.type %>" autofocus="autofocus">
+		    <% } %>
+
+		</div>
+		<button onclick="postPublish();" id="find-button" class="button blue">Publish</button>
 	    </div>
 
-	    <div class="span5">
-		<% if (!extra.type) { %>
-		<input id="type" style="width:100%;" type="text" placeholder="Name of algorithm or code" data-provide="typeahead" autocomplete="off">
-		<% } %>
-		<% if (extra.type) { %>
-		<input id="type" style="width:100%;" type="text" value="<%= extra.type %>" data-provide="typeahead" autocomplete="off">
-		<% } %>
-	    </div>
-
-	    <div class="span5">
-		<div class="btn-group">
-		    <a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-			Java 
-			<span class="caret"></span>
-		    </a>
-		    <ul id="languages" class="dropdown-menu">
-			<li><a>Haskell</a></li>
-			<li><a>Java</a></li>
-			<li><a>Python</a></li>
-		    </ul>
+	    <div id="code-bar">
+		<div class="code-bar-item"><a data-toggle="modal" href="#gistModal">Get from Gist</a></div>
+		<div class="code-bar-item"><a id="upload">Upload</a></div>
+		<div id="code-bar-lang">
+		    <div class="btn-group">
+			<a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			    Java 
+			    <span class="caret"></span>
+			</a>
+			<ul id="languages" class="dropdown-menu">
+			    <li><a>Haskell</a></li>
+			    <li><a>Java</a></li>
+			    <li><a>Python</a></li>
+			</ul>
+		    </div>
 		</div>
 	    </div>
-	</div>
 
-	<ul id="options" class="nav nav-tabs">
-	    <li id="typeLI" class="active">
-		<a id="type" href="#">Type code</a>
-	    </li>
-	    <li id="gistLI">
-		<a id="gist" href="#gistModal" data-toggle="modal">Get from Gist</a>
-	    </li>
-	    <li id="uploadLI"><a href="#" id="upload">Upload code</a></li>
-	</ul>
+	    <div>
+		<div id="editor"></div>
+		<script src="src-min/ace.js" type="text/javascript" charset="utf-8"></script>
+		<script>
+		    var editor = ace.edit("editor");
+		    editor.setTheme("ace/theme/idle_fingers");
+		    editor.getSession().setMode("ace/mode/javascript");
+		</script>
+	    </div>
+
+	</header>
+
 
 	<!-- Gist Modal -->
 	<div id="gistModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -82,29 +85,6 @@
 		<i class="icon-arrow-right"></i>
 		<input type="filepicker" data-fp-apikey="ALQcedGXCTs-BiXSzHaVlz" data-fp-mimetypes="text/*" data-fp-container="modal" data-fp-services="COMPUTER,DROPBOX,GITHUB,GOOGLE_DRIVE" onchange="upload(event.fpfile)"></input>
 -->
-	<div class="row">
-	    <div class="span12">
-		<div id="editor"></div>
-		<script src="src-min/ace.js" type="text/javascript" charset="utf-8"></script>
-		<script>
-		    var editor = ace.edit("editor");
-		    editor.setTheme("ace/theme/idle_fingers");
-		    editor.getSession().setMode("ace/mode/javascript");
-		</script>
-	    </div>
-	</div>
-
-	<hr>
-	
-	<div class="row">
-	    <div class="span12">
-		<center>
-		    <button onclick="postPublish();" class="btn btn-large btn-success" type="button"><i class="icon-ok icon-white"></i> Publish</button>
-		</center>
-	    </div>
-	</div>
-
-	<hr>
 
 	<footer>
 
@@ -116,5 +96,6 @@
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/publish.js"></script>
+    
 </body>
 </html>

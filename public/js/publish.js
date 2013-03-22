@@ -140,6 +140,12 @@ function postPublish () {
         console.log(data);
     });
 
+    
+    search(data_type);
+}
+
+function search(str) {
+    window.location = "/?q="+str;
 }
 
 //Add mimetype and ace language mappings here
