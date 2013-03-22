@@ -1,3 +1,4 @@
+
 $('.search-bar input').focus(function() {
     $(this).parent().addClass('focus');
 });
@@ -6,57 +7,55 @@ $('.search-bar input').blur(function() {
     $(this).parent().removeClass('focus');
 });
 
+searchData = null;
+
 $('.search-bar input').keypress(function(e){
     if(e.which == 13){
-       var searchStr = $('#search-input').val();
-
-       var searchURL = '/search?q=' + searchStr;
-
-       $.get(searchURL, function(data) {
-        console.log(data);
-        data = JSON.parse(data);
-
-        if(data.docs.length > 0) {
-            var langFreq = sortLanguages(data.docs);
-            showLanguages(langFreq);
-
-            var langToShow = langFreq[0].lang;
-            selectLanguage(langToShow);
-            showResults(data.docs, langToShow);
-        }
-        else {
-            noResults();
-       }
-       });
+	var searchStr = $('#search-input').val();
+	search(searchStr);
     }
 });
 
 $('#find-button').click(function() {
     var searchStr = $('#search-input').val();
+    search(searchStr);
+});
 
+function search(searchStr) {
     var searchURL = '/search?q=' + searchStr;
 
     $.get(searchURL, function(data) {
+
     	console.log(data);
     	data = JSON.parse(data);
 
     	if(data.docs.length > 0) {
+
+	    searchData = data.docs;
+
     	    var langFreq = sortLanguages(data.docs);
     	    showLanguages(langFreq);
 
     	    var langToShow = langFreq[0].lang;
-    	    selectLanguage(langToShow);
-    	    showResults(data.docs, langToShow);
+	    langItemClick(langToShow);
     	}
     	else {
     	    noResults();
-	   }
+	}
     });
-});
+}
 
 $('#publish-bar').click(function() {
     window.location = "/publish"
 });
+
+
+function langItemClick(langToShow) {
+    console.log('showing lang: '+langToShow);
+    selectLanguage(langToShow);
+    showResults(searchData, langToShow);
+}
+
 
 function noResults() {
     $('#language-results').empty();
@@ -143,7 +142,6 @@ function selectLanguage(lang) {
 
 }
 
-//Older version, to be changed
 function buildLangResults(lang, value) {
     $('#language-results').append(
 	$('<div>').addClass('lang-item').append(
@@ -154,8 +152,11 @@ function buildLangResults(lang, value) {
 		    value
 		)
 	    )
-	)
-    );
+	).click(function() {
+	    var langToShow = $(this).text().trim().split(" ")[0].toLowerCase();
+	    langItemClick(langToShow);
+	})
+    )
 }
 
 function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {

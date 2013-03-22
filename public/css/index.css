@@ -185,6 +185,8 @@ header {
     padding: 5px;
     margin-right:18px;
 }
+
+/*
 #language-results:before {
     content: '';
     width: 100%;
@@ -195,13 +197,22 @@ header {
     border: 1px solid #ababab;
     border-radius: 4px;
 }
-
+*/
 .lang-item {
     height:30px;
     line-height: 30px;
     padding-left:14px;
-
 }
+.lang-item:hover {
+    padding-left:8px;
+    border-style:solid;
+    border-left:6px solid #87d5ff;
+    border-right:none;
+    border-top:none;
+    border-bottom:none;
+    cursor: hand; cursor: pointer;
+}
+
 
 .lang-item.lang-active {
     padding-left:8px;
