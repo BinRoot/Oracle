@@ -6,28 +6,51 @@ $('.search-bar input').blur(function() {
     $(this).parent().removeClass('focus');
 });
 
+$('.search-bar input').keypress(function(e){
+    if(e.which == 13){
+       var searchStr = $('#search-input').val();
+
+       var searchURL = '/search?q=' + searchStr;
+
+       $.get(searchURL, function(data) {
+        console.log(data);
+        data = JSON.parse(data);
+
+        if(data.docs.length > 0) {
+            var langFreq = sortLanguages(data.docs);
+            showLanguages(langFreq);
+
+            var langToShow = langFreq[0].lang;
+            selectLanguage(langToShow);
+            showResults(data.docs, langToShow);
+        }
+        else {
+            noResults();
+       }
+       });
+    }
+});
+
 $('#find-button').click(function() {
     var searchStr = $('#search-input').val();
-    
+
     var searchURL = '/search?q=' + searchStr;
 
     $.get(searchURL, function(data) {
-	console.log(data);
-	data = JSON.parse(data);
+    	console.log(data);
+    	data = JSON.parse(data);
 
-	if(data.docs.length > 0) {
-	    var langFreq = sortLanguages(data.docs);
-	    showLanguages(langFreq);
+    	if(data.docs.length > 0) {
+    	    var langFreq = sortLanguages(data.docs);
+    	    showLanguages(langFreq);
 
-	    var langToShow = langFreq[0].lang;
-	    selectLanguage(langToShow);
-	    showResults(data.docs, langToShow);
-	}
-	else {
-	    noResults();
-	}
-
-
+    	    var langToShow = langFreq[0].lang;
+    	    selectLanguage(langToShow);
+    	    showResults(data.docs, langToShow);
+    	}
+    	else {
+    	    noResults();
+	   }
     });
 });
 
@@ -56,11 +79,11 @@ function sortLanguages(docs) {
 	    langFreq.push({lang: docItem.lang, value: 1});
 	}
     });
-    
+
     // sort list of languages
     langFreq = langFreq.sort(function(a,b) {return b.value-a.value});
     console.log('sorted lang freq: '+JSON.stringify(langFreq));
-    
+
     return langFreq;
 
 }
@@ -77,11 +100,11 @@ function gravatarHash(email) {
 
 function showLanguages(langFreq) {
     $('#language-results').empty();
-    
+
     for(var i=0; i<langFreq.length; i++) {
-	
+
 	buildLangResults(langFreq[i].lang, langFreq[i].value);
-	
+
 	if(i < langFreq.length-1) {
 	    $('#language-results').append("<hr>");
 	}
@@ -96,7 +119,7 @@ function showResults(docs, lang) {
 
 	if(lang == docItem.lang) {
 	    var voteStr = docItem.votes>1 ? "votes" : "vote";
-	    
+
 	    var imgURL = 'http://gravatar.com/avatar/'+gravatarHash(docItem.email)+'?s=100';
 	    // http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100
 	    buildSearchResults(imgURL, docItem.votes, voteStr, docItem.uname, docItem.code, docItem.lang);
@@ -120,6 +143,7 @@ function selectLanguage(lang) {
 
 }
 
+//Older version, to be changed
 function buildLangResults(lang, value) {
     $('#language-results').append(
 	$('<div>').addClass('lang-item').append(
@@ -148,7 +172,7 @@ function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {
 			    ).append(
 				$('<span>').addClass('votes-votes').append(
 				    voteStr
-				)	
+				)
 			    )
 			)
 		    )
@@ -171,7 +195,7 @@ function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {
 			)
 
 		    )
-		    
+
 		)
 	    )
 	)
