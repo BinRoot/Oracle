@@ -160,8 +160,10 @@ app.post('/publish', function(req, res, next) {
     var post_code = req.body.code;
     var post_email = req.user.emails[0].value;
 
+    var post_id = getIdFromURI(req.user.identifier) + (new Date()).getTime();
+
     var data = {
-	id: getIdFromURI(req.user.identifier) + (new Date()).getTime(),
+	id: post_id,
 	type: post_type,
 	uname: req.user.displayName,
 	uid: getIdFromURI(req.user.identifier),
