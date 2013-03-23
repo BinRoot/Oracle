@@ -62,6 +62,30 @@ var findUser = function findUser(val, callback) {
     });
 }
 
+var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, codeId, callback) {
+    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+        if(!err) {
+            console.log("We are connected! upserting " + uid + ", adding "+codeId);
+	    
+	    var pushUpdate = {
+		$push: {
+		    publications: codeId
+		}
+	    };
+
+	    db.collection('users').update({id:uid}, pushUpdate, {safe:true, upsert:true}, function(err) {
+                if (err) return console.dir(err);
+		callback();
+            });
+	    
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+    
+}
+
 var addOrUpdateUser = function addOrUpdateUser(userData) {
     Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
         if(!err) {
@@ -80,6 +104,7 @@ var addOrUpdateUser = function addOrUpdateUser(userData) {
     
 }
 
+exports.addOrUpdateUserPublications = addOrUpdateUserPublications;
 exports.insertCode = insertCode;
 exports.findTypes = findTypes;
 exports.addOrUpdateUser = addOrUpdateUser;

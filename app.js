@@ -160,13 +160,14 @@ app.post('/publish', function(req, res, next) {
     var post_code = req.body.code;
     var post_email = req.user.emails[0].value;
 
+    var post_uid = getIdFromURI(req.user.identifier);
     var post_id = getIdFromURI(req.user.identifier) + (new Date()).getTime();
 
     var data = {
 	id: post_id,
 	type: post_type,
 	uname: req.user.displayName,
-	uid: getIdFromURI(req.user.identifier),
+	uid: post_uid,
 	lang: post_lang,
 	code: post_code,
 	votes: 1,
@@ -186,11 +187,15 @@ app.post('/publish', function(req, res, next) {
 
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
-	    res.send(body);
+	    db.addOrUpdateUserPublications(post_uid, post_id, function() {
+		res.send(body);
+	    });
 	}
     });
+
     
 });
+
 
 /* Currently the Solr search is pretty dumb:
  * if type matches OR code matches then

@@ -141,7 +141,7 @@ function postPublish () {
     });
 
     
-    search(data_type);
+//    search(data_type);
 }
 
 function search(str) {
