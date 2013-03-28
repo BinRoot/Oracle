@@ -1,0 +1,35 @@
+body{
+    padding-top: 10px;
+}
+
+#centerColumn{
+    text-align:  center;
+}
+
+.center{
+    width: 49%;
+    margin: 0 auto;
+    display: block;
+}
+
+#profPic{
+    float:  right;
+}
+
+.name{
+    text-align: center;
+}
+
+.metaHeader{
+    float: left;
+    padding-left: 5px;
+    padding-top: 5px;
+}
+
+.left{
+    float:  left;
+}
+
+.snippet{
+    text-align: left;
+}

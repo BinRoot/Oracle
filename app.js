@@ -92,9 +92,13 @@ app.get('/gravatar', function(req, res) {
 
 });
 
+app.get('/profile', function(req, res){
+  res.render('profile');
+});
+
 app.get('/auth/google', passport.authenticate('google'));
 
-app.get('/auth/google/return', 
+app.get('/auth/google/return',
 	passport.authenticate('google', { successRedirect: '/',
 					  failureRedirect: '/fail' }));
 
@@ -134,7 +138,7 @@ app.post('/delete', function(req, res, next) {
     var data = {
 	id: post_id,
     };
-    
+
     var postData = {delete:data};
 
     var options = {
@@ -148,7 +152,7 @@ app.post('/delete', function(req, res, next) {
 	    res.send(body);
 	}
     });
-    
+
 });
 
 app.post('/publish', function(req, res, next) {
@@ -174,7 +178,7 @@ app.post('/publish', function(req, res, next) {
 	description: "",
 	email: post_email
     };
-    
+
     var postData = {add:{doc:data}};
 
     var options = {
@@ -193,7 +197,7 @@ app.post('/publish', function(req, res, next) {
 	}
     });
 
-    
+
 });
 
 
@@ -206,8 +210,8 @@ app.get('/search', function(req, res) {
 
     var regexQuery = "*" + q.replace(" ", "*") + "*";
 
-    var searchURL = aws + "collection1/select?q=type%3A" 
-	+ regexQuery + "+OR+code%3A*" 
+    var searchURL = aws + "collection1/select?q=type%3A"
+	+ regexQuery + "+OR+code%3A*"
 	+ regexQuery + "&sort=votes+desc&wt=json";
 
     var options = {
@@ -245,7 +249,7 @@ app.get('/peek', function(req, res) {
 });
 
 
-// Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.                                                          
+// Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.
 
 function getIdFromURI(uri) {
     var gid = uri.split("?")[1];
@@ -267,7 +271,7 @@ function addOrUpdateUser(profile) {
     }
 
     console.log("\ncalling db.addOrUpdateUser on " + JSON.stringify(userData)+"\n");
-    
+
     db.addOrUpdateUser(userData);
 }
 

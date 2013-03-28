@@ -8,21 +8,117 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <!-- <link rel="stylesheet" href="css/custom.css"> -->
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/highlight-styles/default.css">
 </head>
 
 <body>
     <div class="container">
+        <div class="row">
+          <div class="span4">
+            <img id="profPic" src="http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=150" class="img-circle">
+          </div>
+          <div class="span5 name">
+            <h1>Jasdev Singh</h1>
 
+            <table class="table table-bordered">
+                <tr>
+                    <td>Snippets submitted</td> <td id="centerColumn"><a href="#">34</a></td>
+                </tr>
+                <tr>
+                    <td>Number of Comments</td> <td id="centerColumn"><a href="#">15</a></td>
+                </tr>
+                <tr>
+                    <td>Total Upvoted</td> <td id="centerColumn"><a href="#">5</a></td>
+                </tr>
+            </table>
 
-        <img src="http://gravatar.com/avatar/<%= userHash %>?s=150" class="img-circle">
+          </div>
+        </div>
 
-        
+        <div class="row">
+            <div class="span3 offset3 pagination-sentered">
+                <h1 class="left">Snippets</h1>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span6 offset3 pagination-centered">
+                <div class="metaHeader">
+                    By JasdevS, 13 comments
+                </div>
+
+                <div class="snippet">
+                    <pre>
+                        <code class="haskell">
+-- Ma petit chou-fleur...
+(succ 'H') : " " ++ (reverse "3<") ++ " U"
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span6 offset3 pagination-centered">
+                <div class="metaHeader">
+                    By JasdevS, 4 comments
+                </div>
+
+                <div class="snippet">
+                    <pre>
+                        <code class="java">
+public static void main(String[] args){
+    System.out.print("Hello world!");
+}
+                    </code></pre>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="span3 offset3 pagination-sentered">
+                <h1 class="left">Comments</h1>
+            </div>
+        </div>
+
+        <div class="accordion center" id="accordion2">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                Quicksort @ line 141
+              </a>
+            </div>
+            <div id="collapseOne" class="accordion-body collapse">
+              <div class="accordion-inner">
+                "Any reason you didnt use Java's built-in LinkedList?"
+              </div>
+            </div>
+          </div>
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+                Transitive Closure @ line 286
+              </a>
+            </div>
+            <div id="collapseTwo" class="accordion-body collapse">
+              <div class="accordion-inner">
+                "This line is redundant and can be refactored."
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+            <div class="span3 offset3 pagination-sentered">
+                <h1 class="left">Recent Votes</h1>
+            </div>
+        </div>
+
     </div> <!-- /container -->
     <!-- Nonblocking scripts at the bottom of the body -->
+    <script src="js/highlight/highlight.pack.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/publish.js"></script>
+    <script type="text/javascript" src="js/profile.js"></script>
 </body>
 </html>
