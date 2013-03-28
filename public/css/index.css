@@ -19,6 +19,10 @@ header {
     padding: 10px;
 }
 
+.hidden {
+    display:none;
+}
+
 #search {
     width: 700px;
     height: 50px;
@@ -165,6 +169,7 @@ header {
     border-bottom-left-radius: 5px;
 
 }
+/*
 #search-results:before {
     content: '';
     width: 100%;
@@ -174,7 +179,7 @@ header {
     position: absolute;
     border: 1px solid #ababab;
     border-radius: 4px;
-}
+}*/
 
 #language-results {
     width:150px;
@@ -288,7 +293,7 @@ ul.inline-block > li {
 }
 
 .snippet {
-    
+    cursor: hand; cursor: pointer;
 }
 
 .img-circle {

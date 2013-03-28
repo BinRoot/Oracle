@@ -46,6 +46,8 @@ function search(searchStr) {
     	data = JSON.parse(data);
 
     	if(data.docs.length > 0) {
+	    
+	    $('#lang-and-code-results').removeClass('hidden');
 
 	    searchData = data.docs;
 
@@ -65,6 +67,10 @@ $('#publish-bar').click(function() {
     window.location = "/publish";
 });
 
+$('.snippet').click(function() {
+    alert('hi');
+});
+
 
 function langItemClick(langToShow) {
     console.log('showing lang: '+langToShow);
@@ -74,6 +80,7 @@ function langItemClick(langToShow) {
 
 
 function noResults() {
+    $('#lang-and-code-results').addClass('hidden');
     $('#language-results').empty();
     $('#search-results').empty();
 }
