@@ -8,44 +8,41 @@
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/profile.css">
     <link rel="stylesheet" href="css/highlight-styles/default.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="row">
-          <div class="span4">
-            <img id="profPic" src="http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=150" class="img-circle">
-          </div>
-          <div class="span5 name">
-            <h1>Jasdev Singh</h1>
-
-            <table class="table table-bordered">
-                <tr>
-                    <td>Snippets submitted</td> <td id="centerColumn"><a href="#">34</a></td>
-                </tr>
-                <tr>
-                    <td>Number of Comments</td> <td id="centerColumn"><a href="#">15</a></td>
-                </tr>
-                <tr>
-                    <td>Total Upvoted</td> <td id="centerColumn"><a href="#">5</a></td>
-                </tr>
-            </table>
-
-          </div>
-        </div>
-
-        <div class="row">
-            <div class="span3 offset3 pagination-sentered">
-                <h1 class="left">Snippets</h1>
+    <div>
+        <header>
+            <h1 align="center" id="top" class="center">
+                <img id="profPic" src="http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400" class="img-circle avatars">
+                <span id="name">Jasdev Singh</span>
+            </h1>
+            <div id="table">
+                <table id="summary" class="table table-bordered">
+                    <tr>
+                        <td>Snippets submitted</td> <td id="centerColumn"><a href="#">34</a></td>
+                    </tr>
+                    <tr>
+                        <td>Number of Comments</td> <td id="centerColumn"><a href="#">15</a></td>
+                    </tr>
+                    <tr>
+                        <td>Total Upvoted</td> <td id="centerColumn"><a href="#">5</a></td>
+                    </tr>
+                </table>
             </div>
-        </div>
 
+            <div class="row">
+                <div class="span3">
+                    <h1>Snippets</h1>
+                </div>
+            </div>
         <div class="row">
-            <div class="span6 offset3 pagination-centered">
+            <div class="span7">
                 <div class="metaHeader">
-                    By JasdevS, 13 comments
+                    By <a href="#">JasdevS</a>, 13 comments
                 </div>
 
                 <div class="snippet">
@@ -59,9 +56,9 @@
         </div>
 
         <div class="row">
-            <div class="span6 offset3 pagination-centered">
+            <div class="span7">
                 <div class="metaHeader">
-                    By JasdevS, 4 comments
+                    By <a href="#">JasdevS</a>, 4 comments
                 </div>
 
                 <div class="snippet">
@@ -76,12 +73,12 @@ public static void main(String[] args){
         </div>
 
         <div class="row">
-            <div class="span3 offset3 pagination-sentered">
+            <div class="span3">
                 <h1 class="left">Comments</h1>
             </div>
         </div>
 
-        <div class="accordion center" id="accordion2">
+        <div class="accordion" id="accordion2">
           <div class="accordion-group">
             <div class="accordion-heading">
               <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
@@ -109,10 +106,30 @@ public static void main(String[] args){
         </div>
 
         <div class="row">
-            <div class="span3 offset3 pagination-sentered">
+            <div class="span3">
                 <h1 class="left">Recent Votes</h1>
             </div>
         </div>
+
+        <div class="row">
+            <div class="span7">
+                <span><i class="icon-arrow-down"></i> <a href="#">Quicksort</a> by <a href="#">Penguin</a></span>
+                <span style="float: right;">43 mintues ago</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span7">
+                <span><i class="icon-arrow-up"></i> <a href="#">Transitive Closure</a> by <a href="#">abhishelat</a></span>
+                <span style="float: right;">6 hours ago</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="span7">
+                <span><i class="icon-arrow-down"></i> <a href="#">Pattern Matching w/ wildcards</a> by <a href="#">PuneetLall</a></span>
+                <span style="float: right;">2 days ago</span>
+            </div>
+        </div>
+        </header>
 
     </div> <!-- /container -->
     <!-- Nonblocking scripts at the bottom of the body -->
