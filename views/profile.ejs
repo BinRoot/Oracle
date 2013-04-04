@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width">
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/profile.css">
@@ -23,19 +24,19 @@
             <div id="table">
                 <table id="summary" class="table table-bordered">
                     <tr>
-                        <td>Snippets submitted</td> <td id="centerColumn"><a href="#">34</a></td>
+                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#">34</a></td>
                     </tr>
                     <tr>
-                        <td>Number of Comments</td> <td id="centerColumn"><a href="#">15</a></td>
+                        <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">15</a></td>
                     </tr>
                     <tr>
-                        <td>Total Upvoted</td> <td id="centerColumn"><a href="#">5</a></td>
+                        <td>Total Upvoted</td> <td id="centerColumn"><a id="voteScroll" href="#">5</a></td>
                     </tr>
                 </table>
             </div>
 
             <div class="row">
-                <div class="span3">
+                <div id="snippetSection" class="span3">
                     <h1>Snippets</h1>
                 </div>
             </div>
@@ -72,7 +73,7 @@ public static void main(String[] args){
             </div>
         </div>
 
-        <div class="row">
+        <div id="commentSection" class="row">
             <div class="span3">
                 <h1 class="left">Comments</h1>
             </div>
@@ -105,7 +106,7 @@ public static void main(String[] args){
           </div>
         </div>
 
-        <div class="row">
+        <div id="voteSection" class="row">
             <div class="span3">
                 <h1 class="left">Recent Votes</h1>
             </div>
@@ -135,6 +136,7 @@ public static void main(String[] args){
     <!-- Nonblocking scripts at the bottom of the body -->
     <script src="js/highlight/highlight.pack.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/profile.js"></script>
 </body>
