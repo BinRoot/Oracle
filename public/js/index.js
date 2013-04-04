@@ -67,9 +67,6 @@ $('#publish-bar').click(function() {
     window.location = "/publish";
 });
 
-$('.snippet').click(function() {
-    alert('hi');
-});
 
 
 function langItemClick(langToShow) {
@@ -216,7 +213,9 @@ function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {
 			    $('<div>').addClass('snippet').append(
 				"<pre><code>"+ code +"</code></pre>"
 			    )
-			)
+			).click(function() {
+			    console.log($(this));
+			})
 
 		    )
 

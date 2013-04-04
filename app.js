@@ -93,8 +93,9 @@ app.get('/gravatar', function(req, res) {
 });
 
 app.get('/profile', function(req, res){
-  res.render('profile');
+    res.render('profile');
 });
+
 
 app.get('/auth/google', passport.authenticate('google'));
 
@@ -246,6 +247,13 @@ app.get('/peek', function(req, res) {
 	    console.log(error + ' *** ' + response.statusCode);
 	}
     });
+});
+
+
+app.get('/a/:code', function(req, res){
+    var _code = req.params.code;
+    res.render('code', {user: req.user, code:_code});
+    
 });
 
 
