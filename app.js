@@ -92,8 +92,8 @@ app.get('/gravatar', function(req, res) {
 
 });
 
-app.get('/profile', function(req, res){
-    res.render('profile');
+app.get('/u/:id', function(req, res){
+  res.render('profile');
 });
 
 
@@ -253,7 +253,7 @@ app.get('/peek', function(req, res) {
 app.get('/a/:code', function(req, res){
     var _code = req.params.code;
     res.render('code', {user: req.user, code:_code});
-    
+
 });
 
 
