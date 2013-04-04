@@ -1,0 +1,22 @@
+#code-type {
+    display:inline;
+    font-size:x-large;
+}
+
+#code-lang {
+    display:inline;
+    text-align:right;
+    float:right;
+    font-size:large;
+}
+
+#code-bar {
+    height:50px;
+    width: 100%;
+    border-radius: 4px;
+    margin-top:5px;
+    margin-bottom:5px;
+    box-shadow: inset 0 0 10px rgba(0,0,0,.1);
+    padding: 6px 10px;
+    box-sizing: border-box;
+}
