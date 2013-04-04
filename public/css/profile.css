@@ -1,35 +1,40 @@
-body{
-    padding-top: 10px;
+.center{
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    display: inline-block;
 }
 
 #centerColumn{
     text-align:  center;
 }
 
-.center{
-    width: 49%;
-    margin: 0 auto;
-    display: block;
+#top{
+    padding-bottom: 20px;
 }
 
-#profPic{
-    float:  right;
+#summary{
+    width: 80%;
+    height: 50%;
+    margin: auto auto;
+    border: 1px solid black;
 }
 
-.name{
-    text-align: center;
+#table{
+    padding-bottom: 30px;
 }
 
-.metaHeader{
-    float: left;
-    padding-left: 5px;
-    padding-top: 5px;
-}
-
-.left{
-    float:  left;
+#name{
+    padding-left: 30px;
+    vertical-align: middle;
 }
 
 .snippet{
     text-align: left;
 }
+
+.metaHeader{
+    padding-left: 10px;
+}
+
+
