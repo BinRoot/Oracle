@@ -1,4 +1,5 @@
 window.onload = function() {
+/*
     var prmstr = window.location.search.substr(1);
     var prmarr = prmstr.split ("&");
     var params = {};
@@ -12,6 +13,7 @@ window.onload = function() {
     if(searchQuery) {
 	search(searchQuery);
     }
+*/
 };
 
 
@@ -141,7 +143,7 @@ function showResults(docs, lang) {
 
 	    var imgURL = 'http://gravatar.com/avatar/'+gravatarHash(docItem.email)+'?s=100';
 	    // http://gravatar.com/avatar/7bb3f29d02f3cb9e350616b849452b7b?s=100
-	    buildSearchResults(imgURL, docItem.votes, voteStr, docItem.uname, docItem.code, docItem.lang);
+	    buildSearchResults(imgURL, docItem.votes, voteStr, docItem.uname, docItem.code, docItem.lang, docItem.id, docItem.uid);
 	}
     });
 }
@@ -179,7 +181,7 @@ function buildLangResults(lang, value) {
     )
 }
 
-function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {
+function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang, id, uid) {
     $('#search-results').append(
 	$('<div>').addClass('result').append(
 	    $('<ul>').addClass('inline-block').append(
@@ -212,10 +214,10 @@ function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang) {
 			).append(
 			    $('<div>').addClass('snippet').append(
 				"<pre><code>"+ code +"</code></pre>"
-			    )
-			).click(function() {
-			    console.log($(this));
-			})
+			    ).click(function() {
+				location.href = "/a/"+id;
+			    })
+			)
 
 		    )
 
