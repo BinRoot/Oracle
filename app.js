@@ -98,21 +98,38 @@ app.get('/gravatar', function(req, res) {
 app.get('/u/:id', function(req, res){
   var _id = req.params.id;
 
-  //Get user object from id
+  res.render('profile');
+});
 
-  //Use list
+function getSolrCode(item, callback){
+    // get all code data from solr
+    var getCodeURL = aws + "collection1/select?q=id%3A" + item + "&wt=json";
 
-  async.series([
-      function(callback){
-        console.log("sup");
-        callback(null, 'one');
-      }, function(){
-        console.log("man");
+    var options = {
+          uri: getCodeURL,
+          method: 'GET',
+        };
+
+    request(options, function (error, response, body) {
+      if (!error && response.statusCode == 200) {
+          var solrResp = (JSON.parse(body)).response;
+          callback(null, solrResp.docs[0]);
       }
-    ]
-  );
+      else {
+          console.log(error + ' *** ' + response.statusCode);
+          callback(null, "Error fetching code item");
+      }
+    });
+}
 
-  //res.render('profile');
+//Endpoint to translate an array of code ids (in request body) to an array of code items
+app.get('/api/codes/', function(req, res){
+  var _codeIDs = req.body.ids;
+
+  async.map(_codeIDs, getSolrCode, function(err, results){
+      res.send(results);
+    }
+  );
 });
 
 
