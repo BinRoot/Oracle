@@ -5,9 +5,10 @@
 	"express": "3.1.0",
 	"mongodb": "1.2.11",
 	"ejs": "0.8.3",
-	"passport": "0.1.15",
-	"passport-google": "0.2.0",
-	"request": "2.14.0"
+	"passport": "0.1.16",
+	"passport-google": "0.3.0",
+	"request": "2.14.0",
+	"async": "0.2.6"
     },
     "engines": {
 	"node": "0.8.x",
