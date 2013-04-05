@@ -109,7 +109,7 @@ function getSolrCode(item, callback){
     var options = {
           uri: getCodeURL,
           method: 'GET',
-        };
+    };
 
     request(options, function (error, response, body) {
       if (!error && response.statusCode == 200) {
@@ -122,6 +122,29 @@ function getSolrCode(item, callback){
       }
     });
 }
+
+function updateUserRep(uid, isUp) {
+    
+}
+
+app.get('/api/vote', function(req, res, next) {
+    ensureAuthenticated(req, res, next, '/publish');
+}, function(req, res) {
+    var cid = req.query["cid"];
+    console.log('in /api/vote, searching for ' + cid);
+    getSolrCode(cid, function(blah, ret) {
+	var oldVotes = ret.votes;
+	var u1id = req.user.identifier;
+	var u2id = ret.uid;
+	
+	// find rep of user
+	// decrement u1rep
+	// increment u2rep
+	// increment cid votes
+	
+    });
+});
+
 
 //Endpoint to translate an array of code ids (in request body) to an array of code items
 app.get('/api/codes/', function(req, res){

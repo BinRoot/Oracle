@@ -153,6 +153,14 @@ function showResults(docs, lang) {
     });
 }
 
+// [user1] upvotes [user2]'s [code]
+//- [user1] gives away a rep point
+//- [user2] gains a rep point
+//- [code] increments a vote point
+function vote(isUpVote, cid) {
+    
+}
+
 function selectLanguage(lang) {
     var langList = $('#language-results').children();
     _.each(langList, function(langItem, i, list) {
