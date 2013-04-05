@@ -1,14 +1,26 @@
 #code-type {
     display:inline;
+    text-align:left;
     font-size:x-large;
 }
 
 #code-lang {
-    display:inline;
     text-align:right;
     float:right;
     font-size:large;
+
 }
+
+#code-uname {
+    display:inline;
+    text-align:left;
+}
+
+#code-votes {
+    float:right;
+    text-align:right;
+}
+
 
 #code-bar {
     height:50px;
