@@ -27,7 +27,6 @@ var followed;
 var myTimeOut1, myTimeOut2, myTimeOut3;
 $('#profPic').mouseenter(function() {
   if(followed === true){
-    console.log('Followed condition was true');
     return;
   }
   else{
@@ -38,8 +37,8 @@ $('#profPic').mouseenter(function() {
        $('#profPic').attr('title', 'Follow in 1 seconds...').tooltip('fixTitle').tooltip('show');
      }, 2000);
      myTimeOut3 = setTimeout(function() {
-       $('#profPic').attr('title', 'Following!').tooltip('fixTitle').tooltip('show');
        $('#profPic').addClass("following", 800);
+       $('#profPic').attr('title', 'Following!').tooltip('fixTitle').tooltip('show');
        followed = true;
      }, 3000);
    }
@@ -53,5 +52,6 @@ $('#profPic').mouseenter(function() {
 
 
 $(document).ready(function() {
+  //Check if following and add class to profile image
 
 });

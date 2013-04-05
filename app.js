@@ -1,6 +1,7 @@
 var express = require('express');
 var app = express();
 var db = require('./db.js');
+var async = require('async')
 var crypto = require('crypto');
 var passport = require('passport');
 var GoogleStrategy = require('passport-google').Strategy;
@@ -94,8 +95,24 @@ app.get('/gravatar', function(req, res) {
 
 });
 
-app.get('/profile', function(req, res){
-    res.render('profile');
+app.get('/u/:id', function(req, res){
+  var _id = req.params.id;
+
+  //Get user object from id
+
+  //Use list
+
+  async.series([
+      function(callback){
+        console.log("sup");
+        callback(null, 'one');
+      }, function(){
+        console.log("man");
+      }
+    ]
+  );
+
+  //res.render('profile');
 });
 
 
@@ -253,6 +270,7 @@ app.get('/peek', function(req, res) {
 
 app.get('/a/:code', function(req, res){
     var _code = req.params.code;
+
     console.log('in /a/:code, ' + _code);
 
     // get all code data from solr
@@ -275,7 +293,6 @@ app.get('/a/:code', function(req, res){
 	    console.log(error + ' *** ' + response.statusCode);
 	}
     });
-
 
 });
 
