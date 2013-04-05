@@ -6,11 +6,11 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <link rel="stylesheet" href="css/publish.css">
-    <link rel="stylesheet" href="css/highlight-styles/default.css">
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/code.css">
+    <link rel="stylesheet" href="/css/highlight-styles/default.css">
 </head>
 
 <body>
@@ -26,13 +26,30 @@
 	    </div>
 
 	    <div id="code-bar">
+		<% if (code.numFound > 0) { %>
+		<div id="code-type"><%= code.docs[0].type %></div>
+		<div id="code-lang"><%= code.docs[0].lang %></div>
+		<br>
+		<div id="code-uname">by <a href="/u/<%= code.docs[0].uid %>"><%= code.docs[0].uname %></a></div>
+		<div id="code-votes"><%= code.docs[0].votes %> votes</div>
+
+		<% } %>
+		<% if (code.numFound == 0) { %>
+		<div>Error!</div>
+		<% } %>
 	    </div>
 
 	    <div>
-		<pre><code class="haskell">
--- Ma petit chou-fleur...
-(succ 'H') : " " ++ (reverse "3<") ++ " U"
+		<% if (code.numFound > 0) { %>
+		<pre><code class="<%= code.docs[0].lang %>">
+<%= code.docs[0].code %>
 	        </code></pre>
+		<% } %>
+
+		<% if (code.numFound == 0) { %>
+
+		<% } %>
+
 	    </div>
 
 	</header>
@@ -45,9 +62,9 @@
     </div> <!-- /container -->
     <!-- Nonblocking scripts at the bottom of the body -->
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script src="js/highlight/highlight.pack.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/code.js"></script>
+    <script src="/js/highlight/highlight.pack.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="/js/code.js"></script>
     
 </body>
 </html>
