@@ -20,7 +20,13 @@
 	    <div id="search">
 		<label>Search:</label>
 		<div class="search-bar">
+		<% if (code.numFound > 0) { %>
+		    <input id="type" type="text" value="<%= code.docs[0].type %>" autofocus="autofocus">
+		<% } %>
+		<% if (code.numFound == 0) { %>
 		    <input id="type" type="text" placeholder="Name of algorithm or code" autofocus="autofocus">
+		<% } %>
+
 		</div>
 		<button id="find-button" class="button blue">Find Code</button>
 	    </div>

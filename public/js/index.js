@@ -14,6 +14,11 @@ window.onload = function() {
 	search(searchQuery);
     }
 */
+    var searchStr = $('#search-input').val();
+    console.log('initial query: '+searchStr);
+    if(searchStr) {
+	search(searchStr);
+    }
 };
 
 
