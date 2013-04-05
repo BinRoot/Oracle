@@ -75,7 +75,9 @@ app.get('/', function(req, res) {
 	res.clearCookie('returnto');
 	res.redirect(retto);
     }
-    res.render('index', {user: req.user});
+
+    var q = req.query["q"];
+    res.render('index', {user: req.user, query: q});
 });
 
 
@@ -218,7 +220,6 @@ app.post('/publish', function(req, res, next) {
 
 });
 
-
 /* Currently the Solr search is pretty dumb:
  * if type matches OR code matches then
  * it sorts per votes and returns result
@@ -269,7 +270,29 @@ app.get('/peek', function(req, res) {
 
 app.get('/a/:code', function(req, res){
     var _code = req.params.code;
-    res.render('code', {user: req.user, code:_code});
+
+    console.log('in /a/:code, ' + _code);
+
+    // get all code data from solr
+    var getCodeURL = aws + "collection1/select?q=id%3A"
+	+ _code + "&wt=json";
+
+    var options = {
+	uri: getCodeURL,
+	method: 'GET',
+    };
+
+    request(options, function (error, response, body) {
+	if (!error && response.statusCode == 200) {
+	    console.log(JSON.stringify((JSON.parse(body)).response) );
+	    //res.send(JSON.stringify((JSON.parse(body)).response));
+	    var solrResp = (JSON.parse(body)).response;
+	    res.render('code', {user: req.user, code:solrResp});
+	}
+	else {
+	    console.log(error + ' *** ' + response.statusCode);
+	}
+    });
 
 });
 
