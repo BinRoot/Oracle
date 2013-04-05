@@ -75,9 +75,10 @@ app.get('/', function(req, res) {
 	res.clearCookie('returnto');
 	res.redirect(retto);
     }
-
-    var q = req.query["q"];
-    res.render('index', {user: req.user, query: q});
+    else {
+	var q = req.query["q"];
+	res.render('index', {user: req.user, query: q});
+    }
 });
 
 
