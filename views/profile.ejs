@@ -18,19 +18,21 @@
     <div>
         <header>
             <h1 align="center" id="top" class="center">
-                <img id="profPic" src="http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400" class="img-circle avatars">
-                <span id="name">Jasdev Singh</span>
+                <!-- http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400 -->
+                <div id="emailHolder" style="display:none;"><%= profile.email %></div>
+                <img id="profPic" src="" class="img-circle avatars">
+                <span id="name"><%= profile.displayName %></span>
             </h1>
             <div id="table">
                 <table id="summary" class="table table-bordered">
                     <tr>
-                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#">34</a></td>
+                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#"><%= profile.publications.length%></a></td>
                     </tr>
                     <tr>
-                        <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">15</a></td>
+                        <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">TODO</a></td>
                     </tr>
                     <tr>
-                        <td>Total Upvoted</td> <td id="centerColumn"><a id="voteScroll" href="#">5</a></td>
+                        <td>Total Upvoted</td> <td id="centerColumn"><a id="voteScroll" href="#">TODO</a></td>
                     </tr>
                 </table>
             </div>
@@ -139,5 +141,6 @@ public static void main(String[] args){
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="/js/profile.js"></script>
+    <script src="/js/md5.js"></script>
 </body>
 </html>
