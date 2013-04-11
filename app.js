@@ -102,16 +102,6 @@ app.get('/gravatar', function(req, res) {
 
 });
 
-app.get('/u/:id', function(req, res){
-    var uid = req.params.id;
-
-    db.findUser({id: uid}, function(ret) {
-	console.log('/u/:id  ' + JSON.stringify(ret));
-	res.render('profile', {user: req.user, profile: ret});
-    });
-
-});
-
 function getSolrCode(item, callback){
     // get all code data from solr
     var getCodeURL = aws + "collection1/select?q=id%3A" + item + "&wt=json";
@@ -134,7 +124,7 @@ function getSolrCode(item, callback){
 }
 
 function updateUserRep(uid, isUp) {
-    
+
 }
 
 app.get('/api/vote', function(req, res, next) {
@@ -146,31 +136,51 @@ app.get('/api/vote', function(req, res, next) {
 	var oldVotes = ret.votes;
 	var u1id = req.user.identifier;
 	var u2id = ret.uid;
-	
+
 	// find rep of user
 	// decrement u1rep
 	// increment u2rep
 	// increment cid votes
-	
+
     });
 });
 
+function idToCode(ids, callback){
+  async.map(ids, getSolrCode, function(err, results){
+      callback(results);
+    }
+  );
+}
 
 //Endpoint to translate an array of code ids (in request body) to an array of code items
 app.get('/api/codes/', function(req, res){
   var _codeIDs = req.body.ids;
 
-  async.map(_codeIDs, getSolrCode, function(err, results){
-      res.send(results);
-    }
-  );
+  console.log(_codeIDs);
+
+  idToCode(_codeIDs, function(results){
+    res.send(results);
+  })
 });
 
+app.get('/u/:id', function(req, res){
+    var uid = req.params.id;
+    console.log('looking for '+uid);
+    db.findUser({id: uid}, function(ret) {
+      console.log('/u/:id  ' + JSON.stringify(ret));
+
+      idToCode(ret.publications, function(results){
+        console.log("***" + JSON.stringify(results));
+        res.render('profile', {user: req.user, profile: ret, codes: results});
+      });
+    });
+
+});
 
 app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
                                             'https://www.googleapis.com/auth/userinfo.email']}));
 
-app.get('/auth/google/callback', 
+app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
     console.log('SUCCESS!!!');

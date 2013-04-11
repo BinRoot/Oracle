@@ -50,8 +50,14 @@ $('#profPic').mouseenter(function() {
   }
 });
 
+function gravatarHash(email) {
+    if(email)
+      return md5(email.trim().toLowerCase());
+    else return 0;
+}
 
 $(document).ready(function() {
   //Check if following and add class to profile image
-
+  console.log("email to hash " + $("#emailHolder").html());
+  $("#profPic").attr("src", 'http://gravatar.com/avatar/'+ gravatarHash($("#emailHolder").html()) + '?s=100');
 });
