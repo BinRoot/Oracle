@@ -8,6 +8,7 @@
 
     <link rel="stylesheet" href="/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="/css/font-awesome.min.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/code.css">
     <link rel="stylesheet" href="/css/highlight-styles/default.css">
@@ -33,7 +34,8 @@
 
 	    <div id="code-bar">
 		<% if (code.numFound > 0) { %>
-		<div id="code-type"><%= code.docs[0].type %></div>
+		<div id="upvoteBlock"><i id="upvote" class="icon-chevron-up"></i></div>
+    <div id="code-type"><%= code.docs[0].type %></div>
 		<div id="code-lang"><%= code.docs[0].lang %></div>
 		<br>
 		<div id="code-uname">by <a href="/u/<%= code.docs[0].uid %>"><%= code.docs[0].uname %></a></div>
@@ -70,7 +72,8 @@
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
     <script src="/js/highlight/highlight.pack.js"></script>
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/code.js"></script>
-    
+
 </body>
 </html>

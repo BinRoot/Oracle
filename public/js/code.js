@@ -17,3 +17,7 @@ function search(searchStr) {
     window.location = "/?q=" + searchStr;
 }
 
+$('#upvote').click(function(){
+  $(this).effect("bounce", {distance: 5} , 500).animate({color: "#ff5700"}, 200 );
+});
+
