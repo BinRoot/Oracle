@@ -1,0 +1,51 @@
+{
+	"_id" : ObjectId("5148a08a1a5750ce4b52c59d"),
+	"displayName" : "Nishant Shukla",
+	"email" : "nick722@gmail.com",
+	"id" : "AItOawmj_SmgjEKEJh_585wuQGlI6VRJnuEhMNE"
+}
+{
+	"_id" : ObjectId("514b87dc1a5750ce4b52c59e"),
+	"displayName" : "Jasdev Singh",
+	"email" : "js2wt@virginia.edu",
+	"id" : "AItOawlDjo7lkOFPA9cOHYqKzrmku6l6mrBgjSE"
+}
+{
+	"_id" : ObjectId("514b97c01a5750ce4b52c59f"),
+	"displayName" : "Spencer Ingram",
+	"email" : "spencer.meriwether.ingram@gmail.com",
+	"id" : "AItOawlt4uwVWWBmxPU1wUwnOJlHpdDzCuH1oGs"
+}
+{
+	"_id" : ObjectId("514bf73c1a5750ce4b52c5a0"),
+	"displayName" : "Alex Katz",
+	"email" : "atk6jh@virginia.edu",
+	"id" : "AItOawkPkpxD0vw1hXmgV2kPgfvSkkaEvs22rck"
+}
+{
+	"_id" : ObjectId("514cd4411a5750ce4b52c5a1"),
+	"displayName" : "Nishant Shukla",
+	"email" : "ns4av@virginia.edu",
+	"id" : "AItOawne-THbqy1Y3hsNiCVNa81uggMUPXxCPTM"
+}
+{
+	"_id" : ObjectId("515218a60bc66008b61abbaf"),
+	"displayName" : "Andy Locascio",
+	"email" : "andy.locascio@gmail.com",
+	"id" : "AItOawlmVPebkXqjVvOe72txnnOuM5CuA7UYvKM"
+}
+{
+	"_id" : ObjectId("515b2d1492c89423f69dcd9a"),
+	"displayName" : "Meredith Hassett",
+	"email" : "mlh6cz@virginia.edu",
+	"id" : "AItOawml3-9V0tiDhI2Q6vNp0g2Ue65bsRRhzh4",
+	"publications" : [
+		       "AItOawml3-9V0tiDhI2Q6vNp0g2Ue65bsRRhzh41364929843654"
+		       ]
+}
+{
+	"_id" : ObjectId("516604fb92c89423f69dcda0"),
+	"displayName" : "Jasdev Singh",
+	"email" : "jasdevs@gmail.com",
+	"id" : "AItOawn2cc1ymOUi4A0gYeGlwrBe6h0S7-yGdqM"
+}

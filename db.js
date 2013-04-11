@@ -1,5 +1,5 @@
 var Db = require('mongodb').Db;
-var env = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test';
+var env = process.env.MONGOLAB_URI || 'mongodb://heroku_app11372091:5f9jip44h11e7h1upuav7p24hn@ds049467.mongolab.com:49467/heroku_app11372091'; //'mongodb://localhost:27017/test';
 
 // This is just an example of how to 
 // insert an element to the collection
@@ -21,7 +21,7 @@ var insertCode = function(data, callback) {
 };
 
 var findTypes = function findTypes(val, callback) {
-    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+    Db.connect(env, function(err, db) {
         if(!err) {
             console.log("We are connected! finding "+JSON.stringify(val));
 
@@ -45,7 +45,7 @@ var findTypes = function findTypes(val, callback) {
 
 
 var findUser = function findUser(val, callback) {
-    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+    Db.connect(env, function(err, db) {
         if(!err) {
             console.log("We are connected! finding user "+JSON.stringify(val));
 
@@ -63,7 +63,7 @@ var findUser = function findUser(val, callback) {
 }
 
 var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, codeId, callback) {
-    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+    Db.connect(env, function(err, db) {
         if(!err) {
             console.log("We are connected! upserting " + uid + ", adding "+codeId);
 	    
@@ -87,7 +87,7 @@ var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, code
 }
 
 var addOrUpdateUser = function addOrUpdateUser(userData) {
-    Db.connect(process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test', function(err, db) {
+    Db.connect(env, function(err, db) {
         if(!err) {
             console.log("We are connected! upserting "+JSON.stringify(userData));
 	    
