@@ -7,10 +7,29 @@
     <meta name="viewport" content="width=device-width">
 
     <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/highlight-styles/default.css">
 </head>
 
 <body>
+
+    <div class="navbar">
+	<div class="navbar-inner">
+	    <ul class="nav" style="margin-left:-60px">
+		<li class="active"><a href="#">Search</a></li>
+		<li><a href="/publish">Publish</a></li>
+		<li><a href="#">Browse</a></li>
+	    </ul>
+
+	    <% if (user) { %>
+	    <a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
+	    <%}%>
+	    <% if (!user) { %>
+	    <a class="brand" href="/auth/google">Log in</a>
+	    <%}%>
+
+	</div>
+    </div>
 
     <div id="logo">
 	<center>
@@ -18,7 +37,7 @@
 	</center>
     </div>
 
-    <div class="container">
+    <div>
 
 	<header>
 	    <div id="search">

@@ -67,14 +67,23 @@ app.configure(function() {
 });
 
 app.get('/', function(req, res) {
+
     if(req.cookies.returnto) {
 	var retto = req.cookies.returnto;
 	res.clearCookie('returnto');
 	res.redirect(retto);
     }
     else {
-	var q = req.query["q"];
-	res.render('index', {user: req.user, query: q});
+	if (req.isAuthenticated()) { 
+	    db.findUser({id: req.user.id}, function(u) {
+		var q = req.query["q"];
+		res.render('index', {user: req.user, query: q, userExtra: u});
+	    });
+	}
+	else {
+	    var q = req.query["q"];
+	    res.render('index', {user: req.user, query: q});
+	}
     }
 });
 
@@ -368,7 +377,8 @@ function addOrUpdateUser(profile) {
     var userData = {
 	displayName: profile.displayName,
 	email: profile.emails[0].value,
-	id: profile.id
+	id: profile.id,
+	rep: 100
     }
 
     console.log("\ncalling db.addOrUpdateUser on " + JSON.stringify(userData)+"\n");
