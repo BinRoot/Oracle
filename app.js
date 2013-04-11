@@ -97,9 +97,9 @@ app.get('/gravatar', function(req, res) {
 });
 
 app.get('/u/:id', function(req, res){
-  var _id = req.params.id;
-
-  res.render('profile');
+    var _id = req.params.id;
+    
+    res.render('profile', {user: req.user});
 });
 
 function getSolrCode(item, callback){

@@ -314,6 +314,7 @@ ul.inline-block > li {
     border-radius: 50px;
     -webkit-border-radius: 50px;
     -moz-border-radius: 50px;
+    cursor: hand; cursor: pointer;
 }
 
 

@@ -200,7 +200,9 @@ function buildSearchResults(imgSrc, voteNum, voteStr, uname, code, lang, id, uid
 	    $('<ul>').addClass('inline-block').append(
 		$('<li>').append(
 		    $('<div>').addClass('avatars').append(
-			$('<img>').attr('src', imgSrc).addClass('img-circle')
+			$('<img>').attr('src', imgSrc).addClass('img-circle').click(function() {
+			    location.href = "/u/"+uid;
+			})
 		    ).append(
 			$('<div>').addClass('votes').append(
 			    $('<span>').addClass('votes-num').append(
