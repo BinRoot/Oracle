@@ -33,6 +33,39 @@ var userItem =
 	]
     }
 
+// Google OAuth2
+var googleOAuth2 = 
+    {
+	"provider":"google",
+	"id":"104743215642512207964",
+	"displayName":"Nishant Shukla",
+	"name":
+	{
+	    "familyName":"Shukla",
+	    "givenName":"Nishant"
+	},
+	"emails":
+	[
+	    {
+		"value":"nick722@gmail.com"
+	    }
+	],
+	"_raw":"{\n \"id\": \"104743215642512207964\",\n \"email\": \"nick722@gmail.com\",\n \"verified_email\": true,\n \"name\": \"Nishant Shukla\",\n \"given_name\": \"Nishant\",\n \"family_name\": \"Shukla\",\n \"link\": \"https://plus.google.com/104743215642512207964\",\n \"picture\": \"https://lh6.googleusercontent.com/-PMlwf9m_8NA/AAAAAAAAAAI/AAAAAAAAIo8/3GW0AXykATE/photo.jpg\",\n \"gender\": \"other\",\n \"locale\": \"en\"\n}\n",
+	"_json":
+	{
+	    "id":"104743215642512207964",
+	    "email":"nick722@gmail.com",
+	    "verified_email":true,
+	    "name":"Nishant Shukla",
+	    "given_name":"Nishant",
+	    "family_name":"Shukla",
+	    "link":"https://plus.google.com/104743215642512207964",
+	    "picture":"https://lh6.googleusercontent.com/-PMlwf9m_8NA/AAAAAAAAAAI/AAAAAAAAIo8/3GW0AXykATE/photo.jpg",
+	    "gender":"other",
+	    "locale":"en"
+	}
+    }
+
 
 var googleAuth = 
     {

@@ -4,8 +4,11 @@ var db = require('./db.js');
 var async = require('async')
 var crypto = require('crypto');
 var passport = require('passport');
-var GoogleStrategy = require('passport-google').Strategy;
+var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 var request = require('request');
+
+var GOOGLE_CLIENT_ID = "941975996034.apps.googleusercontent.com";
+var GOOGLE_CLIENT_SECRET = "hdsxYToVNjq_buyYuyGQAp4r";
 
 app.use(express.static(__dirname + '/public'));
 
@@ -35,22 +38,16 @@ passport.deserializeUser(function(obj, done) {
 });
 
 passport.use(new GoogleStrategy({
-    returnURL: url + '/auth/google/return',
-    realm: url
+    clientID: GOOGLE_CLIENT_ID,
+    clientSecret: GOOGLE_CLIENT_SECRET,
+    callbackURL: "http://localhost:5000/auth/google/callback" // /oauth2callback ?
   },
-  function(identifier, profile, done) {
-    process.nextTick(function () {
-        console.log("done! "+identifier);
-	profile.identifier = identifier;
+  function(accessToken, refreshToken, profile, done) {
+    console.log('done! ' + JSON.stringify(profile));
 
-	console.log("profile: " + JSON.stringify(profile))
-/*
-{"displayName":"Nishant Shukla","emails":[{"value":"nick722@gmail.com"}],"name":{"familyName":"Shukla","givenName":"Nishant"},"identifier":"https://www.google.com/accounts/o8/id?id=AItOawko8c_hlIiC0x8h3XYlZewRHPr8FnXidac"}
-*/
-	addOrUpdateUser(profile);
+    addOrUpdateUser(profile);
 
-	return done(null, profile);
-    });
+    return done(null, profile);
   }
 ));
 
@@ -161,7 +158,15 @@ app.get('/api/codes/', function(req, res){
 });
 
 
-app.get('/auth/google', passport.authenticate('google'));
+app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.googleapis.com/auth/userinfo.profile',
+                                            'https://www.googleapis.com/auth/userinfo.email']}));
+
+app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log('SUCCESS!!!');
+    res.redirect('/');
+  });
 
 app.get('/auth/google/return',
 	passport.authenticate('google', { successRedirect: '/',
@@ -181,6 +186,7 @@ app.get('/fail', function(req, res) {
 app.get('/publish', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
+
     var extraData = {type: req.query.type};
     console.log('type: '+ extraData.type );
     res.render('publish', {user: req.user, extra:extraData});
@@ -229,8 +235,8 @@ app.post('/publish', function(req, res, next) {
     var post_code = req.body.code;
     var post_email = req.user.emails[0].value;
 
-    var post_uid = getIdFromURI(req.user.identifier);
-    var post_id = getIdFromURI(req.user.identifier) + (new Date()).getTime();
+    var post_uid = req.user.id;
+    var post_id = req.user.id + (new Date()).getTime();
 
     var data = {
 	id: post_id,
@@ -344,10 +350,12 @@ app.get('/a/:code', function(req, res){
 
 // Simple route middleware to ensure user is authenticated.                                                                                                                    //   Use this route middleware on any resource that needs to be protected.  If                                                                                                 //   the request is authenticated (typically via a persistent login session),                                                                                                  //   the request will proceed.  Otherwise, the user will be redirected to the                                                                                                  //   login page.
 
+/* // Deprecated
 function getIdFromURI(uri) {
     var gid = uri.split("?")[1];
     return gid.substring(3, gid.length);
 }
+*/
 
 
 /*
@@ -360,7 +368,7 @@ function addOrUpdateUser(profile) {
     var userData = {
 	displayName: profile.displayName,
 	email: profile.emails[0].value,
-	id: getIdFromURI(profile.identifier)
+	id: profile.id
     }
 
     console.log("\ncalling db.addOrUpdateUser on " + JSON.stringify(userData)+"\n");
