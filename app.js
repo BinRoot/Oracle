@@ -26,6 +26,10 @@ switch(env){
   case process.env.NODE_ENV:
     console.log('in production mode');
     url = hurl;
+
+    GOOGLE_CLIENT_ID = "941975996034-o52eu27r1q39cfkmk1i80mua67076po8.apps.googleusercontent.com";
+    GOOGLE_CLIENT_SECRET = "_jM2IisLTmLHp5Tz7_CYaEP8";
+
     break;
 }
 
