@@ -9,6 +9,7 @@ var request = require('request');
 
 var GOOGLE_CLIENT_ID = "941975996034.apps.googleusercontent.com";
 var GOOGLE_CLIENT_SECRET = "hdsxYToVNjq_buyYuyGQAp4r";
+var callbackURLpassport = "http://localhost:5000/auth/google/callback";
 
 app.use(express.static(__dirname + '/public'));
 
@@ -29,6 +30,7 @@ switch(env){
 
     GOOGLE_CLIENT_ID = "941975996034-o52eu27r1q39cfkmk1i80mua67076po8.apps.googleusercontent.com";
     GOOGLE_CLIENT_SECRET = "_jM2IisLTmLHp5Tz7_CYaEP8";
+    callbackURLpassport = "http://quadco.de/auth/google/callback";
 
     break;
 }
@@ -44,7 +46,7 @@ passport.deserializeUser(function(obj, done) {
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "http://localhost:5000/auth/google/callback" // /oauth2callback ?
+    callbackURL: callbackURLpassport // /oauth2callback ?
   },
   function(accessToken, refreshToken, profile, done) {
     console.log('done! ' + JSON.stringify(profile));
