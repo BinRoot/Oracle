@@ -57,7 +57,6 @@ function gravatarHash(email) {
 }
 
 $(document).ready(function() {
-  //Check if following and add class to profile image
-  console.log("email to hash " + $("#emailHolder").html());
+  //Hacky but we can fix it
   $("#profPic").attr("src", 'http://gravatar.com/avatar/'+ gravatarHash($("#emailHolder").html()) + '?s=100');
 });

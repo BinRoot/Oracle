@@ -42,39 +42,25 @@
                     <h1>Snippets</h1>
                 </div>
             </div>
-        <div class="row">
-            <div class="span7">
-                <div class="metaHeader">
-                    By <a href="#">JasdevS</a>, 13 comments
-                </div>
 
-                <div class="snippet">
-                    <pre>
-                        <code class="haskell">
--- Ma petit chou-fleur...
-(succ 'H') : " " ++ (reverse "3<") ++ " U"
-                    </code></pre>
-                </div>
-            </div>
-        </div>
+            <% for(var i = 0; i < codes.length; i++){ %>
+                <div class="row">
+                    <div class="span7">
+                        <div class="metaHeader">
+                            By <a href="/u/<%= profile.id %>"><%= profile.displayName %></a>, <%= codes[i].votes %> vote(s)
+                        </div>
 
-        <div class="row">
-            <div class="span7">
-                <div class="metaHeader">
-                    By <a href="#">JasdevS</a>, 4 comments
+                        <div class="snippet">
+                            <pre>
+                                <code class="<%= codes[i].lang %>">
+                                    <%= codes[i].code %>
+                            </code></pre>
+                        </div>
+                    </div>
                 </div>
+            <% } %>
 
-                <div class="snippet">
-                    <pre>
-                        <code class="java">
-public static void main(String[] args){
-    System.out.print("Hello world!");
-}
-                    </code></pre>
-                </div>
-            </div>
-        </div>
-
+            <!-- TODO populate from server -->
         <div id="commentSection" class="row">
             <div class="span3">
                 <h1 class="left">Comments</h1>
@@ -108,6 +94,7 @@ public static void main(String[] args){
           </div>
         </div>
 
+        <!-- TODO populate from server -->
         <div id="voteSection" class="row">
             <div class="span3">
                 <h1 class="left">Recent Votes</h1>
