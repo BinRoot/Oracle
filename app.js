@@ -30,7 +30,7 @@ switch(env){
 
     GOOGLE_CLIENT_ID = "941975996034-o52eu27r1q39cfkmk1i80mua67076po8.apps.googleusercontent.com";
     GOOGLE_CLIENT_SECRET = "_jM2IisLTmLHp5Tz7_CYaEP8";
-    callbackURLpassport = "http://quadco.de/auth/google/callback";
+    callbackURLpassport = "http://oracle1.heroku.com/auth/google/callback";
 
     break;
 }
