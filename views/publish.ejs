@@ -21,7 +21,7 @@
 		<div class="search-bar">
 
 		    <% if (!extra.type) { %>
-		    <input id="type" type="text" placeholder="Binary Tree Traversal" autofocus="autofocus">
+		    <input id="type" type="text" placeholder="e.g. 'Binary Tree Traversal'" autofocus="autofocus">
 		    <% } %>
 		    <% if (extra.type) { %>
 		    <input id="type" type="text" value="<%= extra.type %>" autofocus="autofocus">
@@ -37,13 +37,25 @@
 		<div id="code-bar-lang">
 		    <div class="btn-group">
 			<a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
-			    Java 
+			    Java
 			    <span class="caret"></span>
 			</a>
 			<ul id="languages" class="dropdown-menu">
-			    <li><a>Haskell</a></li>
-			    <li><a>Java</a></li>
-			    <li><a>Python</a></li>
+          <li><a>Java</a></li>
+          <li><a>Python</a></li>
+          <li><a>JavaScript</a></li>
+          <li><a>Ruby</a></li>
+          <li><a>Haskell</a></li>
+          <li><a>C++</a></li>
+          <li><a>C</a></li>
+          <li><a>Shell</a></li>
+          <li><a>PHP</a></li>
+          <li><a>Perl</a></li>
+          <li><a>Objective-C</a></li>
+          <li><a>C#</a></li>
+          <li><a>CoffeeScript</a></li>
+          <li><a>Go</a></li>
+          <li><a>Scheme</a></li>
 			</ul>
 		    </div>
 		</div>
@@ -71,7 +83,7 @@
 	    <div class="modal-body">
 	    <div class="alert alert-error hiddenAlert">
 	    	<button type="button" class="close" data-dismiss="alert">&times;</button>
-	    	Bad URL?  We had trouble fetching this gist, make sure it's the right URL and public! 
+	    	Bad URL?  We had trouble fetching this gist, make sure it's the right URL and public!
 	    </div>
 		<input id="gistURL" type="text" style="width:95%;" placeholder="Enter Gist URL" required pattern="[/^https://gist.github.com/$].*[/0-9]">
 	    </div>
@@ -81,7 +93,7 @@
 	    </div>
 	</div>
 
-<!-- 
+<!--
 		<i class="icon-arrow-right"></i>
 		<input type="filepicker" data-fp-apikey="ALQcedGXCTs-BiXSzHaVlz" data-fp-mimetypes="text/*" data-fp-container="modal" data-fp-services="COMPUTER,DROPBOX,GITHUB,GOOGLE_DRIVE" onchange="upload(event.fpfile)"></input>
 -->
@@ -96,6 +108,6 @@
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/publish.js"></script>
-    
+
 </body>
 </html>
