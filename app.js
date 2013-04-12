@@ -389,9 +389,16 @@ app.get('/a/:code', function(req, res){
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    console.log(JSON.stringify((JSON.parse(body)).response) );
-	    //res.send(JSON.stringify((JSON.parse(body)).response));
 	    var solrResp = (JSON.parse(body)).response;
-	    res.render('code', {user: req.user, code:solrResp});
+
+	    if (req.isAuthenticated()) { 
+		db.findUser({id: req.user.id}, function(u) {
+		    res.render('code', {user: req.user, userExtra: u, code:solrResp});
+		});
+	    }
+	    else {
+		res.render('code', {user: req.user, userExtra:null, code:solrResp});
+	    }
 	}
 	else {
 	    console.log(error + ' *** ' + response.statusCode);
