@@ -1,1 +1,1 @@
-curl http://ec2-50-19-140-101.compute-1.amazonaws.com:8983/solr/collection1/update -H "Content-Type: text/xml" --data-binary '<delete><query>*:*</query></delete>'
+curl http://ec2-50-19-140-101.compute-1.amazonaws.com:8983/solr/collection1/update?commit=true -H "Content-Type: text/xml" --data-binary '<delete><query>*:*</query></delete>'

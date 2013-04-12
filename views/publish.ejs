@@ -6,14 +6,36 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="css/bootstrap.min.css">
-    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+
+
     <link rel="stylesheet" href="css/index.css">
     <link rel="stylesheet" href="css/publish.css">
+    <link rel="stylesheet" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+
 </head>
 
 <body>
     <div>
+
+    <div class="navbar">
+	<div class="navbar-inner">
+	    <ul class="nav" style="margin-left:-60px">
+		<li><a href="/">Search</a></li>
+		<li class="active"><a href="#">Publish</a></li>
+		<li><a href="#">Browse</a></li>
+	    </ul>
+
+	    <% if (user) { %>
+	    <a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
+	    <%}%>
+	    <% if (!user) { %>
+	    <a class="brand" href="/auth/google">Log in</a>
+	    <%}%>
+
+	</div>
+    </div>
+
 
 	<header>
 	    <div id="search">
@@ -33,7 +55,7 @@
 
 	    <div id="code-bar">
 		<div class="code-bar-item"><a data-toggle="modal" href="#gistModal">Get from Gist</a></div>
-		<div class="code-bar-item"><a id="upload">Upload</a></div>
+		<div class="code-bar-item"><a id="upload" href="#">Upload</a></div>
 		<div id="code-bar-lang">
 		    <div class="btn-group">
 			<a id="selectedLanguage" class="btn dropdown-toggle" data-toggle="dropdown" href="#">
@@ -66,7 +88,7 @@
 	<div id="gistModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 	    <div class="modal-header">
 		<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-		<h3 id="myModalLabel">Grab code from <a href="https://gist.github.com/discover" target="_blank">Gist</a></h3>
+		<h3 id="myModalLabel">Grab code from <a id="gistLink" href="https://gist.github.com/discover" target="_blank">Gist</a></h3>
 	    </div>
 	    <div class="modal-body">
 	    <div class="alert alert-error hiddenAlert">

@@ -6,16 +6,37 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width">
 
-    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
     <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css">
     <link rel="stylesheet" href="/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/profile.css">
     <link rel="stylesheet" href="/css/highlight-styles/default.css">
+    <link rel="stylesheet" href="/css/bootstrap.css">
 </head>
 
 <body>
-    <div>
+
+
+	<div class="navbar">
+	    <div class="navbar-inner">
+		<ul class="nav" style="margin-left:-60px">
+		    <li><a href="/">Search</a></li>
+		    <li><a href="/publish">Publish</a></li>
+		    <li><a href="#">Browse</a></li>
+		</ul>
+
+		<% if (user && userExtra) { %>
+		<a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
+		<%}%>
+		<% if (!user && !userExtra) { %>
+		<a class="brand" href="/auth/google">Log in</a>
+		<%}%>
+
+	    </div>
+	</div>
+
+
         <header>
             <h1 align="center" id="top" class="center">
                 <!-- http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400 -->

@@ -1,6 +1,6 @@
 #editor {
     width:700px;
-    height:600px;
+    height:400px;
 }
 
 .code-bar-item {
@@ -14,6 +14,8 @@
 
     text-align: center;
     line-height:26px;
+    
+    margin-top:10px;
 }
 .code-bar-item:hover {
 
@@ -41,7 +43,7 @@
 }
 
 #code-bar {
-    height:40px;
+    height:60px;
     width: 100%;
     border-radius: 4px;
     margin-top:5px;
@@ -53,4 +55,8 @@
 
 #code-bar-lang {
     float:right;
+}
+
+#gistLink {
+    color: yellow;
 }

@@ -169,14 +169,34 @@ app.get('/u/:id', function(req, res){
     db.findUser({id: uid}, function(ret) {
 	console.log('/u/:id  ' + JSON.stringify(ret));
 	
-	if(ret.publications) { 
-	    idToCode(ret.publications, function(results){
-		console.log("***" + JSON.stringify(results));
-		res.render('profile', {user: req.user, profile: ret, codes: results});
+	// ADD NAVBAR
+	if (req.isAuthenticated()) { 
+	    db.findUser({id: req.user.id}, function(u) {
+
+		if(ret.publications) { 
+		    idToCode(ret.publications, function(results){
+			console.log("***" + JSON.stringify(results));
+			res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
+		    });
+		}
+		else {
+		    res.render('profile', {user: req.user, userExtra: null, profile: ret, codes: null});
+		}
 	    });
 	}
-	else {
-	    res.render('profile', {user: req.user, profile: ret, codes: null});
+	else { 
+
+	    if(ret.publications) { 
+		idToCode(ret.publications, function(results){
+		    console.log("***" + JSON.stringify(results));
+		    res.render('profile', {user: null, userExtra: null, profile: ret, codes: results});
+		});
+	    }
+	    else {
+		res.render('profile', {user: null, userExtra: null, profile: ret, codes: null});
+	    }
+
+
 	}
     });
 
@@ -213,7 +233,10 @@ app.get('/publish', function(req, res, next) {
 
     var extraData = {type: req.query.type};
     console.log('type: '+ extraData.type );
-    res.render('publish', {user: req.user, extra:extraData});
+
+    db.findUser({id: req.user.id}, function(u) {
+	res.render('publish', {user: req.user, userExtra: u, extra:extraData});
+    });
 });
 
 app.get('/update', function(req, res, next) {
