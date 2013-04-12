@@ -125,7 +125,7 @@ function clearAllActiveChildren(children) {
 function postPublish () {
 
     var data_type = $('#type').val().toLowerCase();
-    var data_lang = $('#selectedLanguage').text().trim().toLowerCase();
+    var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
     var data_code = editor.getValue();
 
     var postData = {
@@ -140,7 +140,7 @@ function postPublish () {
         console.log(data);
     });
 
-    
+
 //    search(data_type);
 }
 
