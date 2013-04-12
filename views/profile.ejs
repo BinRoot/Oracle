@@ -26,7 +26,12 @@
             <div id="table">
                 <table id="summary" class="table table-bordered">
                     <tr>
+			<% if(profile.publications) { %>
                         <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#"><%= profile.publications.length%></a></td>
+			<% } %>
+			<% if(!profile.publications) { %>
+                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#">0</a></td>
+			<% } %>
                     </tr>
                     <tr>
                         <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">TODO</a></td>
@@ -43,6 +48,7 @@
                 </div>
             </div>
 
+	    <% if(codes) { %>
             <% for(var i = 0; i < codes.length; i++){ %>
                 <div class="row">
                     <div class="span7">
@@ -59,6 +65,7 @@
                     </div>
                 </div>
             <% } %>
+	    <% } %>
 
             <!-- TODO populate from server -->
         <div id="commentSection" class="row">

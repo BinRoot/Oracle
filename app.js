@@ -167,12 +167,17 @@ app.get('/u/:id', function(req, res){
     var uid = req.params.id;
     console.log('looking for '+uid);
     db.findUser({id: uid}, function(ret) {
-      console.log('/u/:id  ' + JSON.stringify(ret));
-
-      idToCode(ret.publications, function(results){
-        console.log("***" + JSON.stringify(results));
-        res.render('profile', {user: req.user, profile: ret, codes: results});
-      });
+	console.log('/u/:id  ' + JSON.stringify(ret));
+	
+	if(ret.publications) { 
+	    idToCode(ret.publications, function(results){
+		console.log("***" + JSON.stringify(results));
+		res.render('profile', {user: req.user, profile: ret, codes: results});
+	    });
+	}
+	else {
+	    res.render('profile', {user: req.user, profile: ret, codes: null});
+	}
     });
 
 });

@@ -1,5 +1,5 @@
 var Db = require('mongodb').Db;
-var env = process.env.MONGOLAB_URI || 'mongodb://heroku_app11372091:5f9jip44h11e7h1upuav7p24hn@ds049467.mongolab.com:49467/heroku_app11372091'; //'mongodb://localhost:27017/test';
+var env = process.env.MONGOLAB_URI || 'mongodb://localhost:27017/test';
 
 // This is just an example of how to 
 // insert an element to the collection
