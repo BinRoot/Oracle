@@ -80,7 +80,7 @@ app.get('/', function(req, res) {
 	res.redirect(retto);
     }
     else {
-	if (req.isAuthenticated()) { 
+	if (req.isAuthenticated()) {
 	    db.findUser({id: req.user.id}, function(u) {
 		var q = req.query["q"];
 		res.render('index', {user: req.user, query: q, userExtra: u});
@@ -174,12 +174,12 @@ app.get('/u/:id', function(req, res){
     console.log('looking for '+uid);
     db.findUser({id: uid}, function(ret) {
 	console.log('/u/:id  ' + JSON.stringify(ret));
-	
+
 	// ADD NAVBAR
-	if (req.isAuthenticated()) { 
+	if (req.isAuthenticated()) {
 	    db.findUser({id: req.user.id}, function(u) {
 
-		if(ret.publications) { 
+		if(ret.publications) {
 		    idToCode(ret.publications, function(results){
 			console.log("***" + JSON.stringify(results));
 			res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
@@ -190,9 +190,9 @@ app.get('/u/:id', function(req, res){
 		}
 	    });
 	}
-	else { 
+	else {
 
-	    if(ret.publications) { 
+	    if(ret.publications) {
 		idToCode(ret.publications, function(results){
 		    console.log("***" + JSON.stringify(results));
 		    res.render('profile', {user: null, userExtra: null, profile: ret, codes: results});
@@ -391,7 +391,7 @@ app.get('/a/:code', function(req, res){
 	    console.log(JSON.stringify((JSON.parse(body)).response) );
 	    var solrResp = (JSON.parse(body)).response;
 
-	    if (req.isAuthenticated()) { 
+	    if (req.isAuthenticated()) {
 		db.findUser({id: req.user.id}, function(u) {
 		    res.render('code', {user: req.user, userExtra: u, code:solrResp});
 		});
