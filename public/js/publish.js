@@ -137,7 +137,8 @@ function postPublish () {
     console.log('post data is ', JSON.stringify(postData));
 
     $.post("/publish", postData, function(data){
-        console.log(data);
+	$('#find-button').text("Done!");
+	console.log(data);
     });
 
 
