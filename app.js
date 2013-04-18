@@ -222,6 +222,12 @@ app.get('/auth/google/return',
 	passport.authenticate('google', { successRedirect: '/',
 					  failureRedirect: '/fail' }));
 
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
+
 app.get('/account', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/account');
 }, function(req, res) {

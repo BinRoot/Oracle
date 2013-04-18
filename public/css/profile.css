@@ -21,13 +21,30 @@
 }
 
 #table{
-    padding-bottom: 30px;
+
 }
 
-#name{
-    padding-left: 30px;
-    vertical-align: middle;
+#profPic{
+    float: left;
+    display: inline;
+    margin-bottom: 20px;
+    margin-left:10px;
 }
+
+
+#name{
+    float:left;
+    display: inline;
+    margin-top:24px;
+    margin-left:20px;
+}
+
+#rep{
+    float:left;
+    margin-top:24px;
+    margin-left:40px;
+}
+
 
 .snippet{
     text-align: left;
@@ -37,9 +54,6 @@
     padding-left: 10px;
 }
 
-#profPic{
-
-}
 
 .following{
     border: 6px solid #2b88cc;
