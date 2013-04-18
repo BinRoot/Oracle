@@ -23,7 +23,7 @@
 	    <ul class="nav" style="margin-left:-60px">
 		<li><a href="/">Search</a></li>
 		<li class="active"><a href="#">Publish</a></li>
-		<li><a href="#">Browse</a></li>
+		<li><a href="/super_demo_slides/index.html">Demo</a></li>
 	    </ul>
 
 	    <% if (user) { %>
@@ -43,10 +43,10 @@
 		<div class="search-bar">
 
 		    <% if (!extra.type) { %>
-		    <input id="type" type="text" placeholder="e.g. 'Binary Tree Traversal'" autofocus="autofocus">
+		    <input id="type" data-provide="typeahead" autocomplete="off" type="text" placeholder="e.g. 'Binary Tree Traversal'" autofocus="autofocus">
 		    <% } %>
 		    <% if (extra.type) { %>
-		    <input id="type" type="text" value="<%= extra.type %>" autofocus="autofocus">
+		    <input id="type" data-provide="typeahead" autocomplete="off" type="text" value="<%= extra.type %>" autofocus="autofocus">
 		    <% } %>
 
 		</div>
@@ -130,6 +130,7 @@
     <script type="text/javascript" src="//api.filepicker.io/v1/filepicker.js"></script>
     <script type="text/javascript" src="js/bootstrap.min.js"></script>
     <script type="text/javascript" src="js/publish.js"></script>
+    <script type="text/javascript" src="js/underscore-min.js"></script>
 
 </body>
 </html>

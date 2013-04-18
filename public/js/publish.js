@@ -1,24 +1,33 @@
-$("#type").typeahead({
-    source: function(query, process) {
-	$.get('/peek', { q: query }, function(data) {
-	    var d = JSON.parse(data);
-	    var types = [];
-	    for(var i=0; i<d.length; i++) {
-		types.push(d[i].type + " ("+d[i].sum+")");
-	    }
-	    process(types);
-	});
-    },
-    updater: function (item) {
-	var splits = item.split(' ');
-	item = "";
-	for(var i=0; i<splits.length-1; i++) {
-	    item = item + " " + splits[i];
-	}
-        return item;
-    },
-    minLength: 1
-});
+$('#type').typeahead(
+    {
+        source: function(query, process) {
+
+            $.ajax({
+                url: "/peek?q="+query,
+            }).done(function ( data ) {
+                var facets = JSON.parse(data);
+
+		var strs = [];
+                _.each(facets, function(fItem, i) {
+                    strs.push(fItem.str + " ("+fItem.val+")");
+                });
+
+		console.log(JSON.stringify(strs));
+
+                process(strs);
+            });
+
+        },
+        updater: function(item) {
+            var splits = item.split(" ");
+            var outStr = [];
+	        for(var i=0; i<splits.length-1; i++) {
+                outStr.push(splits[i]);
+            }
+            return outStr;
+        }
+    }
+);
 
 
 filepicker.setKey('AoO2NYenFQq2z9yVBtOEKz');
@@ -137,7 +146,8 @@ function postPublish () {
     console.log('post data is ', JSON.stringify(postData));
 
     $.post("/publish", postData, function(data){
-        console.log(data);
+	$('#find-button').text("Done!");
+	console.log(data);
     });
 
 

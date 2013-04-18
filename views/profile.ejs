@@ -18,144 +18,151 @@
 <body>
 
 
-	<div class="navbar">
-	    <div class="navbar-inner">
-		<ul class="nav" style="margin-left:-60px">
-		    <li><a href="/">Search</a></li>
-		    <li><a href="/publish">Publish</a></li>
-		    <li><a href="#">Browse</a></li>
-		</ul>
+    <div class="navbar">
+	<div class="navbar-inner">
+	    <ul class="nav" style="margin-left:-60px">
+		<li><a href="/">Search</a></li>
+		<li><a href="/publish">Publish</a></li>
+		<li><a href="/super_demo_slides/index.html">Demo</a></li>
+	    </ul>
 
-		<% if (user && userExtra) { %>
-		<a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
-		<%}%>
-		<% if (!user && !userExtra) { %>
-		<a class="brand" href="/auth/google">Log in</a>
-		<%}%>
+	    <% if (user && userExtra) { %>
+	    <a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
+	    <%}%>
+	    <% if (!user && !userExtra) { %>
+	    <a class="brand" href="/auth/google">Log in</a>
+	    <%}%>
 
-	    </div>
 	</div>
+    </div>
 
 
-        <header>
-            <h1 align="center" id="top" class="center">
-                <!-- http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400 -->
-                <div id="emailHolder" style="display:none;"><%= profile.email %></div>
-                <img id="profPic" src="" class="img-circle avatars">
-                <span id="name"><%= profile.displayName %></span>
-            </h1>
-            <div id="table">
-                <table id="summary" class="table table-bordered">
-                    <tr>
-			<% if(profile.publications) { %>
-                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#"><%= profile.publications.length%></a></td>
-			<% } %>
-			<% if(!profile.publications) { %>
-                        <td>Snippets submitted</td> <td id="centerColumn"><a id="snippetScroll" href="#">0</a></td>
-			<% } %>
-                    </tr>
-                    <tr>
-                        <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">TODO</a></td>
-                    </tr>
-                    <tr>
-                        <td>Total Upvoted</td> <td id="centerColumn"><a id="voteScroll" href="#">TODO</a></td>
-                    </tr>
-                </table>
-            </div>
+    <header>
+        <!-- http://gravatar.com/avatar/af111f4cc71a9c259170bd8640578a62?s=400 -->
+        <h1>
+            <div id="emailHolder" style="display:none;"><%= profile.email %></div>
 
-            <div class="row">
-                <div id="snippetSection" class="span3">
-                    <h1>Snippets</h1>
-                </div>
-            </div>
+            <img id="profPic" class="img-circle avatars">
+            <div id="name"><%= profile.displayName %></div>
+            <div id="rep">( 100 )</div>
+	</h1>
 
-	    <% if(codes) { %>
-            <% for(var i = 0; i < codes.length; i++){ %>
-                <div class="row">
-                    <div class="span7">
-                        <div class="metaHeader">
-                            By <a href="/u/<%= profile.id %>"><%= profile.displayName %></a>, <%= codes[i].votes %> vote(s)
-                        </div>
-
-                        <div class="snippet">
-                            <pre>
-                                <code class="<%= codes[i].lang %>">
-<%= codes[i].code %>
-                            </code></pre>
-                        </div>
-                    </div>
-                </div>
-            <% } %>
-	    <% } %>
-
-            <!-- TODO populate from server -->
-        <div id="commentSection" class="row">
-            <div class="span3">
-                <h1 class="left">Comments</h1>
-            </div>
-        </div>
-
-        <div class="accordion" id="accordion2">
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-                Quicksort @ line 141
-              </a>
-            </div>
-            <div id="collapseOne" class="accordion-body collapse">
-              <div class="accordion-inner">
-                "Any reason you didnt use Java's built-in LinkedList?"
-              </div>
-            </div>
-          </div>
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-                Transitive Closure @ line 286
-              </a>
-            </div>
-            <div id="collapseTwo" class="accordion-body collapse">
-              <div class="accordion-inner">
-                "This line is redundant and can be refactored."
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- TODO populate from server -->
-        <div id="voteSection" class="row">
-            <div class="span3">
-                <h1 class="left">Recent Votes</h1>
-            </div>
+        <div id="table">
+            <table id="summary" class="table table-bordered" style="margin:0px; width:100%;">
+                <tr>
+		    <% if(profile.publications) { %>
+                    <td>Code snippets published</td> <td id="centerColumn"><a id="snippetScroll" href="#"><%= profile.publications.length%></a></td>
+		    <% } %>
+		    <% if(!profile.publications) { %>
+                    <td>Code snippets published</td> <td id="centerColumn"><a id="snippetScroll" href="#">0</a></td>
+		    <% } %>
+                </tr>
+		<!--
+                <tr>
+                    <td>Number of Comments</td> <td id="centerColumn"><a id="commentScroll" href="#">TODO</a></td>
+                </tr> 
+		-->
+                <tr>
+                    <td>Total votes</td> <td id="centerColumn"><a id="voteScroll" href="#">TODO</a></td>
+                </tr>
+            </table>
         </div>
 
         <div class="row">
-            <div class="span7">
-                <span><i class="icon-arrow-down"></i> <a href="#">Quicksort</a> by <a href="#">Penguin</a></span>
-                <span style="float: right;">43 mintues ago</span>
+            <div id="snippetSection" class="span3">
+                <h1>Snippets</h1>
             </div>
         </div>
-        <div class="row">
-            <div class="span7">
-                <span><i class="icon-arrow-up"></i> <a href="#">Transitive Closure</a> by <a href="#">abhishelat</a></span>
-                <span style="float: right;">6 hours ago</span>
-            </div>
-        </div>
-        <div class="row">
-            <div class="span7">
-                <span><i class="icon-arrow-down"></i> <a href="#">Pattern Matching w/ wildcards</a> by <a href="#">PuneetLall</a></span>
-                <span style="float: right;">2 days ago</span>
-            </div>
-        </div>
-        </header>
 
-    </div> <!-- /container -->
-    <!-- Nonblocking scripts at the bottom of the body -->
-    <script src="/js/highlight/highlight.pack.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="/js/profile.js"></script>
-    <script src="/js/md5.js"></script>
+	<% if(codes) { %>
+        <% for(var i = 0; i < codes.length; i++){ %>
+           <div class="row">
+               <div class="span7">
+                   <div class="metaHeader">
+                       By <a href="/u/<%= profile.id %>"><%= profile.displayName %></a>, <%= codes[i].votes %> vote(s)
+                   </div>
+
+                   <div class="snippet">
+                       <pre>
+                           <code class="<%= codes[i].lang %>">
+			       <%= codes[i].code %>
+                       </code></pre>
+                   </div>
+               </div>
+           </div>
+           <% } %>
+	   <% } %>
+
+           <!-- TODO populate from server -->
+	   <!--
+           <div id="commentSection" class="row">
+               <div class="span3">
+                   <h1 class="left">Comments</h1>
+               </div>
+           </div>
+
+           <div class="accordion" id="accordion2">
+               <div class="accordion-group">
+		   <div class="accordion-heading">
+		       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+			   Quicksort @ line 141
+		       </a>
+		   </div>
+		   <div id="collapseOne" class="accordion-body collapse">
+		       <div class="accordion-inner">
+			   "Any reason you didnt use Java's built-in LinkedList?"
+		       </div>
+		   </div>
+               </div>
+               <div class="accordion-group">
+		   <div class="accordion-heading">
+		       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
+			   Transitive Closure @ line 286
+		       </a>
+		   </div>
+		   <div id="collapseTwo" class="accordion-body collapse">
+		       <div class="accordion-inner">
+			   "This line is redundant and can be refactored."
+		       </div>
+		   </div>
+               </div>
+           </div>
+	   -->
+
+           <!-- TODO populate from server -->
+           <div id="voteSection" class="row">
+               <div class="span3">
+                   <h1 class="left">Recent Votes</h1>
+               </div>
+           </div>
+
+           <div class="row">
+               <div class="span7">
+                   <span><i class="icon-arrow-up"></i> <a href="#">Quicksort</a> by <a href="#">Penguin</a></span>
+                   <span style="float: right;">43 mintues ago</span>
+               </div>
+           </div>
+           <div class="row">
+               <div class="span7">
+                   <span><i class="icon-arrow-up"></i> <a href="#">Transitive Closure</a> by <a href="#">abhishelat</a></span>
+                   <span style="float: right;">6 hours ago</span>
+               </div>
+           </div>
+           <div class="row">
+               <div class="span7">
+                   <span><i class="icon-arrow-up"></i> <a href="#">Pattern Matching w/ wildcards</a> by <a href="#">PuneetLall</a></span>
+                   <span style="float: right;">2 days ago</span>
+               </div>
+           </div>
+    </header>
+
+</div> <!-- /container -->
+<!-- Nonblocking scripts at the bottom of the body -->
+<script src="/js/highlight/highlight.pack.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript" src="/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/js/profile.js"></script>
+<script src="/js/md5.js"></script>
 </body>
 </html>

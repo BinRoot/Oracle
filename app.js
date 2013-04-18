@@ -222,6 +222,12 @@ app.get('/auth/google/return',
 	passport.authenticate('google', { successRedirect: '/',
 					  failureRedirect: '/fail' }));
 
+app.get('/logout', function(req, res){
+    req.logout();
+    res.redirect('/');
+});
+
+
 app.get('/account', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/account');
 }, function(req, res) {
@@ -331,11 +337,8 @@ app.post('/publish', function(req, res, next) {
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    var regexQuery = "*" + q.replace(" ", "*") + "*";
-
-    var searchURL = aws + "collection1/select?q=type%3A"
-	+ regexQuery + "+OR+code%3A*"
-	+ regexQuery + "&sort=votes+desc&wt=json";
+    var searchURL = aws + "collection1/select?q=" + q + 
+                    "&wt=json&defType=edismax&qf=code%5E0.3+type%5E20";
 
     var options = {
 	uri: searchURL,
@@ -357,13 +360,24 @@ app.get('/peek', function(req, res) {
     var q = req.query["q"];
 
     var options = {
-	uri: aws + 'collection1/select/?wt=json&q=*:*&fl=name&facet=true&facet.field=type',
+	uri: aws + 'collection1/select?q=*%3A*&fl=+&wt=json&facet=true&facet.field=type&facet.prefix='
+	         + q,
 	method: 'GET',
     };
 
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
-	    res.send(body);
+	    var bodyJ = JSON.parse(body);
+	    var facets = bodyJ.facet_counts.facet_fields.type;
+
+	    // [ "a", 1, "b", 2 ] --> [{str: "a", val: 1}, {str: b, val: 2}]
+	    
+	    var data = [];
+	    for(var i=0; i<facets.length/2; i+=2) {
+		data.push({str: facets[i], val: facets[i+1]});
+	    }
+
+	    res.send(JSON.stringify(data));
 	}
 	else {
 	    console.log(error + ' *** ' + response.statusCode);
