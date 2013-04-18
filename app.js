@@ -331,11 +331,8 @@ app.post('/publish', function(req, res, next) {
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    var regexQuery = "*" + q.replace(" ", "*") + "*";
-
-    var searchURL = aws + "collection1/select?q=type%3A"
-	+ regexQuery + "+OR+code%3A*"
-	+ regexQuery + "&sort=votes+desc&wt=json";
+    var searchURL = aws + "collection1/select?q=" + q + 
+                    "&wt=json&defType=edismax&qf=code%5E0.3+type%5E20";
 
     var options = {
 	uri: searchURL,
@@ -357,13 +354,16 @@ app.get('/peek', function(req, res) {
     var q = req.query["q"];
 
     var options = {
-	uri: aws + 'collection1/select/?wt=json&q=*:*&fl=name&facet=true&facet.field=type',
+	uri: aws + 'collection1/select?q=*%3A*&fl=+&wt=json&facet=true&facet.field=type&facet.prefix='
+	         + q,
 	method: 'GET',
     };
 
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
-	    res.send(body);
+	    var bodyJ = JSON.parse(body);
+	    var facets = bodyJ.facet_counts.facet_fields.type;
+	    res.send(JSON.stringify(facets));
 	}
 	else {
 	    console.log(error + ' *** ' + response.statusCode);
