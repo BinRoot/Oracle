@@ -21,6 +21,38 @@ $("#type").typeahead({
 });
 
 
+$('#type').typeahead(
+    {
+        source: function(query, process) {
+
+            $.ajax({
+                url: "/peek?q="+query,
+            }).done(function ( data ) {
+                var facets = JSON.parse(data);
+
+		var strs = [];
+                _.each(facets, function(fItem, i) {
+                    strs.push(fItem.str + " ("+fItem.val+")");
+                });
+
+		console.log(JSON.stringify(strs));
+
+                process(strs);
+            });
+
+        },
+        updater: function(item) {
+            var splits = item.split(" ");
+            varoutStr = [];
+	        for(var i=0; i<splits.length-1; i++) {
+                outStr.push(splits[i]);
+            }
+            return outStr;
+        }
+    }
+);
+
+
 filepicker.setKey('AoO2NYenFQq2z9yVBtOEKz');
 $('.hiddenAlert').hide();
 

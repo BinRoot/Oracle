@@ -43,10 +43,10 @@
 		<div class="search-bar">
 
 		    <% if (!extra.type) { %>
-		    <input id="type" type="text" placeholder="e.g. 'Binary Tree Traversal'" autofocus="autofocus">
+		    <input id="type" data-provide="typeahead" autocomplete="off" type="text" placeholder="e.g. 'Binary Tree Traversal'" autofocus="autofocus">
 		    <% } %>
 		    <% if (extra.type) { %>
-		    <input id="type" type="text" value="<%= extra.type %>" autofocus="autofocus">
+		    <input id="type" data-provide="typeahead" autocomplete="off" type="text" value="<%= extra.type %>" autofocus="autofocus">
 		    <% } %>
 
 		</div>
