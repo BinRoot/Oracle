@@ -22,6 +22,37 @@ window.onload = function() {
 };
 
 
+$('#search-input').typeahead(
+    {
+	source: function(query, process) {
+
+	    $.ajax({
+		url: "/peek?q="+query,
+	    }).done(function ( data ) {
+		var facets = JSON.parse(data);
+
+		var strs = [];
+		_.each(facets, function(fItem, i) {
+		    strs.push(fItem.str + " ("+fItem.val+")");
+		});
+
+		console.log(JSON.stringify(strs));
+
+		process(strs);
+	    });
+
+	},
+	updater: function(item) {
+	    var splits = item.split(" ");
+	    var outStr = [];
+	    for(var i=0; i<splits.length-1; i++) {
+		outStr.push(splits[i]);
+	    }
+            return outStr;
+	}
+    }
+);
+
 $('.search-bar input').focus(function() {
     $(this).parent().addClass('focus');
 });

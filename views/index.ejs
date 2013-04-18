@@ -44,10 +44,10 @@
 		<label>Search:</label>
 		<div class="search-bar">
 		    <% if (query) { %>
-		    <input id="search-input" type="text" value="<%= query %>" autofocus="autofocus">
+		    <input id="search-input" data-provide="typeahead" autocomplete="off" type="text" value="<%= query %>" autofocus="autofocus">
 		    <% } %>
 		    <% if (!query) { %>
-		    <input id="search-input" type="text" placeholder="Name of algorithm or code" autofocus="autofocus">
+		    <input id="search-input" data-provide="typeahead" autocomplete="off" type="text" placeholder="Name of algorithm or code" autofocus="autofocus">
 		    <% } %>
 
 		</div>

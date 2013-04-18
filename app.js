@@ -363,7 +363,15 @@ app.get('/peek', function(req, res) {
 	if (!error && response.statusCode == 200) {
 	    var bodyJ = JSON.parse(body);
 	    var facets = bodyJ.facet_counts.facet_fields.type;
-	    res.send(JSON.stringify(facets));
+
+	    // [ "a", 1, "b", 2 ] --> [{str: "a", val: 1}, {str: b, val: 2}]
+	    
+	    var data = [];
+	    for(var i=0; i<facets.length/2; i+=2) {
+		data.push({str: facets[i], val: facets[i+1]});
+	    }
+
+	    res.send(JSON.stringify(data));
 	}
 	else {
 	    console.log(error + ' *** ' + response.statusCode);
