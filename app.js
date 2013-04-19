@@ -137,19 +137,18 @@ app.get('/api/vote', function(req, res, next) {
     ensureAuthenticated(req, res, next, '/publish');
 }, function(req, res) {
     var cid = req.query["cid"];
+    var u1id = req.user.id; // voter
     console.log('in /api/vote, searching for ' + cid);
+
     getSolrCode(cid, function(blah, ret) {
 	var oldVotes = ret.votes;
-	var u1id = req.user.identifier;
-	var u2id = ret.uid;
+	var u2id = ret.uid; // votee
 
-	// find rep of user
-	// decrement u1rep
-	// increment u2rep
-	// increment cid votes
-
+//	console.log('voter: '+u1id+', votee: '+u2id+', oldVotes: '+oldVotes);
+	
     });
 });
+
 
 function idToCode(ids, callback){
   async.map(ids, getSolrCode, function(err, results){
