@@ -62,6 +62,26 @@ var findUser = function findUser(val, callback) {
     });
 }
 
+var upvoteUser = function upvoteUser(uid, callback) {
+    Db.connect(env, function(err, db) {
+        if(!err) {
+            console.log("We are connected! finding user "+JSON.stringify(val));
+
+	    pushUpdate = { $inc: { rep: 1 } };
+	    
+	    db.collection('users').update({id:uid}, pushUpdate, {safe:true, upsert:true}, function(err) {
+                if (err) return console.dir(err);
+		console.log('upvoted!');
+		callback();
+            });
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+}
+
+
 var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, codeId, callback) {
     Db.connect(env, function(err, db) {
         if(!err) {
