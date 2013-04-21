@@ -81,3 +81,19 @@ var googleAuth =
 	},
 	identifier:"https://www.google.com/accounts/o8/id?id=AItOawko8c_hlIiC0x8h3XYlZewRHPr8FnXidac"
     }
+
+var history = 
+    {
+	action: "publish",
+	uid: "1111",
+	cid: "zzz",
+	time: "now"
+    }
+||
+    {
+	action: "vote",
+	u1id: "1111",
+	u2id: "2222",
+	cid: "zzz",
+	time: "now"
+    }

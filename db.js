@@ -65,7 +65,7 @@ var findUser = function findUser(val, callback) {
 var upvoteUser = function upvoteUser(uid, callback) {
     Db.connect(env, function(err, db) {
         if(!err) {
-            console.log("We are connected! finding user "+JSON.stringify(val));
+            console.log("We are connected! finding user "+JSON.stringify(uid));
 
 	    pushUpdate = { $inc: { rep: 1 } };
 	    
@@ -80,6 +80,26 @@ var upvoteUser = function upvoteUser(uid, callback) {
         }
     });
 }
+
+var votesUpdateUser = function votesUpdateUser(uid, cid, callback) {
+    Db.connect(env, function(err, db) {
+        if(!err) {
+            console.log("We are connected! finding user "+JSON.stringify(uid));
+
+	    pushUpdate = { $push: { votes:cid } }
+	    
+	    db.collection('users').update({id:uid}, pushUpdate, {safe:true, upsert:true}, function(err) {
+                if (err) return console.dir(err);
+		console.log('added cid to votes!');
+		callback();
+            });
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+}
+
 
 
 var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, codeId, callback) {
@@ -129,3 +149,5 @@ exports.insertCode = insertCode;
 exports.findTypes = findTypes;
 exports.addOrUpdateUser = addOrUpdateUser;
 exports.findUser = findUser;
+exports.upvoteUser = upvoteUser;
+exports.votesUpdateUser = votesUpdateUser;
