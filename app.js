@@ -178,7 +178,8 @@ app.get('/api/vote', function(req, res, next) {
 				    //\\ add to history (mongodb)
 				    var hist = {
 					action: "vote",
-					uid: u1id,
+					u1id: u1id,
+					u2id: u2id,
 					cid: cid,
 					time: new Date(),
 				    };
@@ -370,7 +371,20 @@ app.post('/publish', function(req, res, next) {
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    db.addOrUpdateUserPublications(post_uid, post_id, function() {
-		res.send(body);
+
+		//\\ add to history (mongodb)
+		var hist = {
+		    action: "publish",
+		    uid: post_uid,
+		    cid: post_id,
+		    time: new Date(),
+		};
+
+		db.addHistory(hist, function() {
+		    res.send(body);
+		});
+
+
 	    });
 	}
     });
