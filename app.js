@@ -139,14 +139,64 @@ app.get('/api/vote', function(req, res, next) {
     var cid = req.query["cid"];
     var u1id = req.user.id; // voter
     console.log('in /api/vote, searching for ' + cid);
-
-    getSolrCode(cid, function(blah, ret) {
-	var oldVotes = ret.votes;
-	var u2id = ret.uid; // votee
-
-//	console.log('voter: '+u1id+', votee: '+u2id+', oldVotes: '+oldVotes);
+    
+    db.findUser({id: u1id}, function(user1Obj) { //\\ get user1 object (mongo)
 	
+	var previouslyVoted = false;
+
+	var votes = user1Obj.votes;
+	if(votes) {
+	    if(votes.indexOf(cid) != -1) {
+		previouslyVoted = true;
+		res.send('ERR 0: User '+u1id+' has already voted on code '+cid);
+	    }
+	}
+
+	if(!previouslyVoted) {
+	    getSolrCode(cid, function(blah, ret) { //\\ get code object (solr)
+		if(ret) {
+		    console.log('getSolrCode results: '+JSON.stringify(ret));
+		    var oldVotes = ret.votes;
+		    var u2id = ret.uid; // votee
+
+		    db.upvoteUser(u2id, function() { //\\ upvote user (mongodb)
+			
+			//\\ upvote code (solr)
+			var postData = [ {id:cid, votes:{"set":(ret.votes+1)}} ];
+			var options = {
+			    uri: aws + 'update/json?commit=true',
+			    method: 'POST',
+			    json: postData
+			};
+			console.log('POSTing: '+JSON.stringify(postData));
+			request(options, function (error, response, body) {
+			    if (!error && response.statusCode == 200) {
+
+				//\\ add cid to user's votes (mongodb)
+				db.votesUpdateUser(u1id, cid, function() {
+				    
+				    //\\ add to history (mongodb)
+				    var hist = {
+					action: "vote",
+					u1id: u1id,
+					u2id: u2id,
+					cid: cid,
+					time: new Date(),
+				    };
+
+				    db.addHistory(hist, function() {
+					res.send('Done');
+				    });
+
+				});
+			    }
+			});
+		    });
+		}
+	    });
+	}
     });
+
 });
 
 
@@ -321,7 +371,20 @@ app.post('/publish', function(req, res, next) {
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    db.addOrUpdateUserPublications(post_uid, post_id, function() {
-		res.send(body);
+
+		//\\ add to history (mongodb)
+		var hist = {
+		    action: "publish",
+		    uid: post_uid,
+		    cid: post_id,
+		    time: new Date(),
+		};
+
+		db.addHistory(hist, function() {
+		    res.send(body);
+		});
+
+
 	    });
 	}
     });
