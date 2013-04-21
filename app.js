@@ -174,7 +174,19 @@ app.get('/api/vote', function(req, res, next) {
 
 				//\\ add cid to user's votes (mongodb)
 				db.votesUpdateUser(u1id, cid, function() {
-				    res.send('Done.');
+				    
+				    //\\ add to history (mongodb)
+				    var hist = {
+					action: "vote",
+					uid: u1id,
+					cid: cid,
+					time: new Date(),
+				    };
+
+				    db.addHistory(hist, function() {
+					res.send('Done');
+				    });
+
 				});
 			    }
 			});

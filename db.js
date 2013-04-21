@@ -123,8 +123,25 @@ var addOrUpdateUserPublications = function addOrUpdateUserPublications(uid, code
             console.log("Error, not connected: " + err);
         }
     });
-    
 }
+
+var addHistory = function addHistory(hist, callback) {
+    Db.connect(env, function(err, db) {
+        if(!err) {
+            console.log("We are connected! adding history " + JSON.stringify(hist));
+
+	    db.collection('hist').insert(hist, function(err, result) {
+		if (err) return console.dir(err);
+		else callback();
+	    });
+	    
+        }
+        else {
+            console.log("Error, not connected: " + err);
+        }
+    });
+}
+
 
 var addOrUpdateUser = function addOrUpdateUser(userData) {
     Db.connect(env, function(err, db) {
@@ -151,3 +168,4 @@ exports.addOrUpdateUser = addOrUpdateUser;
 exports.findUser = findUser;
 exports.upvoteUser = upvoteUser;
 exports.votesUpdateUser = votesUpdateUser;
+exports.addHistory = addHistory;
