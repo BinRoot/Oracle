@@ -1,3 +1,6 @@
+$("#missingType").hide();
+$("#missingCode").hide();
+
 $('#type').typeahead(
     {
         source: function(query, process) {
@@ -136,6 +139,15 @@ function postPublish () {
     var data_type = $('#type').val().toLowerCase();
     var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
     var data_code = editor.getValue();
+
+    if(data_type === ""){
+        $('#missingType').show();
+        return;
+    }
+    else if(data_code === ""){
+        $('#missingCode').show();
+        return;
+    }
 
     var postData = {
 	type: data_type,
