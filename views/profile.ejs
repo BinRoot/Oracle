@@ -26,12 +26,12 @@
 		<li><a href="/super_demo_slides/index.html">Demo</a></li>
 	    </ul>
 
-	    <% if (user && userExtra) { %>
-	    <a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
-	    <%}%>
+	    <% if (user) { %>
+	    <a class="brand pull-right" href="/logout">Log out</a>
+	    <% } %>
 	    <% if (!user && !userExtra) { %>
 	    <a class="brand" href="/auth/google">Log in</a>
-	    <%}%>
+	    <% } %>
 
 	</div>
     </div>
