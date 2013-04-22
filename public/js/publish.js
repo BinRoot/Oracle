@@ -123,9 +123,29 @@ function updateCode(lang, code) {
         editor.getSession().setMode("ace/mode/" + lang);
         $('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
     }
-
-
 }
+
+
+editor.getSession().on('change', function(e) {
+    var code = editor.getValue();
+
+    var out = hljs.highlightAuto(code);
+
+    console.log(JSON.stringify(out.language));
+    if(out.second_best) {
+	console.log(JSON.stringify(out.second_best.language));
+    }
+    console.log('-');
+
+    var lang = out.language;
+    if(lang) {
+	$('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
+	editor.getSession().setMode("ace/mode/" + lang);
+    }
+});
+
+
+
 
 function clearAllActiveChildren(children) {
     for(var i=0; i<children.length; i++) {
