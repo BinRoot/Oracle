@@ -437,7 +437,7 @@ app.get('/peek', function(req, res) {
 	if (!error && response.statusCode == 200) {
 	    var bodyJ = JSON.parse(body);
 
-	    console.log('peek: '+JSON.stringify(bodyJ);)
+	    console.log('peek: '+JSON.stringify(bodyJ));
 
 	    var facets = bodyJ.facet_counts.facet_fields.type_exact;
 
