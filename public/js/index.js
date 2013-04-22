@@ -1,4 +1,4 @@
-1;3402;0cwindow.onload = function() {
+window.onload = function() {
 /*
     var prmstr = window.location.search.substr(1);
     var prmarr = prmstr.split ("&");
