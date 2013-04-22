@@ -4,7 +4,7 @@ $(document).ready(function() {
 
     console.log(JSON.stringify(userExtra));
     console.log(JSON.stringify(code));
-    
+
     if(userExtra && userExtra.votes) {
 	if(userExtra.votes.indexOf(code.id) != -1) {
 	    $('#upvote').addClass('upvoted');
@@ -55,7 +55,7 @@ $('#upvote').click(function(){
 	}
 	else {
 	    console.log('user not signed in');
-	    window.open('/auth/google');
+	    window.location.href = '/auth/google';
 	}
 
     }

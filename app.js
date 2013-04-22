@@ -139,9 +139,9 @@ app.get('/api/vote', function(req, res, next) {
     var cid = req.query["cid"];
     var u1id = req.user.id; // voter
     console.log('in /api/vote, searching for ' + cid);
-    
+
     db.findUser({id: u1id}, function(user1Obj) { //\\ get user1 object (mongo)
-	
+
 	var previouslyVoted = false;
 
 	var votes = user1Obj.votes;
@@ -160,7 +160,7 @@ app.get('/api/vote', function(req, res, next) {
 		    var u2id = ret.uid; // votee
 
 		    db.upvoteUser(u2id, function() { //\\ upvote user (mongodb)
-			
+
 			//\\ upvote code (solr)
 			var postData = [ {id:cid, votes:{"set":(ret.votes+1)}} ];
 			var options = {
@@ -174,7 +174,7 @@ app.get('/api/vote', function(req, res, next) {
 
 				//\\ add cid to user's votes (mongodb)
 				db.votesUpdateUser(u1id, cid, function() {
-				    
+
 				    //\\ add to history (mongodb)
 				    var hist = {
 					action: "vote",
@@ -230,8 +230,9 @@ app.get('/u/:id', function(req, res){
 
 		if(ret.publications) {
 		    idToCode(ret.publications, function(results){
-			console.log("***" + JSON.stringify(results));
-			res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
+          console.log("*** Profile ***" + ret);
+          console.log("*** User ***" + req.user);
+			    res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
 		    });
 		}
 		else {
@@ -263,8 +264,13 @@ app.get('/auth/google', passport.authenticate('google', { scope: ['https://www.g
 app.get('/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/login' }),
   function(req, res) {
-    console.log('SUCCESS!!!');
-    res.redirect('/');
+    console.log(req.cookies);
+    if(req.cookies !== undefined && req.cookies.returnto !== undefined){
+      res.redirect(req.cookies.returnto);
+    }
+    else{
+      res.redirect('/');
+    }
   });
 
 app.get('/auth/google/return',
@@ -399,7 +405,7 @@ app.post('/publish', function(req, res, next) {
 app.get('/search', function(req, res) {
     var q = req.query["q"];
 
-    var searchURL = aws + "collection1/select?q=" + q + 
+    var searchURL = aws + "collection1/select?q=" + q +
                     "&wt=json&defType=edismax&qf=code%5E0.3+type%5E20";
 
     var options = {
@@ -436,7 +442,7 @@ app.get('/peek', function(req, res) {
 	    var facets = bodyJ.facet_counts.facet_fields.type_exact;
 
 	    // [ "a", 1, "b", 2 ] --> [{str: "a", val: 1}, {str: b, val: 2}]
-	    
+
 	    var data = [];
 	    for(var i=0; i<facets.length/2; i+=2) {
 		data.push({str: facets[i], val: facets[i+1]});
@@ -476,7 +482,8 @@ app.get('/a/:code', function(req, res){
 		});
 	    }
 	    else {
-		res.render('code', {user: req.user, userExtra:null, code:solrResp});
+        res.cookie('returnto', '/a/' + _code, { maxAge: 9000, httpOnly: true });
+		    res.render('code', {user: req.user, userExtra:null, code:solrResp});
 	    }
 	}
 	else {
