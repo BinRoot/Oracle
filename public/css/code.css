@@ -2,7 +2,7 @@
     display:inline;
     text-align:left;
     font-size:x-large;
-    margin-left: 24px;
+
 }
 
 #code-lang {
@@ -14,36 +14,37 @@
 #code-uname {
     display:inline;
     text-align:left;
-    padding-left: 24px;
+
 }
 
 #code-votes {
     float:right;
-    text-align:right;
+    width: 200px;
+}
+
+#code-numvotes {
+    float:right;
 }
 
 
 #code-bar {
-    height:50px;
+    height:60px;
     width: 100%;
     border-radius: 4px;
-    margin-top:5px;
+    margin-top:10px;
     margin-bottom:5px;
     box-shadow: inset 0 0 10px rgba(0,0,0,.1);
-    padding: 6px 10px;
+    padding: 10px 10px;
     box-sizing: border-box;
 }
 
 #upvote{
-    top: 5px;
-    padding-right: 5px;
     color: #65aef8;
     cursor: hand; cursor: pointer;
+    margin-right:10px;
 }
 
 #upvoteBlock{
-    padding-top: 2px;
-    position: absolute;
-    height: 20px;
-    width: 10px;
+    display: inline;
+    float:right;
 }

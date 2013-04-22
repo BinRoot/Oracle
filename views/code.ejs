@@ -56,12 +56,15 @@
 
 	    <div id="code-bar">
 		<% if (code.numFound > 0) { %>
-		<div id="upvoteBlock"><i id="upvote" class="icon-chevron-up"></i></div>
+
 		<div id="code-type"><%= code.docs[0].type %></div>
 		<div id="code-lang"><%= code.docs[0].lang %></div>
 		<br>
 		<div id="code-uname">by <a href="/u/<%= code.docs[0].uid %>"><%= code.docs[0].uname %></a></div>
-		<div id="code-votes"><%= code.docs[0].votes %> votes</div>
+		<div id="code-votes">
+		    <div id="code-numvotes"><%= code.docs[0].votes %> votes</div>
+		    <div id="upvoteBlock"><i id="upvote" class="icon-chevron-up"></i></div>
+		</div>
 
 		<% } %>
 		<% if (code.numFound == 0) { %>
