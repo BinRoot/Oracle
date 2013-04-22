@@ -422,7 +422,7 @@ app.get('/peek', function(req, res) {
     var q = req.query["q"];
 
     var options = {
-	uri: aws + 'collection1/select?q=*%3A*&fl=+&wt=json&facet=true&facet.field=type&facet.prefix='
+	uri: aws + 'collection1/select?q=*%3A*&fl=+&wt=json&facet=true&facet.field=type_exact&facet.prefix='
 	         + q,
 	method: 'GET',
     };
@@ -430,7 +430,10 @@ app.get('/peek', function(req, res) {
     request(options, function (error, response, body) {
 	if (!error && response.statusCode == 200) {
 	    var bodyJ = JSON.parse(body);
-	    var facets = bodyJ.facet_counts.facet_fields.type;
+
+	    console.log('peek: '+JSON.stringify(bodyJ);)
+
+	    var facets = bodyJ.facet_counts.facet_fields.type_exact;
 
 	    // [ "a", 1, "b", 2 ] --> [{str: "a", val: 1}, {str: b, val: 2}]
 	    

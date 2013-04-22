@@ -1,4 +1,4 @@
-window.onload = function() {
+1;3402;0cwindow.onload = function() {
 /*
     var prmstr = window.location.search.substr(1);
     var prmarr = prmstr.split ("&");
@@ -27,7 +27,7 @@ $('#search-input').typeahead(
 	source: function(query, process) {
 
 	    $.ajax({
-		url: "/peek?q="+query,
+		url: "/peek?q="+query.toLowerCase(),
 	    }).done(function ( data ) {
 		var facets = JSON.parse(data);
 

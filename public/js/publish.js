@@ -6,7 +6,7 @@ $('#type').typeahead(
         source: function(query, process) {
 
             $.ajax({
-                url: "/peek?q="+query,
+                url: "/peek?q="+query.toLowerCase(),
             }).done(function ( data ) {
                 var facets = JSON.parse(data);
 
