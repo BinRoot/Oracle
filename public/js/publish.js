@@ -1,6 +1,8 @@
 $("#missingType").hide();
 $("#missingCode").hide();
 
+var allowLangGuessing = true;
+
 $('#type').typeahead(
     {
         source: function(query, process) {
@@ -42,16 +44,17 @@ $('#upload').click(function() {
     $('#uploadLI').addClass('active');
 
     filepicker.pick(
-		{
-			services: ['GITHUB', 'DROPBOX', 'GOOGLE_DRIVE', 'COMPUTER', 'URL'],
-			maxSize: 100*1024
-		},
-		function(fpfile){
-			filepicker.read(fpfile, function(data){
-                var extension = fpfile.filename.split('.').pop();
+	{
+	    services: ['GITHUB', 'DROPBOX', 'GOOGLE_DRIVE', 'COMPUTER', 'URL'],
+	    maxSize: 100*1024
+	},
+	function(fpfile){
+	    filepicker.read(fpfile, function(data){
+                var extension = '.' + fpfile.filename.split('.').pop();
+		console.log('filepicker extension: '+extension);
                 updateCode(aceLanguages[extension], data);
-		});
-    });
+	    });
+	});
 });
 
 $('#gist').click(function() {
@@ -65,7 +68,10 @@ $('#type').click(function() {
 });
 
 $('#languages li').click(function() {
-    $('#selectedLanguage').html( $(this).text() + ' <span class="caret"></span>');
+    allowLangGuessing = false;
+    var lang = $(this).text();
+    $('#selectedLanguage').html( lang + ' <span class="caret"></span>');
+    editor.getSession().setMode("ace/mode/" + lang.toLowerCase());
 });
 
 $('#gistOK').click(function() {
@@ -112,7 +118,11 @@ $('#gistOK').click(function() {
 });
 
 function updateCode(lang, code) {
+    allowLangGuessing = false;
+
     editor.setValue(code);
+
+    console.log('updateCode, lang: '+lang);
 
     if(typeof lang === 'undefined'){
         editor.getSession().setMode(null);
@@ -127,20 +137,22 @@ function updateCode(lang, code) {
 
 
 editor.getSession().on('change', function(e) {
-    var code = editor.getValue();
+    if(allowLangGuessing) {
+	var code = editor.getValue();
 
-    var out = hljs.highlightAuto(code);
+	var out = hljs.highlightAuto(code);
 
-    console.log(JSON.stringify(out.language));
-    if(out.second_best) {
-	console.log(JSON.stringify(out.second_best.language));
-    }
-    console.log('-');
+	console.log(JSON.stringify(out.language));
+	if(out.second_best) {
+	    console.log(JSON.stringify(out.second_best.language));
+	}
+	console.log('-');
 
-    var lang = out.language;
-    if(lang) {
-	$('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
-	editor.getSession().setMode("ace/mode/" + lang);
+	var lang = out.language;
+	if(lang) {
+	    $('#selectedLanguage').html( lang.charAt(0).toUpperCase() + lang.slice(1) + ' <span class="caret"></span>');
+	    editor.getSession().setMode("ace/mode/" + lang);
+	}
     }
 });
 
@@ -157,30 +169,38 @@ function clearAllActiveChildren(children) {
 function postPublish () {
 
     var data_type = $('#type').val().toLowerCase();
-    var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
-    var data_code = editor.getValue();
 
-    if(data_type === ""){
-        $('#missingType').show();
-        return;
+    if(data_type.length == 0) {
+	console.log('No text');
     }
-    else if(data_code === ""){
-        $('#missingCode').show();
-        return;
+    else {
+	var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
+	var data_code = editor.getValue();
+
+	if(data_type === ""){
+            $('#missingType').show();
+            return;
+	}
+	else if(data_code === ""){
+            $('#missingCode').show();
+            return;
+	}
+
+	var postData = {
+	    type: data_type,
+	    lang: data_lang,
+	    code: data_code
+	};
+
+	console.log('post data is ', JSON.stringify(postData));
+
+	$.post("/publish", postData, function(data){
+	    $('#find-button').text("Done!");
+	    console.log(data);
+	});
+	
     }
 
-    var postData = {
-	type: data_type,
-	lang: data_lang,
-	code: data_code
-    };
-
-    console.log('post data is ', JSON.stringify(postData));
-
-    $.post("/publish", postData, function(data){
-	$('#find-button').text("Done!");
-	console.log(data);
-    });
 
 
 //    search(data_type);
