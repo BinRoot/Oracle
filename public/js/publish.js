@@ -169,37 +169,34 @@ function clearAllActiveChildren(children) {
 function postPublish () {
 
     var data_type = $('#type').val().toLowerCase();
+    var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
+    var data_code = editor.getValue();
 
     if(data_type.length == 0) {
-	console.log('No text');
+	console.log('no type');
+        $('#missingType').show();
+	return;
     }
-    else {
-	var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
-	var data_code = editor.getValue();
+    if(data_code.length == 0) {
+	console.log('no code');
+	$('#missingCode').show();
+	return;
+    }
 
-	if(data_type === ""){
-            $('#missingType').show();
-            return;
-	}
-	else if(data_code === ""){
-            $('#missingCode').show();
-            return;
-	}
+    var postData = {
+	type: data_type,
+	lang: data_lang,
+	code: data_code
+    };
 
-	var postData = {
-	    type: data_type,
-	    lang: data_lang,
-	    code: data_code
-	};
+    console.log('post data is ', JSON.stringify(postData));
 
-	console.log('post data is ', JSON.stringify(postData));
-
-	$.post("/publish", postData, function(data){
-	    $('#find-button').text("Done!");
-	    console.log(data);
-	});
+    $.post("/publish", postData, function(data){
+	$('#find-button').text("Done!");
+	console.log(data);
+    });
 	
-    }
+
 
 
 
