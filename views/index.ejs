@@ -22,10 +22,10 @@
 	    </ul>
 
 	    <% if (user) { %>
-	    <a class="brand pull-right" href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a>
+	    <ul class="nav pull-right" style="margin-right:-20px"><li><a href="/u/<%= user.id %>"><%=user.displayName%> · <%= userExtra.rep %></a></li></ul>
 	    <%}%>
 	    <% if (!user) { %>
-	    <a class="brand" href="/auth/google">Log in</a>
+	    <ul class="nav pull-right" style="margin-right:-20px"><li><a href="/auth/google">Log in</a></li></ul>
 	    <%}%>
 
 	</div>

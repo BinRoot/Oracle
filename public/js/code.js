@@ -55,13 +55,13 @@ $('#search-input').typeahead(
 hljs.initHighlightingOnLoad();
 
 $('#find-button').click(function() {
-    var searchStr = $('#type').val();
+    var searchStr = $('#search-input').val();
     search(searchStr);
 });
 
 $('.search-bar input').keypress(function(e){
     if(e.which == 13){
-	var searchStr = $('#type').val();
+	var searchStr = $('#search-input').val();
 	search(searchStr);
     }
 });

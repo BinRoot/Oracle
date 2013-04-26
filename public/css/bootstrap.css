@@ -4634,11 +4634,10 @@ hr {
 }
 
 .navbar .brand {
-  padding: 15px 20px 14px;
-  font-family: 'Raleway';
-  font-size: 24px;
-  font-weight: normal;
 
+  font-family: 'Raleway';
+  font-size: 16px;
+  font-weight: normal;
 }
 
 .navbar .nav > li > a {
