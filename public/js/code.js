@@ -4,7 +4,6 @@ $(document).ready(function() {
 
     console.log(JSON.stringify(userExtra));
     console.log(JSON.stringify(code));
-    console.log(JSON.stringify(profile));
 
     if(userExtra && userExtra.votes) {
 	if(userExtra.votes.indexOf(code.id) != -1) {
@@ -91,6 +90,11 @@ $('#upvote').click(function(){
 		console.log('done voting: '+data);
 		$('#upvote').effect("bounce", {distance: 5} , 500).animate({color: "#ff5700"}, 200 );
 		$('#upvote').addClass('upvoted');
+
+		var numvotesSplit = $('#code-numvotes').text().split(" ");
+		var numvotes = parseInt(numvotesSplit[0]);
+
+		$('#code-numvotes').text((numvotes+1)+" votes");
 	    });
 	}
 	else {
