@@ -13,6 +13,44 @@ $(document).ready(function() {
     }
 });
 
+$('#search-input').typeahead(
+    {
+	source: function(query, process) {
+
+	    $.ajax({
+		url: "/peek?q="+query.toLowerCase(),
+	    }).done(function ( data ) {
+		var facets = JSON.parse(data);
+
+		var strs = [];
+		_.each(facets, function(fItem, i) {
+		    strs.push(fItem.str + " ("+fItem.val+")");
+		});
+
+		console.log(JSON.stringify(strs));
+
+		process(strs);
+	    });
+
+	},
+	updater: function(item) {
+	    console.log('item selected: '+item)
+	    var splits = item.split(" ");
+	    var outStr = "";
+	    for(var i=0; i<splits.length-1; i++) {
+		if(i == splits.length-2) {
+		    outStr = outStr + splits[i];
+		} 
+		else {
+		    outStr = outStr + splits[i] + " ";
+		}
+	    }
+            return outStr;
+	}
+    }
+);
+
+
 hljs.initHighlightingOnLoad();
 
 $('#find-button').click(function() {

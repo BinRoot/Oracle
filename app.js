@@ -387,7 +387,7 @@ app.post('/publish', function(req, res, next) {
 		};
 
 		db.addHistory(hist, function() {
-		    res.send(body);
+		    res.send(post_id);
 		});
 
 

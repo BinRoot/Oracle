@@ -44,10 +44,10 @@
 		<label>Search:</label>
 		<div class="search-bar">
 		<% if (code.numFound > 0) { %>
-		    <input id="type" type="text" value="<%= code.docs[0].type %>" autofocus="autofocus">
+		    <input id="search-input" data-provide="typeahead" autocomplete="off" type="text" value="<%= code.docs[0].type %>" autofocus="autofocus">
 		<% } %>
 		<% if (code.numFound == 0) { %>
-		    <input id="type" type="text" placeholder="Name of algorithm or code" autofocus="autofocus">
+		    <input id="search-input" data-provide="typeahead" autocomplete="off" type="text" placeholder="Name of algorithm or code" autofocus="autofocus">
 		<% } %>
 
 		</div>
@@ -99,6 +99,6 @@
     <script type="text/javascript" src="/js/bootstrap.min.js"></script>
     <script type="text/javascript" src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
     <script type="text/javascript" src="/js/code.js"></script>
-
+    <script src="/js/underscore-min.js"></script>
 </body>
 </html>

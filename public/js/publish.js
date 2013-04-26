@@ -24,11 +24,17 @@ $('#type').typeahead(
 
         },
         updater: function(item) {
-            var splits = item.split(" ");
-            var outStr = [];
-	        for(var i=0; i<splits.length-1; i++) {
-                outStr.push(splits[i]);
-            }
+	    console.log('item selected: '+item)
+	    var splits = item.split(" ");
+	    var outStr = "";
+	    for(var i=0; i<splits.length-1; i++) {
+		if(i == splits.length-2) {
+		    outStr = outStr + splits[i];
+		} 
+		else {
+		    outStr = outStr + splits[i] + " ";
+		}
+	    }
             return outStr;
         }
     }
@@ -72,7 +78,7 @@ $('#languages li').click(function() {
     var lang = $(this).text();
     $('#selectedLanguage').html( lang + ' <span class="caret"></span>');
 
-    editor.getSession().setMode("ace/mode/" + displayToAceMap[lang.toLowerCase()]);
+    editor.getSession().setMode("ace/mode/" + displayToAceMap[lang]);
 
 });
 
@@ -173,7 +179,7 @@ function clearAllActiveChildren(children) {
 function postPublish () {
 
     var data_type = $('#type').val().toLowerCase();
-    var data_lang = gistLanguages[$('#selectedLanguage').text().trim()];
+    var data_lang = displayToDbMap[$('#selectedLanguage').text().trim()];
     var data_code = editor.getValue();
 
     if(data_type.length == 0) {
@@ -184,6 +190,10 @@ function postPublish () {
     if(data_code.length == 0) {
 	console.log('no code');
 	$('#missingCode').show();
+	return;
+    }
+    if(!data_lang) {
+	console.log('Err: data_lang is null.');
 	return;
     }
 
@@ -198,6 +208,7 @@ function postPublish () {
     $.post("/publish", postData, function(data){
 	$('#find-button').text("Done!");
 	console.log(data);
+	window.location = "/a/"+data;
     });
 	
 

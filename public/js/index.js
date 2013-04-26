@@ -43,10 +43,16 @@ $('#search-input').typeahead(
 
 	},
 	updater: function(item) {
+	    console.log('item selected: '+item)
 	    var splits = item.split(" ");
-	    var outStr = [];
+	    var outStr = "";
 	    for(var i=0; i<splits.length-1; i++) {
-		outStr.push(splits[i]);
+		if(i == splits.length-2) {
+		    outStr = outStr + splits[i];
+		} 
+		else {
+		    outStr = outStr + splits[i] + " ";
+		}
 	    }
             return outStr;
 	}
