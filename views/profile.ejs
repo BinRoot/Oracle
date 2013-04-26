@@ -16,7 +16,7 @@
 </head>
 
 <body>
-
+    <div id="profileHolder" style="display:none;"><%= JSON.stringify(profile) %></div>
 
     <div class="navbar">
 	<div class="navbar-inner">
@@ -63,14 +63,14 @@
                 </tr>
 		-->
                 <tr>
-                    <td>Total votes</td> <td id="centerColumn"><a id="voteScroll" href="#">TODO</a></td>
+                    <td>Total votes</td> <td id="centerColumn"><a id="voteScroll" href="#">0</a></td>
                 </tr>
             </table>
         </div>
 
         <div class="row">
             <div id="snippetSection" class="span3">
-                <h1>Snippets</h1>
+                <h3>Snippets</h3>
             </div>
         </div>
 
@@ -93,67 +93,33 @@
            <% } %>
 	   <% } %>
 
-           <!-- TODO populate from server -->
-	   <!--
-           <div id="commentSection" class="row">
-               <div class="span3">
-                   <h1 class="left">Comments</h1>
-               </div>
-           </div>
 
-           <div class="accordion" id="accordion2">
-               <div class="accordion-group">
-		   <div class="accordion-heading">
-		       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
-			   Quicksort @ line 141
-		       </a>
-		   </div>
-		   <div id="collapseOne" class="accordion-body collapse">
-		       <div class="accordion-inner">
-			   "Any reason you didnt use Java's built-in LinkedList?"
-		       </div>
-		   </div>
-               </div>
-               <div class="accordion-group">
-		   <div class="accordion-heading">
-		       <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
-			   Transitive Closure @ line 286
-		       </a>
-		   </div>
-		   <div id="collapseTwo" class="accordion-body collapse">
-		       <div class="accordion-inner">
-			   "This line is redundant and can be refactored."
-		       </div>
-		   </div>
-               </div>
-           </div>
-	   -->
-
-           <!-- TODO populate from server -->
            <div id="voteSection" class="row">
                <div class="span3">
-                   <h1 class="left">Recent Votes</h1>
+                   <h3 class="left">Recent Votes</h3>
                </div>
            </div>
-
-           <div class="row">
-               <div class="span7">
-                   <span><i class="icon-arrow-up"></i> <a href="#">Quicksort</a> by <a href="#">Penguin</a></span>
-                   <span style="float: right;">43 mintues ago</span>
+	   
+	   <div id="votes">
+               <div class="row">
+		   <div class="span7">
+                       <span><i class="icon-arrow-up"></i> <a href="#">Quicksort</a> by <a href="#">Penguin</a></span>
+                       <span style="float: right;">43 mintues ago</span>
+		   </div>
                </div>
-           </div>
-           <div class="row">
-               <div class="span7">
-                   <span><i class="icon-arrow-up"></i> <a href="#">Transitive Closure</a> by <a href="#">abhishelat</a></span>
-                   <span style="float: right;">6 hours ago</span>
+               <div class="row">
+		   <div class="span7">
+                       <span><i class="icon-arrow-up"></i> <a href="#">Transitive Closure</a> by <a href="#">abhishelat</a></span>
+                       <span style="float: right;">6 hours ago</span>
+		   </div>
                </div>
-           </div>
-           <div class="row">
-               <div class="span7">
-                   <span><i class="icon-arrow-up"></i> <a href="#">Pattern Matching w/ wildcards</a> by <a href="#">PuneetLall</a></span>
-                   <span style="float: right;">2 days ago</span>
+               <div class="row">
+		   <div class="span7">
+                       <span><i class="icon-arrow-up"></i> <a href="#">Pattern Matching w/ wildcards</a> by <a href="#">PuneetLall</a></span>
+                       <span style="float: right;">2 days ago</span>
+		   </div>
                </div>
-           </div>
+	   </div>
     </header>
 
 </div> <!-- /container -->
@@ -164,5 +130,6 @@
 <script type="text/javascript" src="/js/bootstrap.min.js"></script>
 <script type="text/javascript" src="/js/profile.js"></script>
 <script src="/js/md5.js"></script>
+<script src="/js/underscore-min.js"></script>
 </body>
 </html>

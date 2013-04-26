@@ -208,12 +208,12 @@ function idToCode(ids, callback){
 }
 
 //Endpoint to translate an array of code ids (in request body) to an array of code items
-app.get('/api/codes/', function(req, res){
-  var _codeIDs = req.body.ids;
+app.get('/api/codes', function(req, res){
+  var _codeIDs = req.query["ids"];
 
-  console.log(_codeIDs);
+  console.log("codeIds: "+ _codeIDs);
 
-  idToCode(_codeIDs, function(results){
+  idToCode(JSON.parse(_codeIDs), function(results){
     res.send(results);
   })
 });
@@ -230,9 +230,9 @@ app.get('/u/:id', function(req, res){
 
 		if(ret.publications) {
 		    idToCode(ret.publications, function(results){
-          console.log("*** Profile ***" + ret);
-          console.log("*** User ***" + req.user);
-			    res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
+			console.log("*** Profile ***" + ret);
+			console.log("*** User ***" + req.user);
+			res.render('profile', {user: req.user, userExtra: u, profile: ret, codes: results});
 		    });
 		}
 		else {
